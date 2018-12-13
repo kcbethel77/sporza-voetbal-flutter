@@ -9,7 +9,7 @@ import 'package:spv/models/network/serializers.dart';
 import 'package:http/http.dart' as http;
 
 abstract class Network {
-  Future<Response<List<News>>> news();
+  Observable<Response<List<News>>> news();
 }
 
 class NetworkImpl implements Network {
@@ -20,15 +20,15 @@ class NetworkImpl implements Network {
     "X-Device-Id": "android"
   };
 
-  const NetworkImpl();
+  final http.Client client;
 
-  Observable<Response<List<News>>> newsStream() {
-    return Observable.fromFuture(news());
-  }
+  const NetworkImpl(this.client);
 
   @override
-  Future<Response<List<News>>> news() async {
-    final response = await http.get(
+  Observable<Response<List<News>>> news() => Observable.fromFuture(_news());
+
+  Future<Response<List<News>>> _news() async {
+    final response = await client.get(
       Uri.parse("$baseUrl/footbal/news"),
       headers: _headers,
     );
@@ -38,13 +38,4 @@ class NetworkImpl implements Network {
           .toList(),
     );
   }
-}
-
-void main() async {
-  const network = const NetworkImpl();
-  network.newsStream().listen((Response event) {
-    print((event as Data).value);
-  }, onError: (err) {
-    print("$err error");
-  });
 }
