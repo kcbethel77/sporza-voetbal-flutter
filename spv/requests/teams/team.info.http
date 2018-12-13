@@ -1,0 +1,4 @@
+GET http://{{host}}/football/team/3007
+Accept: {{accept-header-v7}}
+
+###

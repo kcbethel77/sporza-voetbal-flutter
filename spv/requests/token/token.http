@@ -1,0 +1,11 @@
+PUT http://{{host}}/apps/token
+Content-Type: application/json
+Accept: {{accept-header-v7}}
+X-Platform: {{platform}}
+X-Device-Id: regergnergergherg
+
+{
+  "token": "random-token"
+}
+
+###

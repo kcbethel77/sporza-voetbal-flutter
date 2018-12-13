@@ -1,0 +1,4 @@
+GET http://{{host}}/football/competitions
+Accept: {{accept-header-v7}}
+
+###

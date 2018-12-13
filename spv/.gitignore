@@ -28,6 +28,9 @@
 .pub/
 build/
 
+# Flutter Built Value
+*.g.dart
+
 # Android related
 **/android/**/gradle-wrapper.jar
 **/android/.gradle

@@ -1,0 +1,4 @@
+GET http://{{host}}/football/person/781370/stats
+Accept: {{accept-header-v7}}
+
+###

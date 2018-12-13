@@ -1,0 +1,21 @@
+PUT http://{{host}}/apps/preferences
+Content-Type: application/json
+Accept: {{accept-header-v7}}
+X-Platform: {{platform}}
+X-Device-Id: regergnergergherg
+
+{
+  "items": [
+    {
+      "type": "APP",
+      "enabled": false,
+      "ids": [
+        "1",
+        "2",
+        "3"
+      ]
+    }
+  ]
+}
+
+###

@@ -1,0 +1,4 @@
+GET http://{{host}}/football/competitiongroups
+Accept: {{accept-header-v7}}
+
+###

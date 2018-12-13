@@ -1,0 +1,4 @@
+GET http://{{host}}/football/competition/48/ranking
+Accept: {{accept-header-v7}}
+
+###

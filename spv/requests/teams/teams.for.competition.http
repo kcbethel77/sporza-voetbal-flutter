@@ -1,0 +1,4 @@
+GET http://{{host}}/football/teams?competitionId=48
+Accept: {{accept-header-v7}}
+
+###
