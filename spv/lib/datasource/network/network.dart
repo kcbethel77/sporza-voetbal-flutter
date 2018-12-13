@@ -12,7 +12,7 @@ abstract class Network {
 }
 
 class NetworkImpl implements Network {
-  static String baseUrl = "https://csinfostrada.vrt.be";
+  final String baseUrl;
   static int _version = 7;
   static Map<String, String> _headers = {
     "Accept": "application/be.vrt.infostrada.v$_version+json",
@@ -21,7 +21,7 @@ class NetworkImpl implements Network {
 
   final http.Client client;
 
-  const NetworkImpl(this.client);
+  const NetworkImpl(this.client, {this.baseUrl = "https://csinfostrada.vrt.be"});
 
   @override
   Observable<List<News>> news() => Observable.fromFuture(_news());

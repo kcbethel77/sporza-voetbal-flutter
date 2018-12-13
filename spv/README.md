@@ -1,16 +1,29 @@
-# spv
+# SPV
 
-Sporza Voetbal in Flutter
+Try out to port [Sporza Voetbal][1] in to a Flutter app.
 
-## Getting Started
+## Live Templates
+Optionally:
+Import the Dart live template in IDEA by using *FILE > IMPORT SETTINGS*.  
+Then look for the live-templates.jar in the project.
 
-This project is a starting point for a Flutter application.
+## Handy Commands
 
-A few resources to get you started if this is your first Flutter project:
+Run the build runner code generator
+```
+flutter packages pub run build_runner build
+```
 
-- [Lab: Write your first Flutter app](https://flutter.io/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.io/docs/cookbook)
+Run the Flutter Static analysis tool
 
-For help getting started with Flutter, view our 
-[online documentation](https://flutter.io/docs), which offers tutorials, 
-samples, guidance on mobile development, and a full API reference.
+```
+flutter analyze
+``` 
+
+Run the tests
+
+```
+flutter test
+```
+
+[1]: https://play.google.com/store/apps/details?id=be.vrt.mobile.android.sporza.voetbal
