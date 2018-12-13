@@ -1,6 +1,5 @@
 import 'package:spv/datasource/network/network.dart';
 import 'package:spv/models/network/news.dart';
-import 'package:spv/models/response.dart';
 import 'package:test/test.dart';
 import 'package:http/http.dart' as http;
 import 'package:mockito/mockito.dart';
@@ -75,10 +74,8 @@ void main() {
         ''');
 
       nw.news().listen((resp) {
-        expect(resp is Data<List<News>>, isTrue);
-        expect((resp as Data<List<News>>).value.length, 2);
-
-
+        expect(resp is List<News>, isTrue);
+        expect(resp.length, 2);
       });
     });
   });

@@ -3,13 +3,12 @@ import 'dart:convert';
 
 import 'package:rxdart/rxdart.dart';
 import 'package:spv/models/network/news.dart';
-import 'package:spv/models/response.dart';
 import 'package:spv/models/network/serializers.dart';
 
 import 'package:http/http.dart' as http;
 
 abstract class Network {
-  Observable<Response<List<News>>> news();
+  Observable<List<News>> news();
 }
 
 class NetworkImpl implements Network {
@@ -25,17 +24,15 @@ class NetworkImpl implements Network {
   const NetworkImpl(this.client);
 
   @override
-  Observable<Response<List<News>>> news() => Observable.fromFuture(_news());
+  Observable<List<News>> news() => Observable.fromFuture(_news());
 
-  Future<Response<List<News>>> _news() async {
+  Future<List<News>> _news() async {
     final response = await client.get(
       Uri.parse("$baseUrl/footbal/news"),
       headers: _headers,
     );
-    return Response.success(
-      List.from(json.decode(response.body))
-          .map((item) => serializers.deserializeWith(News.serializer, item))
-          .toList(),
-    );
+    return List.from(json.decode(response.body))
+        .map((item) => serializers.deserializeWith(News.serializer, item))
+        .toList();
   }
 }
