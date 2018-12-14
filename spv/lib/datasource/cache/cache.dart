@@ -1,51 +1,46 @@
 import 'dart:convert';
+import 'dart:io';
 
-import 'package:built_collection/built_collection.dart';
-import 'package:spv/models/network/link.dart';
+import 'package:path/path.dart';
+import 'package:rxdart/rxdart.dart';
+import 'package:spv/datasource/soccer_datasource.dart';
 import 'package:spv/models/network/news.dart';
 import 'package:spv/models/network/serializers.dart';
+import 'package:path_provider/path_provider.dart';
 
-abstract class Cache {
+abstract class Cache extends SporzaSoccerDataSource {
   void saveNewsItems(List<News> newsItems);
 }
 
 class CacheImpl implements Cache {
 
-  const CacheImpl();
+  final String newsFolder = "news";
+  final String newsFile = "news.json";
+  String documentsDir;
 
+  CacheImpl() {
+    //_initDocumentsFolder();
+  }
+
+//  void _initDocumentsFolder() async {
+//    documentsDir = (await getApplicationDocumentsDirectory()).path;
+//  }
+//
+//  Future<File> _getNewsFolder() async {
+//    File newsDir = File(join(documentsDir, newsFolder));
+//    await newsDir.create(recursive: true);
+//    return newsDir;
+//  }
+//
   @override
   void saveNewsItems(List<News> newsItems) async {
-    String newsString = newsItems.map((news) => json.encode(serializers.serialize(news))).toList().toString();
-    print(newsString);
-    var b = json.decode(newsString).map((e) => serializers.deserialize(e));
-    print(b);
+    //File newsFile = await _getNewsFolder();
+    //String newsString = newsItems.map((news) => json.encode(serializers.serialize(news))).toList().toString();
+    //newsFile.writeAsString(newsString);
   }
-}
 
-void main() {
-  var db = CacheImpl();
-  //var link
-  News newsItem = (NewsBuilder()
-        ..id = "id"
-        ..accessibilityText = "acc"
-        ..date = "date"
-        ..description = "description"
-        ..title = "title"
-        ..contentLinks = ListBuilder([
-          (LinkBuilder()
-                ..id = "link-id"
-                ..rel = "link-rel"
-                ..url = "link-url")
-              .build()
-        ])
-        ..imageLinks = ListBuilder([
-          (LinkBuilder()
-                ..id = "link-id"
-                ..rel = "link-rel"
-                ..url = "link-url")
-              .build()
-        ]))
-      .build();
-
-  db.saveNewsItems([newsItem]);
+  @override
+  Observable<List<News>> news() {
+    return Observable.never();
+  }
 }

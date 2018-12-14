@@ -2,14 +2,13 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:rxdart/rxdart.dart';
+import 'package:spv/datasource/soccer_datasource.dart';
 import 'package:spv/models/network/news.dart';
 import 'package:spv/models/network/serializers.dart';
 
 import 'package:http/http.dart' as http;
 
-abstract class Network {
-  Observable<List<News>> news();
-}
+abstract class Network extends SporzaSoccerDataSource {}
 
 class NetworkImpl implements Network {
   final String baseUrl;
