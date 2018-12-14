@@ -39,6 +39,20 @@ const String rawNewsJson = '''[
         "rel": "canonical",
         "url": "https://sporza.be/nl/2018/12/13/cl-groepsfase-nicolas-de-brabander.spv/"
       }
+    ],
+    "videoLinks": [
+      {
+        "id": "pbs-pub-f4f9d0ef-5897-46d5-a7eb-ecb1a028b656vid-37c45b71-c709-4575-8ed0-d021ca7741ac",
+        "publicationId": "pbs-pub-f4f9d0ef-5897-46d5-a7eb-ecb1a028b656",
+        "url": "https://mediazone.vrt.be/api/v1/sporza/assets/pbs-pub-f4f9d0ef-5897-46d5-a7eb-ecb1a028b656vid-37c45b71-c709-4575-8ed0-d021ca7741ac",
+        "mediaType": "VRT",
+        "adDomain": "sporza_spv_workaround",
+        "adPartner": "sporza_workaround",
+        "adContent": "sporza",
+        "adCategory": "sesport",
+        "adLocation": "content-vrt",
+        "adConsent": "all"
+      }
     ]
   }
 ]

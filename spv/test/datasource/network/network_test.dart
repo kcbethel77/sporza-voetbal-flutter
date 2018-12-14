@@ -29,6 +29,7 @@ void main() {
       nw.news.listen((resp) {
         expect(resp is List<News>, isTrue);
         expect(resp.length, 2);
+        expect(resp[1].videoLinks.length, 1);
       });
     });
   });
