@@ -1,6 +1,6 @@
 abstract class Response<T> {
-  factory Response.success(T value) {
-    return Data(value);
+  factory Response.success(T value, bool isNetwork) {
+    return Data(value, isNetwork);
   }
 
   factory Response.nwError(Error err) {
@@ -26,6 +26,11 @@ class NwError<T> implements Response<T> {
 
 class Data<T> implements Response<T> {
   final T value;
+  final bool _networkSuccess;
 
-  const Data(this.value);
+  bool get isNetwork => _networkSuccess;
+
+  bool get isDatabase => !_networkSuccess;
+
+  const Data(this.value, this._networkSuccess);
 }
