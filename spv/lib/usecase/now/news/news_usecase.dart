@@ -1,5 +1,6 @@
 import 'package:rxdart/rxdart.dart';
 import 'package:spv/datasource/cache/cache.dart';
+import 'package:spv/datasource/fetch_type.dart';
 import 'package:spv/datasource/soccer_datasource.dart';
 import 'package:spv/models/network/news.dart';
 
@@ -11,8 +12,11 @@ class NewsUseCase {
 
   Observable<List<News>> get news {
     return Observable.merge([
-      _network.news.onErrorReturnWith((_) => List()).doOnData((newsItems) => _cache.saveNewsItems(newsItems)),
-      _cache.news.onErrorReturnWith((_) => List())
+      _network
+          .getT<News>(newsFetchType)
+          .onErrorReturnWith((_) => List())
+          .doOnData((newsItems) => _cache.saveItems(newsFetchType, newsItems)),
+      _cache.getT<News>(newsFetchType).onErrorReturnWith((_) => List())
     ]);
   }
 }

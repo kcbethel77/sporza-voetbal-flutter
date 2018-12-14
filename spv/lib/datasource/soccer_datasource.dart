@@ -1,6 +1,6 @@
 import 'package:rxdart/rxdart.dart';
-import 'package:spv/models/network/news.dart';
+import 'package:spv/datasource/fetch_type.dart';
 
-abstract class SporzaSoccerDataSource {
-  Observable<List<News>> get news;
+abstract class SporzaSoccerDataSource<T> {
+  Observable<List<T>> getT<T>(final DatasourceType fetchType);
 }

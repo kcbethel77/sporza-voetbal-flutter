@@ -1,5 +1,6 @@
 import 'package:flutter_driver/flutter_driver.dart';
 import 'package:spv/datasource/cache/cache.dart';
+import 'package:spv/datasource/fetch_type.dart';
 import 'package:test/test.dart';
 
 import '../test/utils/model_builder.dart';
@@ -18,7 +19,7 @@ void main() {
     });
 
     test('Simple Screenshot', () async {
-      cache.saveNewsItems(buildNewsItems());
+      cache.saveItems(newsFetchType, buildNewsItems());
     });
   });
 }

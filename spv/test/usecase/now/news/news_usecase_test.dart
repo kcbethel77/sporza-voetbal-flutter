@@ -1,4 +1,5 @@
 import 'package:rxdart/rxdart.dart';
+import 'package:spv/datasource/fetch_type.dart';
 import 'package:spv/models/network/news.dart';
 import 'package:spv/usecase/now/news/news_usecase.dart';
 import 'package:test_api/test_api.dart';
@@ -10,6 +11,7 @@ import '../../../utils/model_builder.dart';
 final List<News> newsItems = buildNewsItems();
 
 Observable<List<News>> get newsSuccessStream => Observable.just(newsItems);
+
 Observable<List<News>> get newsErrorStream => Observable.error(Error());
 
 void main() {
@@ -20,25 +22,25 @@ void main() {
 
   group("a news use case", () {
     test("when network success and db success should emit 2 items", () async {
-      when(mockCache.news).thenAnswer((_) => newsSuccessStream);
-      when(mockNetwork.news).thenAnswer((_) => newsSuccessStream);
+      when(mockCache.getT(newsFetchType)).thenAnswer((_) => newsSuccessStream);
+      when(mockNetwork.getT(newsFetchType)).thenAnswer((_) => newsSuccessStream);
 
       List<List<News>> emissions = await newsUseCase.news.toList();
       expect(emissions.length, 2);
     });
 
     test("when network success should save to db", () {
-      when(mockCache.news).thenAnswer((_) => newsSuccessStream);
-      when(mockNetwork.news).thenAnswer((_) => newsSuccessStream);
+      when(mockCache.getT(newsFetchType)).thenAnswer((_) => newsSuccessStream);
+      when(mockNetwork.getT(newsFetchType)).thenAnswer((_) => newsSuccessStream);
 
       newsUseCase.news;
 
-      verify(mockCache.saveNewsItems(newsItems));
+      verify(mockCache.saveItems(newsFetchType, newsItems));
     });
 
     test("when network success and db failure should have 2 emissions one of which is an empty list", () async {
-      when(mockCache.news).thenAnswer((_) => newsErrorStream);
-      when(mockNetwork.news).thenAnswer((_) => newsSuccessStream);
+      when(mockCache.getT(newsFetchType)).thenAnswer((_) => newsErrorStream);
+      when(mockNetwork.getT(newsFetchType)).thenAnswer((_) => newsSuccessStream);
 
       List<List<News>> emissions = await newsUseCase.news.toList();
 
@@ -48,8 +50,8 @@ void main() {
     });
 
     test("when network error and db success should have 2 emissions one of which is an empty list", () async {
-      when(mockCache.news).thenAnswer((_) => newsSuccessStream);
-      when(mockNetwork.news).thenAnswer((_) => newsErrorStream);
+      when(mockCache.getT(newsFetchType)).thenAnswer((_) => newsSuccessStream);
+      when(mockNetwork.getT(newsFetchType)).thenAnswer((_) => newsErrorStream);
 
       List<List<News>> emissions = await newsUseCase.news.toList();
 

@@ -1,4 +1,4 @@
-# SPV
+# Sporza Voetbal Flutter
 
 Try out to port [Sporza Voetbal][1] in to a Flutter app.
 
