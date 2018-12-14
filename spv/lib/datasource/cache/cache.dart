@@ -28,7 +28,7 @@ class CacheImpl implements Cache {
   CacheImpl({this.path});
 
   Future<File> _getFolder(final String path, final String file) async {
-    final File newsDir = File(join(await documentsDir, path, file));
+    final File newsDir = File(join(await documentsDir, path, "$file.json"));
     await newsDir.create(recursive: true);
     return newsDir;
   }

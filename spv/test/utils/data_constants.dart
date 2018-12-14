@@ -57,3 +57,77 @@ const String rawNewsJson = '''[
   }
 ]
 ''';
+
+const String rawVideosJson= '''[
+  {
+    "id": "_content_sporza_nl_2018_12_14_bekijk-een-avondje-europees-voetbal-in-ons-europa-league-magazin",
+    "date": "2018-12-14T05:16:18.000+0000",
+    "title": "Bekijk een avondje Europees voetbal in ons Europa League-magazine",
+    "accessibilityText": "Bekijk een avondje Europees voetbal in ons Europa League-magazine, geplaatst om 5 uur 16.",
+    "abstractText": "Drie Belgische teams kwamen gisteren voor het laatst in actie in de groepsfase van de Europa League. Herbekijk een samenvatting van hun duels in ons Europa League magazine.",
+    "imageLinks": [
+      {
+        "id": "aHR0cHM6Ly9pbWFnZXMudnJ0LmJlL29yaWcvMjAxOC8xMi8xNC82YzA1ZWNiNS1mZjY0LTExZTgtYWJjYy0wMmI3Yjc2YmY0N2YuanBn",
+        "rel": "permalink",
+        "url": "https://images.vrt.be/orig/2018/12/14/6c05ecb5-ff64-11e8-abcc-02b7b76bf47f.jpg"
+      }
+    ],
+    "contentLinks": [
+      {
+        "id": "aHR0cHM6Ly9zcG9yemEuYmUvbmwvMjAxOC8xMi8xNC9iZWtpamstZWVuLWF2b25kamUtZXVyb3BlZXMtdm9ldGJhbC1pbi1vbnMtZXVyb3BhLWxlYWd1ZS1tYWdhemluLnNwdi8=",
+        "rel": "canonical",
+        "url": "https://sporza.be/nl/2018/12/14/bekijk-een-avondje-europees-voetbal-in-ons-europa-league-magazin.spv/"
+      }
+    ],
+    "videoLinks": [
+      {
+        "id": "pbs-pub-9ace5f63-7d95-4c47-a12a-9723b89c4dcbvid-03167f5b-c762-4563-9d6e-01e669f5848f",
+        "publicationId": "pbs-pub-9ace5f63-7d95-4c47-a12a-9723b89c4dcb",
+        "url": "https://mediazone.vrt.be/api/v1/sporza/assets/pbs-pub-9ace5f63-7d95-4c47-a12a-9723b89c4dcbvid-03167f5b-c762-4563-9d6e-01e669f5848f",
+        "mediaType": "VRT",
+        "adDomain": "sporza_spv_workaround",
+        "adPartner": "sporza_workaround",
+        "adContent": "sporza",
+        "adCategory": "sesport",
+        "adLocation": "content-vrt",
+        "adConsent": "all"
+      }
+    ]
+  },
+  {
+    "id": "_content_sporza_nl_2018_12_13_genk-klopt-sarpsborg-en-overwintert-in-de-europa-league",
+    "date": "2018-12-13T22:16:32.000+0000",
+    "title": "Genk klopt Sarpsborg en overwintert in de Europa League",
+    "accessibilityText": "Genk klopt Sarpsborg en overwintert in de Europa League, geplaatst op 13 december.",
+    "abstractText": "",
+    "imageLinks": [
+      {
+        "id": "aHR0cHM6Ly9pbWFnZXMudnJ0LmJlL29yaWcvMjAxOC8xMi8xMy9iZjcxOWVkZC1mZjI0LTExZTgtYWJjYy0wMmI3Yjc2YmY0N2YuanBn",
+        "rel": "permalink",
+        "url": "https://images.vrt.be/orig/2018/12/13/bf719edd-ff24-11e8-abcc-02b7b76bf47f.jpg"
+      }
+    ],
+    "contentLinks": [
+      {
+        "id": "aHR0cHM6Ly9zcG9yemEuYmUvbmwvMjAxOC8xMi8xMy9nZW5rLWtsb3B0LXNhcnBzYm9yZy1lbi1vdmVyd2ludGVydC1pbi1kZS1ldXJvcGEtbGVhZ3VlLnNwdi8=",
+        "rel": "canonical",
+        "url": "https://sporza.be/nl/2018/12/13/genk-klopt-sarpsborg-en-overwintert-in-de-europa-league.spv/"
+      }
+    ],
+    "videoLinks": [
+      {
+        "id": "pbs-pub-c506cfc9-a01f-4ac0-b56b-b5658ba7f517vid-74dfb047-f6a2-41fe-892e-34e040f55e09",
+        "publicationId": "pbs-pub-c506cfc9-a01f-4ac0-b56b-b5658ba7f517",
+        "url": "https://mediazone.vrt.be/api/v1/sporza/assets/pbs-pub-c506cfc9-a01f-4ac0-b56b-b5658ba7f517vid-74dfb047-f6a2-41fe-892e-34e040f55e09",
+        "mediaType": "VRT",
+        "adDomain": "sporza_spv_workaround",
+        "adPartner": "sporza_workaround",
+        "adContent": "sporza",
+        "adCategory": "sesport",
+        "adLocation": "content-vrt",
+        "adConsent": "all"
+      }
+    ]
+  }
+]
+''';

@@ -3,6 +3,7 @@ import 'package:spv/datasource/cache/cache.dart';
 import 'package:spv/datasource/network/network.dart';
 import 'package:spv/usecase/now/news/news_usecase.dart';
 import 'package:http/http.dart' as http;
+import 'package:spv/usecase/now/videos/video_usecase.dart';
 
 void main() => runApp(MyApp());
 
@@ -53,9 +54,19 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
-    final NewsUseCase newsUseCase = NewsUseCase(CacheImpl(), NetworkImpl(http.Client()));
+    var httpClient = http.Client();
+    var cache = CacheImpl();
+    var network = NetworkImpl(httpClient);
+
+    final NewsUseCase newsUseCase = NewsUseCase(cache, network);
+    final VideoUseCase videoUseCase = VideoUseCase(cache, network);
+
+    videoUseCase.videos.listen((data) {
+      print("Received video items: $data");
+    });
+
     newsUseCase.news.listen((data) {
-      print(data);
+      print("Received news items: $data");
     });
   }
 
