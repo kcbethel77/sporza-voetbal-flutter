@@ -2,7 +2,7 @@ import 'package:flutter_driver/flutter_driver.dart';
 import 'package:spv/datasource/cache/cache.dart';
 import 'package:test/test.dart';
 
-import '../test/model_builder.dart';
+import '../test/utils/model_builder.dart';
 
 void main() {
   group('Caching', () {

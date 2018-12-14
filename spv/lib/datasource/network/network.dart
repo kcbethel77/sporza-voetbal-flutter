@@ -27,7 +27,7 @@ class NetworkImpl implements Network {
 
   Future<List<News>> _news() async {
     final response = await client.get(
-      Uri.parse("$baseUrl/footbal/news"),
+      Uri.parse("$baseUrl/football/news"),
       headers: _headers,
     );
     return List.from(json.decode(response.body))

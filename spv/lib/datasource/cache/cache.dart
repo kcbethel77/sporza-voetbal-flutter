@@ -13,21 +13,21 @@ abstract class Cache extends SporzaSoccerDataSource {
 }
 
 class CacheImpl implements Cache {
-  final String newsFolder = "news";
-  final String newsFile = "news.json";
-  String documentsDir;
+  final String _newsFolder = "news";
+  final String _newsFile = "news.json";
+  String _documentsDir;
+  Future<String> get documentsDir async {
+    if(_documentsDir == null ){
+      _documentsDir = Platform.isAndroid || Platform.isIOS ? (await getApplicationDocumentsDirectory()).path : path;
+    }
+    return _documentsDir;
+  }
   final String path;
 
-  CacheImpl({final this.path}) {
-    _initDocumentsFolder();
-  }
-
-  void _initDocumentsFolder() async {
-    documentsDir = Platform.isAndroid || Platform.isIOS ? (await getApplicationDocumentsDirectory()).path : path;
-  }
+  CacheImpl({this.path});
 
   Future<File> _getNewsFolder() async {
-    final File newsDir = File(join(documentsDir, newsFolder, newsFile));
+    final File newsDir = File(join(await documentsDir, _newsFolder, _newsFile));
     await newsDir.create(recursive: true);
     return newsDir;
   }

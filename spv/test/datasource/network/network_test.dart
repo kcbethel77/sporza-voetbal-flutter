@@ -1,14 +1,10 @@
 import 'package:spv/datasource/network/network.dart';
 import 'package:spv/models/network/news.dart';
 import 'package:test/test.dart';
-import 'package:http/http.dart' as http;
 import 'package:mockito/mockito.dart';
 
-import '../data_constants.dart';
-
-class MockHttp extends Mock implements http.Client {}
-
-class MockResponse extends Mock implements http.Response {}
+import '../../utils/data_constants.dart';
+import '../../utils/mocks/mocks.dart';
 
 void main() {
   final MockHttp mockHttp = MockHttp();

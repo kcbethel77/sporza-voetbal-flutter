@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:spv/datasource/cache/cache.dart';
+import 'package:spv/datasource/network/network.dart';
+import 'package:spv/usecase/now/news/news_usecase.dart';
+import 'package:http/http.dart' as http;
 
 void main() => runApp(MyApp());
 
@@ -45,6 +49,15 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    final NewsUseCase newsUseCase = NewsUseCase(CacheImpl(), NetworkImpl(http.Client()));
+    newsUseCase.news.listen((data) {
+      print(data);
+    });
+  }
 
   void _incrementCounter() {
     setState(() {

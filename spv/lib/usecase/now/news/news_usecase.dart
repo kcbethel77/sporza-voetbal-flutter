@@ -1,14 +1,18 @@
 import 'package:rxdart/rxdart.dart';
 import 'package:spv/datasource/cache/cache.dart';
-import 'package:spv/datasource/network/network.dart';
+import 'package:spv/datasource/soccer_datasource.dart';
 import 'package:spv/models/network/news.dart';
 
 class NewsUseCase {
+  final Cache _cache;
+  final SporzaSoccerDataSource _network;
 
-  final Cache cache;
-  final Network network;
+  NewsUseCase(this._cache, this._network);
 
-  NewsUseCase(this.cache, this.network);
-
-  Observable<List<News>> get news => network.news;
+  Observable<List<News>> get news {
+    return Observable.merge([
+      _network.news.onErrorReturnWith((_) => List()).doOnData((newsItems) => _cache.saveNewsItems(newsItems)),
+      _cache.news.onErrorReturnWith((_) => List())
+    ]);
+  }
 }
