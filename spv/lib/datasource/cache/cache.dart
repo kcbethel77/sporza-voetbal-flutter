@@ -41,7 +41,7 @@ class CacheImpl implements Cache {
   }
 
   @override
-  Observable<List<News>> news() => Observable.fromFuture(_news());
+  Observable<List<News>> get news => Observable.fromFuture(_news());
 
   Future<List<News>> _news() async {
     List<News> newsList = List();

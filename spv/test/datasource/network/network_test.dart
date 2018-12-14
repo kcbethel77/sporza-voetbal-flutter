@@ -20,7 +20,7 @@ void main() {
 
   group("a network implementation", () {
     test("has injected headers on client", () {
-      nw.news().listen((resp) {
+      nw.news.listen((resp) {
         expect(verify(mockHttp.get(any, headers: captureAnyNamed('headers'))).captured.single,
             equals({"Accept": "application/be.vrt.infostrada.v7+json", "X-Device-Id": "android"}));
       });
@@ -30,7 +30,7 @@ void main() {
       when(mockHttp.get(any, headers: anyNamed('headers'))).thenAnswer((_) => Future.value(mockResponse));
       when(mockResponse.body).thenReturn(rawNewsJson);
 
-      nw.news().listen((resp) {
+      nw.news.listen((resp) {
         expect(resp is List<News>, isTrue);
         expect(resp.length, 2);
       });

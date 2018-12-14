@@ -23,7 +23,7 @@ class NetworkImpl implements Network {
   const NetworkImpl(this.client, {this.baseUrl = "https://csinfostrada.vrt.be"});
 
   @override
-  Observable<List<News>> news() => Observable.fromFuture(_news());
+  Observable<List<News>> get news => Observable.fromFuture(_news());
 
   Future<List<News>> _news() async {
     final response = await client.get(

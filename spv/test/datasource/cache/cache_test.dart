@@ -15,7 +15,7 @@ void main() {
       var savedNewsItems = buildNewsItems();
       await cache.saveNewsItems(savedNewsItems);
 
-      cache.news().listen(expectAsync1((actual) {
+      cache.news.listen(expectAsync1((actual) {
         expect(actual, savedNewsItems);
       }));
     });
