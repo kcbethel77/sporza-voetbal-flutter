@@ -10,8 +10,6 @@ part 'serializers.g.dart';
 
 @SerializersFor(const [
   News,
-  Video,
-  Link,
-  VideoLink,
+  Video
 ])
 final Serializers serializers = (_$serializers.toBuilder()..addPlugin(StandardJsonPlugin())).build();

@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 import 'package:built_collection/built_collection.dart';
+import 'package:spv/models/network/link.dart';
 import 'package:spv/models/network/video_link.dart';
 
 part 'video.g.dart';

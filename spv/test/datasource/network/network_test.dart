@@ -38,7 +38,7 @@ void main() {
       when(mockHttp.get(any, headers: anyNamed('headers'))).thenAnswer((_) => Future.value(mockResponse));
       when(mockResponse.body).thenReturn(rawVideosJson);
 
-      nw.getT<News>(newsFetchType).listen((resp) {
+      nw.getT<Video>(videoFetchType).listen((resp) {
         expect(resp is List<Video>, isTrue);
         expect(resp.length, 2);
       });

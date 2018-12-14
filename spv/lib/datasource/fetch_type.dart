@@ -1,5 +1,6 @@
 import 'package:built_value/serializer.dart';
 import 'package:spv/models/network/news.dart';
+import 'package:spv/models/network/video.dart';
 
 const int _version = 7;
 
@@ -38,12 +39,12 @@ class NewsFetchType extends DatasourceType<News> {
 
 const videoFetchType = const VideoFetchType();
 
-class VideoFetchType extends DatasourceType<News> {
+class VideoFetchType extends DatasourceType<Video> {
   @override
   String get file => "videos";
 
   @override
-  Serializer<News> get serializer => News.serializer;
+  Serializer<Video> get serializer => Video.serializer;
 
   const VideoFetchType() : super();
 }
