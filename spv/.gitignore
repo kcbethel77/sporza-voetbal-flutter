@@ -28,6 +28,9 @@
 .pub/
 build/
 
+# Flutter JSON Cache test
+test/json/**
+
 # Flutter Built Value
 *.g.dart
 
