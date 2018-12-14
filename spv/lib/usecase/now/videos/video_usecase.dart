@@ -14,10 +14,10 @@ class VideoUseCase {
   Observable<List<Video>> get videos {
     return Observable.merge([
       _network
-          .getT<Video>(videoFetchType)
+          .getT<Video>(videoDatasourceType)
           .onErrorReturnWith((_) => List())
-          .doOnData((videoItems) => _cache.saveItems(videoFetchType, videoItems)),
-      _cache.getT<Video>(videoFetchType).onErrorReturnWith((_) => List())
+          .doOnData((videoItems) => _cache.saveItems(videoDatasourceType, videoItems)),
+      _cache.getT<Video>(videoDatasourceType).onErrorReturnWith((_) => List())
     ]);
   }
 }

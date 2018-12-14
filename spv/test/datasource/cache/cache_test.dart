@@ -9,14 +9,14 @@ void main() {
 
   group("a cache layer", () {
     test("should successfully cache news json", () async {
-      expect(await cache.saveItems(newsFetchType, buildNewsItems()), true);
+      expect(await cache.saveItems(newsDatasourceType, buildNewsItems()), true);
     });
 
     test("should successfully fetch the cached news json", () async {
       var savedNewsItems = buildNewsItems();
-      await cache.saveItems(newsFetchType, savedNewsItems);
+      await cache.saveItems(newsDatasourceType, savedNewsItems);
 
-      cache.getT(newsFetchType).listen(expectAsync1((actual) {
+      cache.getT(newsDatasourceType).listen(expectAsync1((actual) {
         expect(actual, savedNewsItems);
       }));
     });

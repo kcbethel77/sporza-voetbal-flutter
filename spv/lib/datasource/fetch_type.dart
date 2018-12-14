@@ -1,5 +1,6 @@
 import 'package:built_value/serializer.dart';
 import 'package:spv/models/network/news.dart';
+import 'package:spv/models/network/team.dart';
 import 'package:spv/models/network/video.dart';
 
 const int _version = 7;
@@ -25,26 +26,38 @@ abstract class DatasourceType<T> {
   Serializer<T> get serializer;
 }
 
-const newsFetchType = const NewsFetchType();
+const newsDatasourceType = const NewsDatasourceType();
 
-class NewsFetchType extends DatasourceType<News> {
+class NewsDatasourceType extends DatasourceType<News> {
   @override
   String get file => "news";
 
   @override
   Serializer<News> get serializer => News.serializer;
 
-  const NewsFetchType() : super();
+  const NewsDatasourceType() : super();
 }
 
-const videoFetchType = const VideoFetchType();
+const videoDatasourceType = const VideoDatasourceType();
 
-class VideoFetchType extends DatasourceType<Video> {
+class VideoDatasourceType extends DatasourceType<Video> {
   @override
   String get file => "videos";
 
   @override
   Serializer<Video> get serializer => Video.serializer;
 
-  const VideoFetchType() : super();
+  const VideoDatasourceType() : super();
+}
+
+const teamDataSourceType = const TeamDatasourceType();
+
+class TeamDatasourceType extends DatasourceType<Team> {
+  @override
+  String get file => "teams";
+
+  @override
+  Serializer<Team> get serializer => Team.serializer;
+
+  const TeamDatasourceType() : super();
 }

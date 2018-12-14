@@ -19,7 +19,7 @@ void main() {
     });
 
     test('Simple Screenshot', () async {
-      cache.saveItems(newsFetchType, buildNewsItems());
+      cache.saveItems(newsDatasourceType, buildNewsItems());
     });
   });
 }

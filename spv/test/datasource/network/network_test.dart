@@ -1,6 +1,7 @@
 import 'package:spv/datasource/fetch_type.dart';
 import 'package:spv/datasource/network/network.dart';
 import 'package:spv/models/network/news.dart';
+import 'package:spv/models/network/team.dart';
 import 'package:spv/models/network/video.dart';
 import 'package:test/test.dart';
 import 'package:mockito/mockito.dart';
@@ -18,7 +19,7 @@ void main() {
 
   group("a network implementation", () {
     test("has injected headers on client", () {
-      nw.getT(newsFetchType).listen((resp) {
+      nw.getT(newsDatasourceType).listen((resp) {
         expect(verify(mockHttp.get(any, headers: captureAnyNamed('headers'))).captured.single,
             equals({"Accept": "application/be.vrt.infostrada.v7+json", "X-Device-Id": "android"}));
       });
@@ -28,18 +29,28 @@ void main() {
       when(mockHttp.get(any, headers: anyNamed('headers'))).thenAnswer((_) => Future.value(mockResponse));
       when(mockResponse.body).thenReturn(rawNewsJson);
 
-      nw.getT<News>(newsFetchType).listen((resp) {
+      nw.getT<News>(newsDatasourceType).listen((resp) {
         expect(resp is List<News>, isTrue);
         expect(resp.length, 2);
       });
     });
 
-    test("can pase a video items JSON" ,() {
+    test("can parse a video items JSON" ,() {
       when(mockHttp.get(any, headers: anyNamed('headers'))).thenAnswer((_) => Future.value(mockResponse));
       when(mockResponse.body).thenReturn(rawVideosJson);
 
-      nw.getT<Video>(videoFetchType).listen((resp) {
+      nw.getT<Video>(videoDatasourceType).listen((resp) {
         expect(resp is List<Video>, isTrue);
+        expect(resp.length, 2);
+      });
+    });
+
+    test("can parse a team items JSON", () {
+      when(mockHttp.get(any, headers: anyNamed('headers'))).thenAnswer((_) => Future.value(mockResponse));
+      when(mockResponse.body).thenReturn(teamsJson);
+
+      nw.getT<Team>(teamDataSourceType).listen((resp) {
+        expect(resp is List<Team>, isTrue);
         expect(resp.length, 2);
       });
     });

@@ -131,3 +131,28 @@ const String rawVideosJson= '''[
   }
 ]
 ''';
+
+const String teamsJson = '''[
+  {
+    "id": "4253",
+    "name": "1. FC Nürnberg",
+    "logoUrl": "https://images.vrt.be/orig/contentapi/infostrada/team/4253.png",
+    "countryShort": "FCN",
+    "competitionIds": [
+      "56"
+    ],
+    "canSelectAsFavourite": true
+  },
+  {
+    "id": "103110",
+    "name": "1. FSV Mainz 05",
+    "logoUrl": "https://images.vrt.be/orig/contentapi/infostrada/team/103110.png",
+    "countryShort": "M05",
+    "competitionIds": [
+      "56",
+      "44"
+    ],
+    "canSelectAsFavourite": true
+  }
+]
+''';

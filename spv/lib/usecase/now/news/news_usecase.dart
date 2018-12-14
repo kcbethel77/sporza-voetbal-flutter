@@ -13,10 +13,10 @@ class NewsUseCase {
   Observable<List<News>> get news {
     return Observable.merge([
       _network
-          .getT<News>(newsFetchType)
+          .getT<News>(newsDatasourceType)
           .onErrorReturnWith((_) => List())
-          .doOnData((newsItems) => _cache.saveItems(newsFetchType, newsItems)),
-      _cache.getT<News>(newsFetchType).onErrorReturnWith((_) => List())
+          .doOnData((newsItems) => _cache.saveItems(newsDatasourceType, newsItems)),
+      _cache.getT<News>(newsDatasourceType).onErrorReturnWith((_) => List())
     ]);
   }
 }
