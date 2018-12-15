@@ -2,9 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:spv/datasource/cache/cache.dart';
 import 'package:spv/datasource/network/network.dart';
 import 'package:spv/models/response.dart';
-import 'package:spv/usecase/now/news/news_usecase.dart';
 import 'package:http/http.dart' as http;
-import 'package:spv/usecase/now/videos/video_usecase.dart';
+import 'package:spv/usecase/use_case.dart';
 
 void main() => runApp(MyApp());
 

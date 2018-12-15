@@ -1,9 +1,5 @@
 import 'package:built_collection/built_collection.dart';
-import 'package:spv/models/network/link.dart';
-import 'package:spv/models/network/news.dart';
-import 'package:spv/models/network/team.dart';
-import 'package:spv/models/network/video.dart';
-import 'package:spv/models/network/video_link.dart';
+import 'package:spv/models/network/network_models.dart';
 
 const String id = "id";
 const String accessibilityText = "accessibilityText";

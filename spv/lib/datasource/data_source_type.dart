@@ -1,7 +1,5 @@
 import 'package:built_value/serializer.dart';
-import 'package:spv/models/network/news.dart';
-import 'package:spv/models/network/team.dart';
-import 'package:spv/models/network/video.dart';
+import 'package:spv/models/network/network_models.dart';
 
 const int _version = 7;
 
