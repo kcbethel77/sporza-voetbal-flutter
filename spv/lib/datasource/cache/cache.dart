@@ -4,7 +4,7 @@ import 'dart:io';
 import 'package:built_value/serializer.dart';
 import 'package:path/path.dart';
 import 'package:rxdart/rxdart.dart';
-import 'package:spv/datasource/fetch_type.dart';
+import 'package:spv/datasource/data_source_type.dart';
 import 'package:spv/datasource/soccer_datasource.dart';
 import 'package:spv/models/network/serializers.dart';
 import 'package:path_provider/path_provider.dart';
@@ -57,6 +57,6 @@ class CacheImpl implements Cache {
   }
 
   @override
-  Observable<List<T>> getT<T>(final DatasourceType fetchType) =>
+  Observable<List<T>> getListOfT<T>(final DatasourceType fetchType) =>
       Observable.fromFuture(_fetchT(fetchType.path, fetchType.file, fetchType.serializer));
 }

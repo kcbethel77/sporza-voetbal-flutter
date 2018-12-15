@@ -1,28 +1,32 @@
 abstract class Response<T> {
-  factory Response.success(T value, bool isNetwork) {
-    return Data(value, isNetwork);
+  factory Response.nwSuccess(T value) {
+    return Data(value, true);
+  }
+
+  factory Response.dbSuccess(T value) {
+    return Data(value, false);
   }
 
   factory Response.nwError(Error err) {
-    return NwError(err);
+    return Error<T>(err, true);
   }
 
   factory Response.dbError(Error err) {
-    return DbError(err);
+    return Error<T>(err, false);
   }
 }
 
-class DbError<T> implements Response<T> {
+class Error<T> implements Response<T> {
   final Error throwable;
+  final bool _networkError;
 
-  const DbError(this.throwable);
+  bool get isNetwork => _networkError;
+
+  bool get isDatabase => !_networkError;
+
+  const Error(this.throwable, this._networkError);
 }
 
-class NwError<T> implements Response<T> {
-  final Error throwable;
-
-  const NwError(this.throwable);
-}
 
 class Data<T> implements Response<T> {
   final T value;

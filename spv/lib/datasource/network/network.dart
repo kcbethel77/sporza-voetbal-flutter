@@ -3,7 +3,7 @@ import 'dart:convert';
 
 import 'package:built_value/serializer.dart';
 import 'package:rxdart/rxdart.dart';
-import 'package:spv/datasource/fetch_type.dart';
+import 'package:spv/datasource/data_source_type.dart';
 import 'package:spv/datasource/soccer_datasource.dart';
 import 'package:spv/models/network/serializers.dart';
 
@@ -26,6 +26,6 @@ class NetworkImpl implements Network {
   }
 
   @override
-  Observable<List<T>> getT<T>(final DatasourceType dataSourceType) => Observable.fromFuture(
+  Observable<List<T>> getListOfT<T>(final DatasourceType dataSourceType) => Observable.fromFuture(
       fetchT(Uri.parse("$baseUrl${dataSourceType.uri}"), dataSourceType.headers, dataSourceType.serializer));
 }
