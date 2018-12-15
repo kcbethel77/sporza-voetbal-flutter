@@ -58,7 +58,7 @@ const String rawNewsJson = '''[
 ]
 ''';
 
-const String rawVideosJson= '''[
+const String rawVideosJson = '''[
   {
     "id": "_content_sporza_nl_2018_12_14_bekijk-een-avondje-europees-voetbal-in-ons-europa-league-magazin",
     "date": "2018-12-14T05:16:18.000+0000",

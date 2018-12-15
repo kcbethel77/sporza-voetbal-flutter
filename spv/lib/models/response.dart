@@ -8,15 +8,15 @@ abstract class Response<T> {
   }
 
   factory Response.nwError(Error err) {
-    return Error<T>(err, true);
+    return Fail<T>(err, true);
   }
 
   factory Response.dbError(Error err) {
-    return Error<T>(err, false);
+    return Fail<T>(err, false);
   }
 }
 
-class Error<T> implements Response<T> {
+class Fail<T> implements Response<T> {
   final Error throwable;
   final bool _networkError;
 
@@ -24,7 +24,7 @@ class Error<T> implements Response<T> {
 
   bool get isDatabase => !_networkError;
 
-  const Error(this.throwable, this._networkError);
+  const Fail(this.throwable, this._networkError);
 }
 
 
@@ -34,7 +34,9 @@ class Data<T> implements Response<T> {
 
   bool get isNetwork => _networkSuccess;
 
-  bool get isDatabase => !_networkSuccess;
+  bool get isDatabase {
+    return !_networkSuccess;
+  }
 
   const Data(this.value, this._networkSuccess);
 }

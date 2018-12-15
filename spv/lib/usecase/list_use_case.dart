@@ -12,16 +12,16 @@ abstract class ListUseCase<T> {
 
   DatasourceType<T> get dataSourceType;
 
-  Observable<Response<List<T>>> get networkStream => _network
+  Observable<Response<List<T>>> get _networkStream => _network
       .getListOfT<T>(dataSourceType)
       .doOnData((items) => _cache.saveItems(dataSourceType, items))
       .map((value) => Response.nwSuccess(value))
       .onErrorReturnWith((err) => Response.nwError(err));
 
-  Observable<Response<List<T>>> get cacheStream => _cache
+  Observable<Response<List<T>>> get _cacheStream => _cache
       .getListOfT<T>(dataSourceType)
-      .map((value) => Response.nwSuccess(value))
+      .map((value) => Response.dbSuccess(value))
       .onErrorReturnWith((err) => Response.dbError(err));
 
-  Observable<Response<List<T>>> get mergeNetworkAndDb => Observable.merge([networkStream, cacheStream]);
+  Observable<Response<List<T>>> get mergeNetworkAndDb => Observable.merge([_networkStream, _cacheStream]);
 }

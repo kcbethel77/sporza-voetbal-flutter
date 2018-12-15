@@ -3,20 +3,14 @@ import 'package:spv/datasource/cache/cache.dart';
 import 'package:spv/datasource/data_source_type.dart';
 import 'package:spv/datasource/soccer_datasource.dart';
 import 'package:spv/models/network/video.dart';
+import 'package:spv/models/response.dart';
+import 'package:spv/usecase/list_use_case.dart';
 
-class VideoUseCase {
-  final Cache _cache;
-  final SporzaSoccerDataSource _network;
+class VideoUseCase extends ListUseCase<Video> {
+  VideoUseCase(Cache cache, SporzaSoccerDataSource network) : super(cache, network);
 
-  VideoUseCase(this._cache, this._network);
+  @override
+  DatasourceType<Video> get dataSourceType => videoDatasourceType;
 
-  Observable<List<Video>> get videos {
-    return Observable.merge([
-      _network
-          .getListOfT<Video>(videoDatasourceType)
-          .onErrorReturnWith((_) => List())
-          .doOnData((videoItems) => _cache.saveItems(videoDatasourceType, videoItems)),
-      _cache.getListOfT<Video>(videoDatasourceType).onErrorReturnWith((_) => List())
-    ]);
-  }
+  Observable<Response<List<Video>>> get video => mergeNetworkAndDb;
 }
