@@ -1,5 +1,6 @@
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
+import 'package:spv/models/network/media_type.dart';
 
 part 'video_link.g.dart';
 
@@ -14,7 +15,7 @@ abstract class VideoLink implements Built<VideoLink, VideoLinkBuilder> {
 
   String get url;
 
-  String get mediaType;
+  MediaType get mediaType;
 
   String get adDomain;
 

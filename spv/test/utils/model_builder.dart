@@ -10,7 +10,7 @@ const String name = "name";
 const String rel = "rel";
 const String url = "http://www.sporza.be/";
 const String publicationId = "pubId";
-const String mediaType = "mediaType";
+const MediaType mediaType = MediaType.VRT;
 const String adDomain = "adDomain";
 const String adPartner = "adPartner";
 const String adContent = "adContent";
@@ -33,7 +33,7 @@ VideoLink buildVideoLink(
     {String id = id,
     String publicationId = publicationId,
     String url = url,
-    String mediaType = mediaType,
+    MediaType mediaType = mediaType,
     String adDomain = adDomain,
     String adPartner = adPartner,
     String adContent = adContent,
