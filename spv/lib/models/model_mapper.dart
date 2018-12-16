@@ -2,7 +2,7 @@ import 'package:spv/models/network/network_models.dart' as network;
 import 'package:spv/models/view/view_models.dart' as view;
 
 class Mapper {
-  static List<view.News> mapListOfNewToViewModels(List<network.News> news) =>
+  static List<view.News> mapListOfNewsToViewModels(List<network.News> news) =>
       _mapListOfTtoR<network.News, view.News>(news, mapNewsToViewModel);
 
   static view.News mapNewsToViewModel(network.News news) {
