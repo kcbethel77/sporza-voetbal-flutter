@@ -14,17 +14,23 @@ class CompetitionOverviewUseCase extends ListUseCase<Competition> {
 
   Observable<Response<List<Competition>>> get competitions => mergeNetworkAndDb;
 
-  Observable<Response<List<Competition>>> get sporzaFavoriteCompetitions {
-    return competitions.map((response) {
-      if (response is Data) {
-        var dataResp = response as Data<List<Competition>>;
-        var sporzaFeaturedCompetitions = dataResp.value.where((competition) => competition.sporzaFeatured).toList();
-        return dataResp.isNetwork
-            ? Response.nwSuccess(sporzaFeaturedCompetitions)
-            : Response.dbSuccess(sporzaFeaturedCompetitions);
-      } else {
-        return response;
-      }
-    });
-  }
+  Observable<Response<List<Competition>>> get sporzaFavoriteCompetitions =>
+      _filterCompetitionFromList((competition) => competition.sporzaFeatured);
+
+  Observable<Response<List<Competition>>> get nonSporzaFavouriteCompetitions =>
+      _filterCompetitionFromList((competition) => !competition.sporzaFeatured);
+
+  Observable<Response<List<Competition>>> _filterCompetitionFromList(
+          [bool competitionPredicate(Competition competition)]) =>
+      competitions.map((response) {
+        if (response is Data) {
+          var dataResp = response as Data<List<Competition>>;
+          var sporzaFeaturedCompetitions = dataResp.value.where(competitionPredicate).toList();
+          return dataResp.isNetwork
+              ? Response.nwSuccess(sporzaFeaturedCompetitions)
+              : Response.dbSuccess(sporzaFeaturedCompetitions);
+        } else {
+          return response;
+        }
+      });
 }
