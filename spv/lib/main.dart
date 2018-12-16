@@ -43,9 +43,13 @@ class _MyHomePageState extends State<MyHomePage> {
     final NewsUseCase newsUseCase = NewsUseCase(cache, network);
     final VideoUseCase videoUseCase = VideoUseCase(cache, network);
 
-    final NewsBloc newsBloc = NewsBloc(newsUseCase);
+    final NowBloc newsBloc = NowBloc(newsUseCase, videoUseCase);
 
     newsBloc.news.listen((data) {
+      print(data);
+    });
+
+    newsBloc.videos.listen((data) {
       print(data);
     });
 

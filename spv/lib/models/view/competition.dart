@@ -1,6 +1,6 @@
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
-import 'package:spv/models/view/accessibile.dart';
+import 'package:spv/models/view/accessible.dart';
 import 'package:spv/models/view/id.dart';
 
 part 'competition.g.dart';
