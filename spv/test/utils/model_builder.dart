@@ -3,11 +3,15 @@ import 'package:spv/models/network/network_models.dart';
 
 const String id = "id";
 const String accessibilityText = "accessibilityText";
+const String country = "country";
 const String date = "date";
 const String description = "description";
 const String title = "title";
 const String name = "name";
+const String label = "label";
 const String rel = "rel";
+const int position = 42;
+const String defaultPhase = "defaultPhase";
 const String url = "http://www.sporza.be/";
 const String publicationId = "pubId";
 const MediaType mediaType = MediaType.VRT;
@@ -20,6 +24,9 @@ const String adConsent = "adConsent";
 const String logoUrl = "http://www.sporza.be/logoUrl.png";
 const String countryShort = "countryShort";
 const bool canSelectAsFavourite = true;
+const bool hasRanking = true;
+const bool sporzaFeatured = true;
+const bool additionalInfo = true;
 
 Link buildLink({String id = id, String url = url, String rel = rel}) {
   return (LinkBuilder()
@@ -108,5 +115,32 @@ Team buildTeamItem(
         ..countryShort = countryShort
         ..competitionIds = ListBuilder(competitionIds)
         ..canSelectAsFavourite = canSelectAsFavourite)
+      .build();
+}
+
+Competition buildCompetition(
+    {String id = id,
+    String country = country,
+    String countryShort = countryShort,
+    String label = label,
+    int position = position,
+    String accessibilityText = accessibilityText,
+    String defaultPhase = defaultPhase,
+    bool canSelectFavourites = canSelectAsFavourite,
+    bool hasRanking = hasRanking,
+    bool sporzaFeatured = sporzaFeatured,
+    bool additionInfo = additionalInfo}) {
+  return (CompetitionBuilder()
+        ..id = id
+        ..country = country
+        ..countryShort = countryShort
+        ..label = label
+        ..position = position
+        ..accessibilityText = accessibilityText
+        ..defaultPhase = defaultPhase
+        ..canSelectFavourites = canSelectFavourites
+        ..hasRanking = hasRanking
+        ..sporzaFeatured = sporzaFeatured
+        ..additionalInfo = additionalInfo)
       .build();
 }

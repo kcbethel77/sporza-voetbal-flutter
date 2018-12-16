@@ -156,3 +156,33 @@ const String teamsJson = '''[
   }
 ]
 ''';
+
+const String competitionJson = '''
+[
+  {
+    "id": "936",
+    "country": "België",
+    "countryShort": "BEL",
+    "label": "1e provinciale West-Vlaanderen",
+    "position": 32,
+    "accessibilityText": "België, 1e provinciale West-Vlaanderen",
+    "canSelectFavourites": true,
+    "hasRanking": true,
+    "sporzaFeatured": false,
+    "additionalInfo": false
+  },
+  {
+    "id": "961",
+    "country": "Wereld",
+    "countryShort": "EUNL",
+    "label": "Nations League",
+    "position": 33,
+    "accessibilityText": "Nations League",
+    "defaultPhase": "130818",
+    "canSelectFavourites": true,
+    "hasRanking": true,
+    "sporzaFeatured": false,
+    "additionalInfo": false
+  }
+]
+''';

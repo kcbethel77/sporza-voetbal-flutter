@@ -59,3 +59,15 @@ class TeamDatasourceType extends DatasourceType<Team> {
 
   const TeamDatasourceType() : super();
 }
+
+const competitionDataSourceType = const CompetitionDataSourceType();
+
+class CompetitionDataSourceType extends DatasourceType<Competition> {
+  @override
+  String get file => "competitions";
+
+  @override
+  Serializer<Competition> get serializer => Competition.serializer;
+
+  const CompetitionDataSourceType() : super();
+}

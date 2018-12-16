@@ -12,6 +12,7 @@ abstract class DrawerMenu implements Built<DrawerMenu, DrawerMenuBuilder> {
 
   BuiltList<Competition> get nonFavouriteCompetitions;
 
+  //combination of Favourites as well as Sporza Featured
   BuiltList<Competition> get favouriteCompetitions;
 
   factory DrawerMenu([updates(DrawerMenuBuilder b)]) = _$DrawerMenu;
