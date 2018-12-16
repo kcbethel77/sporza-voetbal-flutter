@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:spv/bloc/news_bloc.dart';
 import 'package:spv/datasource/cache/cache.dart';
 import 'package:spv/datasource/network/network.dart';
 import 'package:spv/models/response.dart';
@@ -42,29 +43,35 @@ class _MyHomePageState extends State<MyHomePage> {
     final NewsUseCase newsUseCase = NewsUseCase(cache, network);
     final VideoUseCase videoUseCase = VideoUseCase(cache, network);
 
-    videoUseCase.video.listen((data) {
-      if (data is Data) {
-        print("is Data");
-        print((data as Data).value);
-      }
+    final NewsBloc newsBloc = NewsBloc(newsUseCase);
 
-      if (data is Fail) {
-        print("is Fail");
-        print((data as Fail).throwable);
-      }
+    newsBloc.news.listen((data) {
+      print(data);
     });
 
-    newsUseCase.news.listen((data) {
-      if (data is Data) {
-        print("is Data");
-        print((data as Data).value);
-      }
-
-      if (data is Fail) {
-        print("is Fail");
-        print((data as Fail).throwable);
-      }
-    });
+//    videoUseCase.video.listen((data) {
+//      if (data is Data) {
+//        print("is Data");
+//        print((data as Data).value);
+//      }
+//
+//      if (data is Fail) {
+//        print("is Fail");
+//        print((data as Fail).throwable);
+//      }
+//    });
+//
+//    newsUseCase.news.listen((data) {
+//      if (data is Data) {
+//        print("is Data");
+//        print((data as Data).value);
+//      }
+//
+//      if (data is Fail) {
+//        print("is Fail");
+//        print((data as Fail).throwable);
+//      }
+//    });
   }
 
   void _incrementCounter() {
