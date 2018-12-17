@@ -12,21 +12,27 @@ void main() {
   final MockResponse mockResponse = MockResponse();
   final Network nw = NetworkImpl(mockHttp);
 
-  when(mockHttp.get(any, headers: anyNamed('headers'))).thenAnswer((_) => Future.value(mockResponse));
+  when(mockHttp.get(any, headers: anyNamed('headers')))
+      .thenAnswer((_) => Future.value(mockResponse));
   when(mockResponse.body).thenReturn("[]");
 
   group("a network implementation", () {
     test("has injected headers on client", () {
       nw.getListOfT(newsDatasourceType).listen((resp) {
-        expect(verify(mockHttp.get(any, headers: captureAnyNamed('headers'))).captured.single,
-            equals({"Accept": "application/be.vrt.infostrada.v7+json", "X-Device-Id": "android"}));
+        expect(
+            verify(mockHttp.get(any, headers: captureAnyNamed('headers')))
+                .captured
+                .single,
+            equals({
+              "Accept": "application/be.vrt.infostrada.v7+json",
+              "X-Device-Id": "android"
+            }));
       });
     });
   });
 
   group("news", () {
     test("can parse a news items JSON", () {
-      when(mockHttp.get(any, headers: anyNamed('headers'))).thenAnswer((_) => Future.value(mockResponse));
       when(mockResponse.body).thenReturn(rawNewsJson);
 
       nw.getListOfT<News>(newsDatasourceType).listen((resp) {
@@ -38,7 +44,6 @@ void main() {
 
   group("video", () {
     test("can parse a video items JSON", () {
-      when(mockHttp.get(any, headers: anyNamed('headers'))).thenAnswer((_) => Future.value(mockResponse));
       when(mockResponse.body).thenReturn(rawVideosJson);
 
       nw.getListOfT<Video>(videoDatasourceType).listen((resp) {
@@ -50,7 +55,6 @@ void main() {
 
   group("teams", () {
     test("can parse a team items JSON", () {
-      when(mockHttp.get(any, headers: anyNamed('headers'))).thenAnswer((_) => Future.value(mockResponse));
       when(mockResponse.body).thenReturn(teamsJson);
 
       nw.getListOfT<Team>(teamDataSourceType).listen((resp) {
@@ -62,12 +66,21 @@ void main() {
 
   group("competition", () {
     test("can parse competition items JSON", () {
-      when(mockHttp.get(any, headers: anyNamed('headers'))).thenAnswer((_) => Future.value(mockResponse));
       when(mockResponse.body).thenReturn(competitionJson);
 
       nw.getListOfT<Competition>(competitionDataSourceType).listen((resp) {
         expect(resp is List<Competition>, isTrue);
         expect(resp.length, 2);
+      });
+    });
+
+    test("can parse a calendar JSON", () async {
+      when(mockResponse.body).thenReturn(calendarJson);
+
+      final _competitionId = "48";
+      final type = CalendarForCompetitionDataSourceType(_competitionId);
+      nw.getT<Competition>(type).listen((resp) {
+        expect(resp.id, _competitionId);
       });
     });
   });

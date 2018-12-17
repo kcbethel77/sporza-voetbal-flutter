@@ -16,6 +16,7 @@ abstract class Competition implements Built<Competition, CompetitionBuilder> {
 
   String get label;
 
+  @nullable
   int get position;
 
   String get accessibilityText;
@@ -23,12 +24,15 @@ abstract class Competition implements Built<Competition, CompetitionBuilder> {
   @nullable
   String get defaultPhase;
 
+  @nullable
   bool get canSelectFavourites;
 
   bool get hasRanking;
 
+  @nullable
   bool get sporzaFeatured;
 
+  @nullable
   bool get additionalInfo;
 
   factory Competition([updates(CompetitionBuilder b)]) = _$Competition;

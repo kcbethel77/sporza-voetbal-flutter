@@ -7,6 +7,10 @@ import '../../utils/model_builder.dart';
 void main() {
   final Cache cache = CacheImpl(path: "json");
 
+  tearDown(() async {
+    await cache.removeDir("json");
+  });
+
   group("news caching", () {
     var newsItems = List.of([
       buildNewsItem(
@@ -62,7 +66,8 @@ void main() {
 
     group("teams caching", () {
       var teamItems = List.of([
-        buildTeamItem(id: "1", competitionIds: ["1, 2, 3"], canSelectAsFavourite: false),
+        buildTeamItem(
+            id: "1", competitionIds: ["1, 2, 3"], canSelectAsFavourite: false),
         buildTeamItem(id: "2", competitionIds: ["4, 5, 6"]),
         buildTeamItem(id: "3", competitionIds: ["7, 8, 9"])
       ]);
@@ -74,6 +79,19 @@ void main() {
           expect(actual, teamItems);
         }));
       });
+    });
+  });
+
+  group("competition", () {
+    var competition = buildCompetition();
+
+    final calendarDataSourceType = CalendarForCompetitionDataSourceType("48");
+    test("should save and fetch the calendar", () async {
+      await cache.saveItem(calendarDataSourceType, competition);
+
+      cache.getT(calendarDataSourceType).listen(expectAsync1((actual) {
+        expect(actual, competition);
+      }));
     });
   });
 }

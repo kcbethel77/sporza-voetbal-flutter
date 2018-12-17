@@ -71,3 +71,16 @@ class CompetitionDataSourceType extends DatasourceType<Competition> {
 
   const CompetitionDataSourceType() : super();
 }
+
+class CalendarForCompetitionDataSourceType extends DatasourceType<Competition> {
+
+  final String _competitionId;
+
+  @override
+  String get file => "competition/$_competitionId";
+
+  @override
+  Serializer<Competition> get serializer => Competition.serializer;
+
+  const CalendarForCompetitionDataSourceType(this._competitionId);
+}
