@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:spv/bloc/news_bloc.dart';
+import 'package:spv/bloc/home_bloc.dart';
 import 'package:spv/datasource/cache/cache.dart';
 import 'package:spv/datasource/network/network.dart';
 import 'package:spv/models/response.dart';
@@ -43,7 +43,7 @@ class _MyHomePageState extends State<MyHomePage> {
     final NewsUseCase newsUseCase = NewsUseCase(cache, network);
     final VideoUseCase videoUseCase = VideoUseCase(cache, network);
 
-    final NowBloc newsBloc = NowBloc(newsUseCase, videoUseCase);
+    final HomeBloc newsBloc = HomeBloc(newsUseCase, videoUseCase);
 
     newsBloc.news.listen((data) {
       print(data);
