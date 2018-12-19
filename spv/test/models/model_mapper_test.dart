@@ -172,7 +172,7 @@ void main() {
               matches: [buildMatch(homeTeam, awayTeam)],
             ),
             buildMatchDay(
-              matches: [buildMatch(awayTeam, homeTeam)],
+              matches: [buildMatch(buildTeamItem(canSelectAsFavourite: null), awayTeam)],
             ),
           ],
         ),
@@ -279,6 +279,22 @@ void main() {
 
                 test("isKnockout", () {
                   expect(firstMatch.isKnockout, isKnockout);
+                });
+              });
+            });
+          });
+
+          group("second match day", () {
+            var secondMatchDay = matchDays.elementAt(1);
+
+            group("first match", () {
+              Match firstMatch = secondMatchDay.matches.first;
+
+              group("home team", () {
+                var homeTeam = firstMatch.homeTeam;
+
+                test("canBeFavourite", () {
+                  expect(homeTeam.canBeFavourite, true);
                 });
               });
             });

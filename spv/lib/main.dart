@@ -53,13 +53,13 @@ class _MyHomePageState extends State<MyHomePage> {
       print(data);
     });
 
-    newsBloc.news.listen((data) {
-      //print(data);
-    });
+    //newsBloc.news.listen((data) {
+    //  //print(data);
+    //});
 
-    newsBloc.videos.listen((data) {
-      //print(data);
-    });
+    //newsBloc.videos.listen((data) {
+    //  //print(data);
+    //});
 
 //    videoUseCase.video.listen((data) {
 //      if (data is Data) {
