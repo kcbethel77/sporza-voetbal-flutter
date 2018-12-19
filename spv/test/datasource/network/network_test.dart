@@ -1,3 +1,4 @@
+import 'package:built_value/serializer.dart';
 import 'package:spv/datasource/data_source_type.dart';
 import 'package:spv/datasource/network/network.dart';
 import 'package:spv/models/network/network_models.dart';
@@ -12,21 +13,14 @@ void main() {
   final MockResponse mockResponse = MockResponse();
   final Network nw = NetworkImpl(mockHttp);
 
-  when(mockHttp.get(any, headers: anyNamed('headers')))
-      .thenAnswer((_) => Future.value(mockResponse));
-  when(mockResponse.body).thenReturn("[]");
+  when(mockHttp.get(any, headers: anyNamed('headers'))).thenAnswer((_) => Future.value(mockResponse));
 
   group("a network implementation", () {
     test("has injected headers on client", () {
+      when(mockResponse.body).thenReturn("[]");
       nw.getListOfT(newsDatasourceType).listen((resp) {
-        expect(
-            verify(mockHttp.get(any, headers: captureAnyNamed('headers')))
-                .captured
-                .single,
-            equals({
-              "Accept": "application/be.vrt.infostrada.v7+json",
-              "X-Device-Id": "android"
-            }));
+        expect(verify(mockHttp.get(any, headers: captureAnyNamed('headers'))).captured.single,
+            equals({"Accept": "application/be.vrt.infostrada.v7+json", "X-Device-Id": "android"}));
       });
     });
   });
@@ -81,6 +75,16 @@ void main() {
       final type = CalendarForCompetitionDataSourceType(_competitionId);
       nw.getT<Competition>(type).listen((resp) {
         expect(resp.id, _competitionId);
+      });
+    });
+
+    test("can not parse a calendar JSON when no response",() {
+      when(mockResponse.body).thenReturn("{}");
+
+      final _competitionId = "48";
+      final type = CalendarForCompetitionDataSourceType(_competitionId);
+      nw.getT<Competition>(type).listen((resp) {}, onError: (err) {
+        expect(err, const TypeMatcher<DeserializationError>());
       });
     });
   });
