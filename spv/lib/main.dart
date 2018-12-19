@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:spv/bloc/competition_overview_bloc.dart';
 import 'package:spv/bloc/home_bloc.dart';
 import 'package:spv/datasource/cache/cache.dart';
 import 'package:spv/datasource/network/network.dart';
@@ -45,12 +46,19 @@ class _MyHomePageState extends State<MyHomePage> {
 
     final HomeBloc newsBloc = HomeBloc(newsUseCase, videoUseCase);
 
-    newsBloc.news.listen((data) {
+    final CompetitionOverviewBloc competitionOverviewBloc =
+        CompetitionOverviewBloc("59", cache, network);
+
+    competitionOverviewBloc.calendar.listen((data) {
       print(data);
     });
 
+    newsBloc.news.listen((data) {
+      //print(data);
+    });
+
     newsBloc.videos.listen((data) {
-      print(data);
+      //print(data);
     });
 
 //    videoUseCase.video.listen((data) {
