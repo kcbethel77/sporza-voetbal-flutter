@@ -75,6 +75,9 @@ void main() {
       final type = CalendarForCompetitionDataSourceType(_competitionId);
       nw.getT<Competition>(type).listen((resp) {
         expect(resp.id, _competitionId);
+        expect(resp.phases.length, 1);
+        expect(resp.phases.first.matchDays.length, 30);
+        expect(resp.phases.first.matchDays.first.matches.length, 8);
       });
     });
 

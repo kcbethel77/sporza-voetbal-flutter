@@ -5,5 +5,5 @@ import 'package:spv/models/network/network_models.dart';
 
 part 'serializers.g.dart';
 
-@SerializersFor(const [News, Video, Team, MediaType, Competition])
+@SerializersFor(const [News, Video, Team, MediaType, Competition, Phase, MatchDay, Match])
 final Serializers serializers = (_$serializers.toBuilder()..addPlugin(StandardJsonPlugin())).build();

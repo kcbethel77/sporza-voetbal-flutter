@@ -1,5 +1,7 @@
+import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
+import 'package:spv/models/network/network_models.dart';
 
 part 'competition.g.dart';
 
@@ -26,6 +28,9 @@ abstract class Competition implements Built<Competition, CompetitionBuilder> {
 
   @nullable
   bool get canSelectFavourites;
+
+  @nullable
+  BuiltList<Phase> get phases;
 
   bool get hasRanking;
 

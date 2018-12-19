@@ -15,10 +15,13 @@ abstract class Team implements Built<Team, TeamBuilder> {
 
   String get logoUrl;
 
+  @nullable
   String get countryShort;
 
+  @nullable
   BuiltList<String> get competitionIds;
 
+  @nullable
   bool get canSelectAsFavourite;
 
   factory Team([updates(TeamBuilder b)]) = _$Team;
