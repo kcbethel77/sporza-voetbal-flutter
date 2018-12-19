@@ -37,12 +37,19 @@ const bool canSelectAsFavourite = true;
 const bool hasRanking = true;
 const bool sporzaFeatured = true;
 const bool additionalInfo = true;
+const bool isFavourite = true;
 
 const String homeTeamName = "homeTeam";
 const String awayTeamName = "awayTeam";
 
-final Team homeTeam = buildTeamItem(id: "${homeTeamName}_$id", name: homeTeamName, logoUrl: "${url}_$homeTeamName");
-final Team awayTeam = buildTeamItem(id: "${awayTeamName}_$id", name: awayTeamName, logoUrl: "${url}_$awayTeamName");
+final Team homeTeam = buildTeamItem(
+    id: "${homeTeamName}_$id",
+    name: homeTeamName,
+    logoUrl: "${url}_$homeTeamName");
+final Team awayTeam = buildTeamItem(
+    id: "${awayTeamName}_$id",
+    name: awayTeamName,
+    logoUrl: "${url}_$awayTeamName");
 
 Link buildLink({String id = id, String url = url, String rel = rel}) {
   return (LinkBuilder()

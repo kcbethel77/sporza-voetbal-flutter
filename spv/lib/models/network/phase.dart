@@ -16,8 +16,10 @@ abstract class Phase implements Built<Phase, PhaseBuilder> {
 
   String get labelShort;
 
+  @nullable
   String get currentMatchDay;
 
+  @nullable
   int get currentMatchDayIndex;
 
   BuiltList<MatchDay> get matchDays;

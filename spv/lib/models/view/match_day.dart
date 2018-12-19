@@ -2,10 +2,12 @@ import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 import 'package:built_collection/built_collection.dart';
 import 'package:spv/models/view/view_models.dart';
+import 'package:spv/models/view/accessible.dart';
 
 part 'match_day.g.dart';
 
-abstract class MatchDay implements Built<MatchDay, MatchDayBuilder> {
+abstract class MatchDay
+    implements Built<MatchDay, MatchDayBuilder>, Accessible {
   static Serializer<MatchDay> get serializer => _$matchDaySerializer;
 
   MatchDay._();
@@ -14,7 +16,7 @@ abstract class MatchDay implements Built<MatchDay, MatchDayBuilder> {
 
   bool get isCurrent;
 
-  BuiltList<Match> get match;
+  BuiltList<Match> get matches;
 
   factory MatchDay([updates(MatchDayBuilder b)]) = _$MatchDay;
 }

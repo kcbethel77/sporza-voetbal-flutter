@@ -20,6 +20,10 @@ abstract class Match implements Built<Match, MatchBuilder>, Id, Accessible {
   //TODO: Convert me to an Enum
   String get status;
 
+  int get homeScore;
+
+  int get awayScore;
+
   bool get isKnockout;
 
   factory Match([updates(MatchBuilder b)]) = _$Match;

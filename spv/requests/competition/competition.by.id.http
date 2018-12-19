@@ -1,4 +1,4 @@
-GET http://{{host}}/football/competition/48
+GET http://{{host}}/football/competition/59
 Accept: {{accept-header-v7}}
 
 ###

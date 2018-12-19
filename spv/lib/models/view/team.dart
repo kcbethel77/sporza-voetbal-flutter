@@ -5,7 +5,7 @@ import 'package:spv/models/view/accessible.dart';
 
 part 'team.g.dart';
 
-abstract class Team implements Built<Team, TeamBuilder>, Id, Accessible {
+abstract class Team implements Built<Team, TeamBuilder>, Id {
   static Serializer<Team> get serializer => _$teamSerializer;
 
   Team._();
