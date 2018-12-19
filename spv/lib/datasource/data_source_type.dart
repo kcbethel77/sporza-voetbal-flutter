@@ -73,7 +73,6 @@ class CompetitionDataSourceType extends DatasourceType<Competition> {
 }
 
 class CalendarForCompetitionDataSourceType extends DatasourceType<Competition> {
-
   final String _competitionId;
 
   @override
@@ -83,4 +82,7 @@ class CalendarForCompetitionDataSourceType extends DatasourceType<Competition> {
   Serializer<Competition> get serializer => Competition.serializer;
 
   const CalendarForCompetitionDataSourceType(this._competitionId);
+
+  @override
+  bool operator ==(other) => other is CalendarForCompetitionDataSourceType && other._competitionId == _competitionId;
 }

@@ -27,7 +27,6 @@ class Fail<T> implements Response<T> {
   const Fail(this.throwable, this._networkError);
 }
 
-
 class Data<T> implements Response<T> {
   final T value;
   final bool _networkSuccess;
@@ -39,4 +38,17 @@ class Data<T> implements Response<T> {
   }
 
   const Data(this.value, this._networkSuccess);
+}
+
+typedef SuccessFullTransform<T, R> = R Function(Data<T> data);
+typedef FailTransform<T> = T Function(Fail<T> failure);
+
+R transformResponse<T, R>(Response resp, [SuccessFullTransform<T, R> success, FailTransform<R> fail]) {
+  if (resp is Data) {
+    return success(resp);
+  } else if (resp is Fail) {
+    return fail(resp);
+  } else {
+    throw Error();
+  }
 }
