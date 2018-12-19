@@ -8,7 +8,7 @@ void main() {
   final Cache cache = CacheImpl(path: "json");
 
   tearDown(() async {
-    await cache.removeDir("json");
+    //await cache.removeDir("json");
   });
 
   group("news caching", () {
@@ -83,7 +83,9 @@ void main() {
   });
 
   group("competition", () {
-    var competition = buildCompetition();
+    var competition = buildCompetition(
+      phases: [buildPhase(matchDays: [buildMatchDay(matches: [buildMatch(homeTeam, awayTeam)])])]
+    );
 
     final calendarDataSourceType = CalendarForCompetitionDataSourceType("48");
     test("should save and fetch the calendar", () async {

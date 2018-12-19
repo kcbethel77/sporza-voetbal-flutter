@@ -14,6 +14,9 @@ const int position = 42;
 const String defaultPhase = "defaultPhase";
 const String url = "http://www.sporza.be/";
 const String publicationId = "pubId";
+const String labelShort = "labelShort";
+const String currentMatchDay = "currentMatchDay";
+const int currentMatchDayIndex = 34;
 const MediaType mediaType = MediaType.VRT;
 const String adDomain = "adDomain";
 const String adPartner = "adPartner";
@@ -23,10 +26,23 @@ const String adLocation = "adLocation";
 const String adConsent = "adConsent";
 const String logoUrl = "http://www.sporza.be/logoUrl.png";
 const String countryShort = "countryShort";
+const String startTime = "startTime";
+const String status = "status";
+const int homeScore = 19;
+const int awayScore = 90;
+const String statusName = "status name";
+const String statusLabel = "status label";
+const bool isKnockout = true;
 const bool canSelectAsFavourite = true;
 const bool hasRanking = true;
 const bool sporzaFeatured = true;
 const bool additionalInfo = true;
+
+const String homeTeamName = "homeTeam";
+const String awayTeamName = "awayTeam";
+
+final Team homeTeam = buildTeamItem(id: "${homeTeamName}_$id", name: homeTeamName, logoUrl: "${url}_$homeTeamName");
+final Team awayTeam = buildTeamItem(id: "${awayTeamName}_$id", name: awayTeamName, logoUrl: "${url}_$awayTeamName");
 
 Link buildLink({String id = id, String url = url, String rel = rel}) {
   return (LinkBuilder()
@@ -127,6 +143,7 @@ Competition buildCompetition(
     String accessibilityText = accessibilityText,
     String defaultPhase = defaultPhase,
     bool canSelectFavourites = canSelectAsFavourite,
+    List<Phase> phases = const [],
     bool hasRanking = hasRanking,
     bool sporzaFeatured = sporzaFeatured,
     bool additionInfo = additionalInfo}) {
@@ -139,8 +156,67 @@ Competition buildCompetition(
         ..accessibilityText = accessibilityText
         ..defaultPhase = defaultPhase
         ..canSelectFavourites = canSelectFavourites
+        ..phases = ListBuilder(phases)
         ..hasRanking = hasRanking
         ..sporzaFeatured = sporzaFeatured
         ..additionalInfo = additionalInfo)
+      .build();
+}
+
+Phase buildPhase(
+    {String id = id,
+    String label = label,
+    String labelShort = labelShort,
+    String currentMatchDay = currentMatchDay,
+    int currentMatchDayIndex = currentMatchDayIndex,
+    List<MatchDay> matchDays = const []}) {
+  return (PhaseBuilder()
+        ..id = id
+        ..label = label
+        ..labelShort = labelShort
+        ..currentMatchDay = currentMatchDay
+        ..currentMatchDayIndex = currentMatchDayIndex
+        ..matchDays = ListBuilder(matchDays))
+      .build();
+}
+
+MatchDay buildMatchDay(
+    {String id = id,
+    String name = name,
+    String accessibilityText = accessibilityText,
+    List<Match> matches = const []}) {
+  return (MatchDayBuilder()
+        ..id = id
+        ..name = name
+        ..accessibilityText = accessibilityText
+        ..matches = ListBuilder(matches))
+      .build();
+}
+
+Match buildMatch(
+  Team homeTeam,
+  Team awayTeam, {
+  String id = id,
+  String startTime = startTime,
+  String status = status,
+  int homeScore = homeScore,
+  int awayScore = awayScore,
+  String statusName = statusName,
+  String statusLabel = statusLabel,
+  String accessibilityText = accessibilityText,
+  bool isKnockout = isKnockout,
+}) {
+  return (MatchBuilder()
+        ..id = id
+        ..homeTeam = homeTeam.toBuilder()
+        ..awayTeam = awayTeam.toBuilder()
+        ..startTime = startTime
+        ..status = status
+        ..homeScore = homeScore
+        ..awayScore = awayScore
+        ..statusName = statusName
+        ..statusLabel = statusLabel
+        ..accessibilityText = accessibilityText
+        ..isKnockout = isKnockout)
       .build();
 }
