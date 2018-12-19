@@ -53,37 +53,13 @@ class _MyHomePageState extends State<MyHomePage> {
       print(data);
     });
 
-    //newsBloc.news.listen((data) {
-    //  //print(data);
-    //});
+    newsBloc.news.listen((data) {
+      print(data);
+    });
 
-    //newsBloc.videos.listen((data) {
-    //  //print(data);
-    //});
-
-//    videoUseCase.video.listen((data) {
-//      if (data is Data) {
-//        print("is Data");
-//        print((data as Data).value);
-//      }
-//
-//      if (data is Fail) {
-//        print("is Fail");
-//        print((data as Fail).throwable);
-//      }
-//    });
-//
-//    newsUseCase.news.listen((data) {
-//      if (data is Data) {
-//        print("is Data");
-//        print((data as Data).value);
-//      }
-//
-//      if (data is Fail) {
-//        print("is Fail");
-//        print((data as Fail).throwable);
-//      }
-//    });
+    newsBloc.videos.listen((data) {
+      print(data);
+    });
   }
 
   void _incrementCounter() {
