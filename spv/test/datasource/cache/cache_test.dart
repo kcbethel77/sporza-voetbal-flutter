@@ -8,7 +8,7 @@ void main() {
   final Cache cache = CacheImpl(path: "json");
 
   tearDown(() async {
-    //await cache.removeDir("json");
+    await cache.removeDir("json");
   });
 
   group("news caching", () {
