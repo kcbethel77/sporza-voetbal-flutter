@@ -76,9 +76,9 @@ void main() {
       nw.getT<Competition>(type).listen((resp) {
         expect(resp.id, _competitionId);
         expect(resp.phases.length, 1);
-        expect(resp.phases.first.matchDays.length, 30);
+        expect(resp.phases.first.matchDays.length, 2);
         expect(resp.phases.first.ranking, isNull);
-        expect(resp.phases.first.matchDays.first.matches.length, 8);
+        expect(resp.phases.first.matchDays.first.matches.length, 2);
       });
     });
 
@@ -101,7 +101,7 @@ void main() {
         expect(resp.id, _competitionId);
         expect(resp.phases.length, 1);
         expect(resp.phases.first.matchDays, isNull);
-        expect(resp.phases.first.ranking.length, 16);
+        expect(resp.phases.first.ranking.length, 2);
         expect(resp.phases.first.ranking.first.id, "132540_5002");
       });
     });
