@@ -5,7 +5,7 @@ import 'package:test/test.dart';
 import '../../utils/model_builder.dart';
 
 void main() {
-  final Cache cache = CacheImpl(path: "json");
+  final CacheImpl cache = CacheImpl(path: "json");
 
   tearDown(() async {
     await cache.removeDir("json");
@@ -66,9 +66,10 @@ void main() {
 
     group("teams caching", () {
       var teamItems = List.of([
-        buildTeamItem(id: "1", competitionIds: ["1, 2, 3"], canSelectAsFavourite: false),
-        buildTeamItem(id: "2", competitionIds: ["4, 5, 6"]),
-        buildTeamItem(id: "3", competitionIds: ["7, 8, 9"])
+        buildTeam(
+            id: "1", competitionIds: ["1, 2, 3"], canSelectAsFavourite: false),
+        buildTeam(id: "2", competitionIds: ["4, 5, 6"]),
+        buildTeam(id: "3", competitionIds: ["7, 8, 9"])
       ]);
 
       test("should successfully fetch the cached teams json", () async {

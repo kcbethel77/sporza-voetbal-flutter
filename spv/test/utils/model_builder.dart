@@ -49,8 +49,8 @@ const bool isFavourite = true;
 const MediaType mediaType = MediaType.VRT;
 const MatchStatus matchStatus = MatchStatus.END;
 
-final Team homeTeam = buildTeamItem(id: "${homeTeamName}_$id", name: homeTeamName, logoUrl: "${url}_$homeTeamName");
-final Team awayTeam = buildTeamItem(id: "${awayTeamName}_$id", name: awayTeamName, logoUrl: "${url}_$awayTeamName");
+final Team homeTeam = buildTeam(id: "${homeTeamName}_$id", name: homeTeamName, logoUrl: "${url}_$homeTeamName");
+final Team awayTeam = buildTeam(id: "${awayTeamName}_$id", name: awayTeamName, logoUrl: "${url}_$awayTeamName");
 
 Link buildLink({String id = id, String url = url, String rel = rel}) {
   return (LinkBuilder()
@@ -125,7 +125,7 @@ Video buildVideoItem(
       .build();
 }
 
-Team buildTeamItem(
+Team buildTeam(
     {String id = id,
     String name = name,
     String logoUrl = logoUrl,

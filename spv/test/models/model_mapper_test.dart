@@ -110,7 +110,8 @@ void main() {
   });
 
   group("Video", () {
-    var videoViewModel = Mapper.mapVideoToViewModel(buildVideoItem(contentLinks: [
+    var videoViewModel =
+        Mapper.mapVideoToViewModel(buildVideoItem(contentLinks: [
       buildLink(url: "url1"),
       buildLink(url: "url2"),
     ], imageLinks: [
@@ -157,6 +158,7 @@ void main() {
     var defaultPhase = "defaultPhase";
     var phaseLabel = "phaseLabel";
     var matchDay = "matchDay";
+    var favoriteTeamId = "favoriteTeam";
 
     final network.Competition competition = buildCompetition(
       defaultPhase: defaultPhase,
@@ -171,7 +173,14 @@ void main() {
               matches: [buildMatch(homeTeam, awayTeam)],
             ),
             buildMatchDay(
-              matches: [buildMatch(buildTeamItem(canSelectAsFavourite: null), awayTeam)],
+              matches: [
+                buildMatch(
+                    buildTeam(
+                      canSelectAsFavourite: null,
+                      id: favoriteTeamId,
+                    ),
+                    awayTeam)
+              ],
             ),
           ],
         ),
@@ -184,7 +193,10 @@ void main() {
       ],
     );
 
-    final Calendar calendar = Mapper.mapCompetitionToCalendar(competition);
+    final Calendar calendar = Mapper.mapCompetitionToCalendar(
+      competition,
+      [favoriteTeamId],
+    );
 
     test("has the correct competition title", () {
       expect(calendar.competitionTitle, label);
@@ -294,6 +306,10 @@ void main() {
 
                 test("canBeFavourite", () {
                   expect(homeTeam.canBeFavourite, true);
+                });
+
+                test("isFavourite", () {
+                  expect(homeTeam.isFavorite, true);
                 });
               });
             });

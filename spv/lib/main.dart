@@ -3,7 +3,7 @@ import 'package:spv/bloc/competition_overview_bloc.dart';
 import 'package:spv/bloc/home_bloc.dart';
 import 'package:spv/datasource/cache/cache.dart';
 import 'package:spv/datasource/network/network.dart';
-import 'package:spv/models/response.dart';
+import 'package:spv/datasource/user/user_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'package:spv/usecase/usecase.dart';
 
@@ -37,6 +37,9 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
+  }
+
+  void _incrementCounter() {
     var httpClient = http.Client();
     var cache = CacheImpl();
     var network = NetworkImpl(httpClient);
@@ -46,8 +49,10 @@ class _MyHomePageState extends State<MyHomePage> {
 
     final HomeBloc newsBloc = HomeBloc(newsUseCase, videoUseCase);
 
+    final UserPreference userPreferences = UserPreferenceImpl();
+
     final CompetitionOverviewBloc competitionOverviewBloc =
-        CompetitionOverviewBloc("48", cache, network);
+    CompetitionOverviewBloc("48", cache, network, userPreferences);
 
     competitionOverviewBloc.calendar.listen((data) {
       print(data);
@@ -64,9 +69,7 @@ class _MyHomePageState extends State<MyHomePage> {
     newsBloc.videos.listen((data) {
       print(data);
     });
-  }
 
-  void _incrementCounter() {
     setState(() {
       _counter++;
     });
