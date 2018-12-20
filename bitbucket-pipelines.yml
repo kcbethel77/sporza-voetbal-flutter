@@ -5,9 +5,10 @@ clone:
 
 pipelines:
   branches:
-    - step:
-        name: Build and test
-        script:
-          - flutter packages get
-          - flutter packages pub run build_runner build
-          - flutter test
+    master:
+      - step:
+          name: Build and test
+          script:
+            - flutter packages get
+            - flutter packages pub run build_runner build
+            - flutter test
