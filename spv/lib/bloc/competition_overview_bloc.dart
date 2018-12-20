@@ -24,11 +24,11 @@ class CompetitionOverviewBloc with ViewModelMappable {
 
   Observable<Response<Calendar>> get calendar => Observable.zip(
       [_calendarUseCase.calendar, _userPreference.favoriteTeams],
-      (pair) => mapToViewModel(
+      (pair) => mapToViewModels(
           pair.first,
           (competition) =>
               Mapper.mapCompetitionToCalendar(competition, pair.last)));
 
   Observable<Response> get ranking => _rankingUseCase.ranking.map(
-      (response) => mapToViewModel(response, Mapper.mapCompetitionToRanking));
+      (response) => mapToViewModels(response, Mapper.mapCompetitionToRanking));
 }
