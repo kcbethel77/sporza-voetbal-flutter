@@ -19,6 +19,7 @@ pipelines:
             - androidgradle
             - gradlewrapper
           script:
+            - cd spv
             - flutter packages pub run build_runner build
       - step:
           name: Test
@@ -26,6 +27,7 @@ pipelines:
             - androidgradle
             - gradlewrapper
           script:
+            - cd spv
             - flutter test
 
 definitions:
