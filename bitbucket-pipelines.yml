@@ -1,0 +1,13 @@
+image: nathansamson/flutter-builder-docker
+
+clone:
+  depth: 5
+
+pipelines:
+  branches:
+    - step:
+        name: Build and test
+        script:
+          - flutter packages get
+          - flutter packages pub run build_runner build
+          - flutter test
