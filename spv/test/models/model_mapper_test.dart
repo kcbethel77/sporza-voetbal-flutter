@@ -273,7 +273,7 @@ void main() {
                 });
 
                 test("has correct status", () {
-                  expect(firstMatch.status, status);
+                  expect(firstMatch.status, matchStatus);
                 });
 
                 test("isKnockout", () {

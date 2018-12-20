@@ -1,6 +1,6 @@
 import 'package:built_collection/built_collection.dart';
-import 'package:meta/meta.dart';
 import 'package:spv/models/network/network_models.dart';
+import 'package:spv/models/common/common.dart';
 
 const int rank = 10;
 const int nrOfMatches = 20;
@@ -33,7 +33,6 @@ const String adConsent = "adConsent";
 const String logoUrl = "http://www.sporza.be/logoUrl.png";
 const String countryShort = "countryShort";
 const String startTime = "startTime";
-const String status = "status";
 const String statusName = "status name";
 const String statusLabel = "status label";
 const String homeTeamName = "homeTeam";
@@ -48,6 +47,7 @@ const bool additionalInfo = true;
 const bool isFavourite = true;
 
 const MediaType mediaType = MediaType.VRT;
+const MatchStatus matchStatus = MatchStatus.END;
 
 final Team homeTeam = buildTeamItem(id: "${homeTeamName}_$id", name: homeTeamName, logoUrl: "${url}_$homeTeamName");
 final Team awayTeam = buildTeamItem(id: "${awayTeamName}_$id", name: awayTeamName, logoUrl: "${url}_$awayTeamName");
@@ -224,7 +224,7 @@ Match buildMatch(
   Team awayTeam, {
   String id = id,
   String startTime = startTime,
-  String status = status,
+  MatchStatus status = matchStatus,
   int homeScore = homeScore,
   int awayScore = awayScore,
   String statusName = statusName,

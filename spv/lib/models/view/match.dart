@@ -3,6 +3,7 @@ import 'package:built_value/serializer.dart';
 import 'package:spv/models/view/view_models.dart';
 import 'package:spv/models/view/id.dart';
 import 'package:spv/models/view/accessible.dart';
+import 'package:spv/models/common/common.dart';
 
 part 'match.g.dart';
 
@@ -17,8 +18,7 @@ abstract class Match implements Built<Match, MatchBuilder>, Id, Accessible {
 
   String get startTime;
 
-  //TODO: Convert me to an Enum
-  String get status;
+  MatchStatus get status;
 
   int get homeScore;
 
