@@ -7,15 +7,25 @@ pipelines:
   branches:
     master:
       - step:
+          name: Get Packages
           caches:
             - fluttercache
-            - androidgradle
-            - gradlewrapper
-          name: Build and test
           script:
             - cd spv
             - flutter packages get
+      - step:
+          name: Build Runner
+          caches:
+            - androidgradle
+            - gradlewrapper
+          script:
             - flutter packages pub run build_runner build
+      - step:
+          name: Test
+          caches:
+            - androidgradle
+            - gradlewrapper
+          script:
             - flutter test
 
 definitions:
