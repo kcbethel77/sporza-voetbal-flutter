@@ -9,3 +9,6 @@ export 'calendar_phase.dart';
 export 'match.dart';
 export 'match_day.dart';
 export 'team.dart';
+export 'ranking.dart';
+export 'ranking_phase.dart';
+export 'rank.dart';

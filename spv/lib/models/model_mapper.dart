@@ -38,12 +38,17 @@ class Mapper {
         .build();
   }
 
+  static bool _isCurrentPhase(final network.Phase phase, final String defaultPhase) => phase.id == defaultPhase;
+
+  static String _nameForPhase(final network.Phase phase) => phase.label;
+
+  //<editor-fold desc="Calendar">
   static List<view.CalendarPhase> _mapPhasesToCalendarPhases(
           final BuiltList<network.Phase> phases, final String defaultPhase) =>
       phases
           .map((phase) => (view.CalendarPhaseBuilder()
-                ..name = phase.label
-                ..isCurrent = phase.id == defaultPhase
+                ..name = _nameForPhase(phase)
+                ..isCurrent = _isCurrentPhase(phase, defaultPhase)
                 ..matchDays = ListBuilder(_mapToMatchDays(phase.matchDays, phase.currentMatchDay)))
               .build())
           .toList();
@@ -84,6 +89,37 @@ class Mapper {
         ..competitionTitle = competition.label
         ..phases = ListBuilder(_mapPhasesToCalendarPhases(competition.phases, competition.defaultPhase)))
       .build();
+  //</editor-fold>
 
-  static List<R> _mapListOfTtoR<T, R>(List<T> list, [R mapFunc(T t)]) => list.map(mapFunc).toList();
+  //<editor-fold desc="Ranking">
+  static view.Ranking mapCompetitionToRanking(final network.Competition competition) => (view.RankingBuilder()
+        ..competitionTitle = competition.label
+        ..phases = ListBuilder(_mapPhasesToRankingPhases(competition.phases, competition.defaultPhase)))
+      .build();
+
+  static List<view.RankingPhase> _mapPhasesToRankingPhases(
+          final BuiltList<network.Phase> phases, final String defaultPhase) =>
+      phases
+          .map((phase) => (view.RankingPhaseBuilder()
+                ..name = _nameForPhase(phase)
+                ..isCurrent = _isCurrentPhase(phase, defaultPhase)
+                ..rankings = ListBuilder(_mapListOfTtoR(phase.ranking, _mapRankingToRank)))
+              .build())
+          .toList();
+
+  static view.Rank _mapRankingToRank(final network.Ranking ranking) {
+    final view.Team team = _mapToTeam(ranking.team).build();
+    return (view.RankBuilder()
+          ..id = ranking.id
+          ..accessibility = ranking.accessibilityText
+          ..name = team.name
+          ..iconUrl = team.iconUrl
+          ..position = ranking.rank
+          ..matchedPlayed = ranking.nrOfMatches
+          ..points = ranking.points)
+        .build();
+  }
+  //</editor-fold>
+
+  static List<R> _mapListOfTtoR<T, R>(Iterable<T> list, [R mapFunc(T t)]) => list.map(mapFunc).toList();
 }

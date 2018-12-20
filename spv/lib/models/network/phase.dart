@@ -22,7 +22,11 @@ abstract class Phase implements Built<Phase, PhaseBuilder> {
   @nullable
   int get currentMatchDayIndex;
 
+  @nullable
   BuiltList<MatchDay> get matchDays;
+
+  @nullable
+  BuiltList<Ranking> get ranking;
 
   factory Phase([updates(PhaseBuilder b)]) = _$Phase;
 }

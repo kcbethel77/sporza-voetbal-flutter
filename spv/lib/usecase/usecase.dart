@@ -7,5 +7,6 @@ export 'now/videos/video_usecase.dart';
 //Competitions
 export 'competition/overview/competition_overview_usecase.dart';
 
-//Calendar
+//Calendar + Ranking
 export 'calendar/calendar_usecase.dart';
+export 'ranking/ranking_usecase.dart';

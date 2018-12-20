@@ -3,7 +3,7 @@ import 'package:spv/datasource/cache/cache.dart';
 import 'package:spv/datasource/data_source_type.dart';
 import 'package:spv/datasource/soccer_datasource.dart';
 import 'package:spv/models/response.dart';
-import 'package:spv/usecase/use_case_mixin.dart';
+import 'package:spv/usecase/usecase_mixin.dart';
 
 abstract class ListUseCase<T> with UseCase {
   final Cache _cache;

@@ -5635,3 +5635,237 @@ const String calendarJson = '''
   "hasRanking": true
 }
 ''';
+
+const String rankingJsonWithoutRankings = ''' 
+{
+  "id": "48",
+  "country": "België",
+  "countryShort": "BEL",
+  "label": "Jupiler Pro League",
+  "accessibilityText": "België, Jupiler Pro League",
+  "phases": [
+    {
+      "id": "132540",
+      "label": "Regulier",
+      "labelShort": "Regulier",
+      "ranking": []
+    }
+  ],
+  "defaultPhase": "132540",
+  "hasRanking": true
+}
+''';
+
+const String rankingJson = ''' 
+{
+  "id": "48",
+  "country": "België",
+  "countryShort": "BEL",
+  "label": "Jupiler Pro League",
+  "accessibilityText": "België, Jupiler Pro League",
+  "phases": [
+    {
+      "id": "132540",
+      "label": "Regulier",
+      "labelShort": "Regulier",
+      "ranking": [
+        {
+          "id": "132540_5002",
+          "rank": 1,
+          "team": {
+            "id": "5002",
+            "name": "KRC Genk",
+            "logoUrl": "https://images.vrt.be/orig/contentapi/infostrada/team/5002.png"
+          },
+          "nrOfMatches": 19,
+          "points": 42,
+          "accessibilityText": "1e plaats, KRC Genk, 19 wedstrijden gespeeld, 42 punten."
+        },
+        {
+          "id": "132540_4035",
+          "rank": 2,
+          "team": {
+            "id": "4035",
+            "name": "Club Brugge",
+            "logoUrl": "https://images.vrt.be/orig/contentapi/infostrada/team/4035.png"
+          },
+          "nrOfMatches": 19,
+          "points": 35,
+          "accessibilityText": "2e plaats, Club Brugge, 19 wedstrijden gespeeld, 35 punten."
+        },
+        {
+          "id": "132540_4201",
+          "rank": 3,
+          "team": {
+            "id": "4201",
+            "name": "Antwerp",
+            "logoUrl": "https://images.vrt.be/orig/contentapi/infostrada/team/4201.png"
+          },
+          "nrOfMatches": 19,
+          "points": 35,
+          "accessibilityText": "3e plaats, Antwerp, 19 wedstrijden gespeeld, 35 punten."
+        },
+        {
+          "id": "132540_4209",
+          "rank": 4,
+          "team": {
+            "id": "4209",
+            "name": "Anderlecht",
+            "logoUrl": "https://images.vrt.be/orig/contentapi/infostrada/team/4209.png"
+          },
+          "nrOfMatches": 19,
+          "points": 31,
+          "accessibilityText": "4e plaats, Anderlecht, 19 wedstrijden gespeeld, 31 punten."
+        },
+        {
+          "id": "132540_102513",
+          "rank": 5,
+          "team": {
+            "id": "102513",
+            "name": "STVV",
+            "logoUrl": "https://images.vrt.be/orig/contentapi/infostrada/team/102513.png"
+          },
+          "nrOfMatches": 19,
+          "points": 31,
+          "accessibilityText": "5e plaats, STVV, 19 wedstrijden gespeeld, 31 punten."
+        },
+        {
+          "id": "132540_4500",
+          "rank": 6,
+          "team": {
+            "id": "4500",
+            "name": "Charleroi",
+            "logoUrl": "https://images.vrt.be/orig/contentapi/infostrada/team/4500.png"
+          },
+          "nrOfMatches": 19,
+          "points": 30,
+          "accessibilityText": "6e plaats, Charleroi, 19 wedstrijden gespeeld, 30 punten."
+        },
+        {
+          "id": "132540_300",
+          "rank": 7,
+          "team": {
+            "id": "300",
+            "name": "Standard",
+            "logoUrl": "https://images.vrt.be/orig/contentapi/infostrada/team/300.png"
+          },
+          "nrOfMatches": 19,
+          "points": 30,
+          "accessibilityText": "7e plaats, Standard, 19 wedstrijden gespeeld, 30 punten."
+        },
+        {
+          "id": "132540_4301",
+          "rank": 8,
+          "team": {
+            "id": "4301",
+            "name": "KAA Gent",
+            "logoUrl": "https://images.vrt.be/orig/contentapi/infostrada/team/4301.png"
+          },
+          "nrOfMatches": 19,
+          "points": 28,
+          "accessibilityText": "8e plaats, KAA Gent, 19 wedstrijden gespeeld, 28 punten."
+        },
+        {
+          "id": "132540_4033",
+          "rank": 9,
+          "team": {
+            "id": "4033",
+            "name": "Cercle Brugge",
+            "logoUrl": "https://images.vrt.be/orig/contentapi/infostrada/team/4033.png"
+          },
+          "nrOfMatches": 19,
+          "points": 25,
+          "accessibilityText": "9e plaats, Cercle Brugge, 19 wedstrijden gespeeld, 25 punten."
+        },
+        {
+          "id": "132540_102231",
+          "rank": 10,
+          "team": {
+            "id": "102231",
+            "name": "KV Kortrijk",
+            "logoUrl": "https://images.vrt.be/orig/contentapi/infostrada/team/102231.png"
+          },
+          "nrOfMatches": 19,
+          "points": 24,
+          "accessibilityText": "10e plaats, KV Kortrijk, 19 wedstrijden gespeeld, 24 punten."
+        },
+        {
+          "id": "132540_105244",
+          "rank": 11,
+          "team": {
+            "id": "105244",
+            "name": "KAS Eupen",
+            "logoUrl": "https://images.vrt.be/orig/contentapi/infostrada/team/105244.png"
+          },
+          "nrOfMatches": 19,
+          "points": 22,
+          "accessibilityText": "11e plaats, KAS Eupen, 19 wedstrijden gespeeld, 22 punten."
+        },
+        {
+          "id": "132540_100078",
+          "rank": 12,
+          "team": {
+            "id": "100078",
+            "name": "KV Oostende",
+            "logoUrl": "https://images.vrt.be/orig/contentapi/infostrada/team/100078.png"
+          },
+          "nrOfMatches": 19,
+          "points": 22,
+          "accessibilityText": "12e plaats, KV Oostende, 19 wedstrijden gespeeld, 22 punten."
+        },
+        {
+          "id": "132540_103844",
+          "rank": 13,
+          "team": {
+            "id": "103844",
+            "name": "Zulte Waregem",
+            "logoUrl": "https://images.vrt.be/orig/contentapi/infostrada/team/103844.png"
+          },
+          "nrOfMatches": 19,
+          "points": 17,
+          "accessibilityText": "13e plaats, Zulte Waregem, 19 wedstrijden gespeeld, 17 punten."
+        },
+        {
+          "id": "132540_118772",
+          "rank": 14,
+          "team": {
+            "id": "118772",
+            "name": "Waasland-Beveren",
+            "logoUrl": "https://images.vrt.be/orig/contentapi/infostrada/team/118772.png"
+          },
+          "nrOfMatches": 19,
+          "points": 17,
+          "accessibilityText": "14e plaats, Waasland-Beveren, 19 wedstrijden gespeeld, 17 punten."
+        },
+        {
+          "id": "132540_119442",
+          "rank": 15,
+          "team": {
+            "id": "119442",
+            "name": "Excel Moeskroen",
+            "logoUrl": "https://images.vrt.be/orig/contentapi/infostrada/team/119442.png"
+          },
+          "nrOfMatches": 19,
+          "points": 14,
+          "accessibilityText": "15e plaats, Excel Moeskroen, 19 wedstrijden gespeeld, 14 punten."
+        },
+        {
+          "id": "132540_4706",
+          "rank": 16,
+          "team": {
+            "id": "4706",
+            "name": "KSC Lokeren",
+            "logoUrl": "https://images.vrt.be/orig/contentapi/infostrada/team/4706.png"
+          },
+          "nrOfMatches": 19,
+          "points": 14,
+          "accessibilityText": "16e plaats, KSC Lokeren, 19 wedstrijden gespeeld, 14 punten."
+        }
+      ]
+    }
+  ],
+  "defaultPhase": "132540",
+  "hasRanking": true
+}
+
+''';

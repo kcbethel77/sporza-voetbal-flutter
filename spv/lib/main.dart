@@ -5,7 +5,7 @@ import 'package:spv/datasource/cache/cache.dart';
 import 'package:spv/datasource/network/network.dart';
 import 'package:spv/models/response.dart';
 import 'package:http/http.dart' as http;
-import 'package:spv/usecase/use_case.dart';
+import 'package:spv/usecase/usecase.dart';
 
 void main() => runApp(MyApp());
 
@@ -47,9 +47,13 @@ class _MyHomePageState extends State<MyHomePage> {
     final HomeBloc newsBloc = HomeBloc(newsUseCase, videoUseCase);
 
     final CompetitionOverviewBloc competitionOverviewBloc =
-        CompetitionOverviewBloc("59", cache, network);
+        CompetitionOverviewBloc("48", cache, network);
 
     competitionOverviewBloc.calendar.listen((data) {
+      print(data);
+    });
+
+    competitionOverviewBloc.ranking.listen((data) {
       print(data);
     });
 

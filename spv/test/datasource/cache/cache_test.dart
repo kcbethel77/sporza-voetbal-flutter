@@ -66,8 +66,7 @@ void main() {
 
     group("teams caching", () {
       var teamItems = List.of([
-        buildTeamItem(
-            id: "1", competitionIds: ["1, 2, 3"], canSelectAsFavourite: false),
+        buildTeamItem(id: "1", competitionIds: ["1, 2, 3"], canSelectAsFavourite: false),
         buildTeamItem(id: "2", competitionIds: ["4, 5, 6"]),
         buildTeamItem(id: "3", competitionIds: ["7, 8, 9"])
       ]);
@@ -83,17 +82,40 @@ void main() {
   });
 
   group("competition", () {
-    var competition = buildCompetition(
-      phases: [buildPhase(matchDays: [buildMatchDay(matches: [buildMatch(homeTeam, awayTeam)])])]
-    );
+    group("calendar", () {
+      var competition = buildCompetition(phases: [
+        buildPhase(matchDays: [
+          buildMatchDay(matches: [buildMatch(homeTeam, awayTeam)])
+        ])
+      ]);
 
-    final calendarDataSourceType = CalendarForCompetitionDataSourceType("48");
-    test("should save and fetch the calendar", () async {
-      await cache.saveItem(calendarDataSourceType, competition);
+      final calendarDataSourceType = CalendarForCompetitionDataSourceType("48");
 
-      cache.getT(calendarDataSourceType).listen(expectAsync1((actual) {
-        expect(actual, competition);
-      }));
+      test("should save and fetch the calendar", () async {
+        await cache.saveItem(calendarDataSourceType, competition);
+
+        cache.getT(calendarDataSourceType).listen(expectAsync1((actual) {
+          expect(actual, competition);
+        }));
+      });
+    });
+
+    group("ranking", () {
+      var competition = buildCompetition(phases: [
+        buildPhase(
+          rankings: [buildRanking(homeTeam)],
+        )
+      ]);
+
+      final rankingDataSourceType = RankingForCompetitionDataSourceType("48");
+
+      test("should save and fetch the ranking", () async {
+        await cache.saveItem(rankingDataSourceType, competition);
+
+        cache.getT(rankingDataSourceType).listen(expectAsync1((actual) {
+          expect(actual, competition);
+        }));
+      });
     });
   });
 }
