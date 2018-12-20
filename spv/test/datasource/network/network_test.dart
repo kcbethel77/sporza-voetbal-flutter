@@ -76,18 +76,46 @@ void main() {
       nw.getT<Competition>(type).listen((resp) {
         expect(resp.id, _competitionId);
         expect(resp.phases.length, 1);
-        expect(resp.phases.first.matchDays.length, 30);
-        expect(resp.phases.first.matchDays.first.matches.length, 8);
+        expect(resp.phases.first.matchDays.length, 2);
+        expect(resp.phases.first.ranking, isNull);
+        expect(resp.phases.first.matchDays.first.matches.length, 2);
       });
     });
 
-    test("can not parse a calendar JSON when no response",() {
+    test("can not parse a calendar JSON when no response", () {
       when(mockResponse.body).thenReturn("{}");
 
       final _competitionId = "48";
       final type = CalendarForCompetitionDataSourceType(_competitionId);
       nw.getT<Competition>(type).listen((resp) {}, onError: (err) {
         expect(err, const TypeMatcher<DeserializationError>());
+      });
+    });
+
+    test("can parse a ranking JSON", () {
+      when(mockResponse.body).thenReturn(rankingJson);
+
+      final _competitionId = "48";
+      final type = RankingForCompetitionDataSourceType(_competitionId);
+      nw.getT<Competition>(type).listen((resp) {
+        expect(resp.id, _competitionId);
+        expect(resp.phases.length, 1);
+        expect(resp.phases.first.matchDays, isNull);
+        expect(resp.phases.first.ranking.length, 2);
+        expect(resp.phases.first.ranking.first.id, "132540_5002");
+      });
+    });
+
+    test("can parse a ranking JSON without rankings", () {
+      when(mockResponse.body).thenReturn(rankingJsonWithoutRankings);
+
+      final _competitionId = "48";
+      final type = RankingForCompetitionDataSourceType(_competitionId);
+      nw.getT<Competition>(type).listen((resp) {
+        expect(resp.id, _competitionId);
+        expect(resp.phases.length, 1);
+        expect(resp.phases.first.matchDays, isNull);
+        expect(resp.phases.first.ranking.length, 0);
       });
     });
   });

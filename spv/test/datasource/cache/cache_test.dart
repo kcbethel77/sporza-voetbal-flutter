@@ -5,7 +5,7 @@ import 'package:test/test.dart';
 import '../../utils/model_builder.dart';
 
 void main() {
-  final Cache cache = CacheImpl(path: "json");
+  final CacheImpl cache = CacheImpl(path: "json");
 
   tearDown(() async {
     await cache.removeDir("json");
@@ -66,10 +66,10 @@ void main() {
 
     group("teams caching", () {
       var teamItems = List.of([
-        buildTeamItem(
+        buildTeam(
             id: "1", competitionIds: ["1, 2, 3"], canSelectAsFavourite: false),
-        buildTeamItem(id: "2", competitionIds: ["4, 5, 6"]),
-        buildTeamItem(id: "3", competitionIds: ["7, 8, 9"])
+        buildTeam(id: "2", competitionIds: ["4, 5, 6"]),
+        buildTeam(id: "3", competitionIds: ["7, 8, 9"])
       ]);
 
       test("should successfully fetch the cached teams json", () async {
@@ -83,17 +83,40 @@ void main() {
   });
 
   group("competition", () {
-    var competition = buildCompetition(
-      phases: [buildPhase(matchDays: [buildMatchDay(matches: [buildMatch(homeTeam, awayTeam)])])]
-    );
+    group("calendar", () {
+      var competition = buildCompetition(phases: [
+        buildPhase(matchDays: [
+          buildMatchDay(matches: [buildMatch(homeTeam, awayTeam)])
+        ])
+      ]);
 
-    final calendarDataSourceType = CalendarForCompetitionDataSourceType("48");
-    test("should save and fetch the calendar", () async {
-      await cache.saveItem(calendarDataSourceType, competition);
+      final calendarDataSourceType = CalendarForCompetitionDataSourceType("48");
 
-      cache.getT(calendarDataSourceType).listen(expectAsync1((actual) {
-        expect(actual, competition);
-      }));
+      test("should save and fetch the calendar", () async {
+        await cache.saveItem(calendarDataSourceType, competition);
+
+        cache.getT(calendarDataSourceType).listen(expectAsync1((actual) {
+          expect(actual, competition);
+        }));
+      });
+    });
+
+    group("ranking", () {
+      var competition = buildCompetition(phases: [
+        buildPhase(
+          rankings: [buildRanking(homeTeam)],
+        )
+      ]);
+
+      final rankingDataSourceType = RankingForCompetitionDataSourceType("48");
+
+      test("should save and fetch the ranking", () async {
+        await cache.saveItem(rankingDataSourceType, competition);
+
+        cache.getT(rankingDataSourceType).listen(expectAsync1((actual) {
+          expect(actual, competition);
+        }));
+      });
     });
   });
 }

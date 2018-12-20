@@ -3,7 +3,7 @@ import 'package:test/test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:spv/datasource/data_source_type.dart';
-import 'package:spv/usecase/use_case.dart';
+import 'package:spv/usecase/usecase.dart';
 import 'package:spv/models/network/network_models.dart';
 
 import '../../../utils/spv_test_utils.dart';

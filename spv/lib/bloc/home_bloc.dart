@@ -3,7 +3,7 @@ import 'package:spv/models/model_mapper.dart';
 import 'package:spv/bloc/view_model_mappable_mixin.dart';
 import 'package:spv/models/response.dart';
 import 'package:spv/models/view/view_models.dart';
-import 'package:spv/usecase/use_case.dart';
+import 'package:spv/usecase/usecase.dart';
 
 class HomeBloc with ViewModelMappable {
   final NewsUseCase _newsUseCase;

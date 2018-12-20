@@ -1,5 +1,14 @@
 import 'package:built_collection/built_collection.dart';
 import 'package:spv/models/network/network_models.dart';
+import 'package:spv/models/common/common.dart';
+
+const int rank = 10;
+const int nrOfMatches = 20;
+const int points = 30;
+const int position = 40;
+const int currentMatchDayIndex = 50;
+const int homeScore = 60;
+const int awayScore = 70;
 
 const String id = "id";
 const String accessibilityText = "accessibilityText";
@@ -10,14 +19,11 @@ const String title = "title";
 const String name = "name";
 const String label = "label";
 const String rel = "rel";
-const int position = 42;
 const String defaultPhase = "defaultPhase";
 const String url = "http://www.sporza.be/";
 const String publicationId = "pubId";
 const String labelShort = "labelShort";
 const String currentMatchDay = "currentMatchDay";
-const int currentMatchDayIndex = 34;
-const MediaType mediaType = MediaType.VRT;
 const String adDomain = "adDomain";
 const String adPartner = "adPartner";
 const String adContent = "adContent";
@@ -27,11 +33,12 @@ const String adConsent = "adConsent";
 const String logoUrl = "http://www.sporza.be/logoUrl.png";
 const String countryShort = "countryShort";
 const String startTime = "startTime";
-const String status = "status";
-const int homeScore = 19;
-const int awayScore = 90;
 const String statusName = "status name";
 const String statusLabel = "status label";
+const String homeTeamName = "homeTeam";
+const String awayTeamName = "awayTeam";
+const String iconUrl = "http://www.sporza.be/iconUrl.png";
+
 const bool isKnockout = true;
 const bool canSelectAsFavourite = true;
 const bool hasRanking = true;
@@ -39,17 +46,11 @@ const bool sporzaFeatured = true;
 const bool additionalInfo = true;
 const bool isFavourite = true;
 
-const String homeTeamName = "homeTeam";
-const String awayTeamName = "awayTeam";
+const MediaType mediaType = MediaType.VRT;
+const MatchStatus matchStatus = MatchStatus.END;
 
-final Team homeTeam = buildTeamItem(
-    id: "${homeTeamName}_$id",
-    name: homeTeamName,
-    logoUrl: "${url}_$homeTeamName");
-final Team awayTeam = buildTeamItem(
-    id: "${awayTeamName}_$id",
-    name: awayTeamName,
-    logoUrl: "${url}_$awayTeamName");
+final Team homeTeam = buildTeam(id: "${homeTeamName}_$id", name: homeTeamName, logoUrl: "${url}_$homeTeamName");
+final Team awayTeam = buildTeam(id: "${awayTeamName}_$id", name: awayTeamName, logoUrl: "${url}_$awayTeamName");
 
 Link buildLink({String id = id, String url = url, String rel = rel}) {
   return (LinkBuilder()
@@ -124,7 +125,7 @@ Video buildVideoItem(
       .build();
 }
 
-Team buildTeamItem(
+Team buildTeam(
     {String id = id,
     String name = name,
     String logoUrl = logoUrl,
@@ -170,19 +171,37 @@ Competition buildCompetition(
       .build();
 }
 
+Ranking buildRanking(Team team,
+    {final String id = id,
+    final int rank = rank,
+    final int nrOfMatches = nrOfMatches,
+    final int points = points,
+    final String accessibilityText = accessibilityText}) {
+  return (RankingBuilder()
+        ..id = id
+        ..rank = rank
+        ..team = team.toBuilder()
+        ..nrOfMatches = nrOfMatches
+        ..points = points
+        ..accessibilityText = accessibilityText)
+      .build();
+}
+
 Phase buildPhase(
     {String id = id,
     String label = label,
     String labelShort = labelShort,
     String currentMatchDay = currentMatchDay,
     int currentMatchDayIndex = currentMatchDayIndex,
-    List<MatchDay> matchDays = const []}) {
+    List<MatchDay> matchDays = const [],
+    List<Ranking> rankings = const []}) {
   return (PhaseBuilder()
         ..id = id
         ..label = label
         ..labelShort = labelShort
         ..currentMatchDay = currentMatchDay
         ..currentMatchDayIndex = currentMatchDayIndex
+        ..ranking = ListBuilder(rankings)
         ..matchDays = ListBuilder(matchDays))
       .build();
 }
@@ -205,7 +224,7 @@ Match buildMatch(
   Team awayTeam, {
   String id = id,
   String startTime = startTime,
-  String status = status,
+  MatchStatus status = matchStatus,
   int homeScore = homeScore,
   int awayScore = awayScore,
   String statusName = statusName,

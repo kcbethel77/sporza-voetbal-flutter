@@ -84,5 +84,35 @@ class CalendarForCompetitionDataSourceType extends DatasourceType<Competition> {
   const CalendarForCompetitionDataSourceType(this._competitionId);
 
   @override
-  bool operator ==(other) => other is CalendarForCompetitionDataSourceType && other._competitionId == _competitionId;
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is CalendarForCompetitionDataSourceType &&
+      runtimeType == other.runtimeType &&
+      _competitionId == other._competitionId;
+
+  @override
+  int get hashCode => _competitionId.hashCode;
+}
+
+class RankingForCompetitionDataSourceType extends DatasourceType<Competition> {
+
+  final String _competitionId;
+
+  RankingForCompetitionDataSourceType(this._competitionId);
+
+  @override
+  String get file => "competition/$_competitionId/ranking";
+
+  @override
+  Serializer<Competition> get serializer => Competition.serializer;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is RankingForCompetitionDataSourceType &&
+      runtimeType == other.runtimeType &&
+      _competitionId == other._competitionId;
+
+  @override
+  int get hashCode => _competitionId.hashCode;
 }

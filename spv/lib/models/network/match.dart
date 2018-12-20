@@ -1,6 +1,7 @@
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 import 'package:spv/models/network/network_models.dart';
+import 'package:spv/models/common/common.dart';
 
 part 'match.g.dart';
 
@@ -17,7 +18,7 @@ abstract class Match implements Built<Match, MatchBuilder> {
 
   String get startTime;
 
-  String get status;
+  MatchStatus get status;
 
   int get homeScore;
 

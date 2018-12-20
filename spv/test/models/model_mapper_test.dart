@@ -158,6 +158,7 @@ void main() {
     var defaultPhase = "defaultPhase";
     var phaseLabel = "phaseLabel";
     var matchDay = "matchDay";
+    var favoriteTeamId = "favoriteTeam";
 
     final network.Competition competition = buildCompetition(
       defaultPhase: defaultPhase,
@@ -172,7 +173,14 @@ void main() {
               matches: [buildMatch(homeTeam, awayTeam)],
             ),
             buildMatchDay(
-              matches: [buildMatch(buildTeamItem(canSelectAsFavourite: null), awayTeam)],
+              matches: [
+                buildMatch(
+                    buildTeam(
+                      canSelectAsFavourite: null,
+                      id: favoriteTeamId,
+                    ),
+                    awayTeam)
+              ],
             ),
           ],
         ),
@@ -185,7 +193,10 @@ void main() {
       ],
     );
 
-    final Calendar calendar = Mapper.mapCompetitionToCalendar(competition);
+    final Calendar calendar = Mapper.mapCompetitionToCalendar(
+      competition,
+      [favoriteTeamId],
+    );
 
     test("has the correct competition title", () {
       expect(calendar.competitionTitle, label);
@@ -274,7 +285,7 @@ void main() {
                 });
 
                 test("has correct status", () {
-                  expect(firstMatch.status, status);
+                  expect(firstMatch.status, matchStatus);
                 });
 
                 test("isKnockout", () {
@@ -295,6 +306,10 @@ void main() {
 
                 test("canBeFavourite", () {
                   expect(homeTeam.canBeFavourite, true);
+                });
+
+                test("isFavourite", () {
+                  expect(homeTeam.isFavorite, true);
                 });
               });
             });
@@ -327,6 +342,93 @@ void main() {
               expect(firstMatchDay.isCurrent, true);
             });
           });
+        });
+      });
+    });
+  });
+
+  group("Ranking", () {
+    final String defaultPhase = "defaultPhase";
+    final int rank2 = 2;
+    final network.Competition competition = buildCompetition(
+      defaultPhase: defaultPhase,
+      phases: [
+        buildPhase(
+          rankings: [
+            buildRanking(homeTeam),
+            buildRanking(awayTeam, rank: rank2),
+          ],
+        ),
+        buildPhase(id: defaultPhase)
+      ],
+    );
+
+    final Ranking ranking = Mapper.mapCompetitionToRanking(competition);
+
+    test("has the correct title", () {
+      expect(ranking.competitionTitle, label);
+    });
+
+    group("phases", () {
+      var phases = ranking.phases;
+
+      test("has correct amount of phases", () {
+        expect(phases.length, 2);
+      });
+
+      group("first phase", () {
+        var firstPhase = phases.elementAt(0);
+
+        test("isCurrent", () {
+          expect(firstPhase.isCurrent, isFalse);
+        });
+
+        test("has correct name", () {
+          expect(firstPhase.name, label);
+        });
+
+        group("ranking", () {
+          var rankings = firstPhase.rankings;
+
+          group("first ranking", () {
+            var firstRanking = rankings.first;
+
+            test("has correct name", () {
+              expect(firstRanking.name, homeTeam.name);
+            });
+
+            test("has correct icon url", () {
+              expect(firstRanking.iconUrl, homeTeam.logoUrl);
+            });
+
+            test("has correct position", () {
+              expect(firstRanking.position, rank);
+            });
+
+            test("has correct amount of matches played", () {
+              expect(firstRanking.matchedPlayed, nrOfMatches);
+            });
+
+            test("has correct amount of points", () {
+              expect(firstRanking.points, points);
+            });
+          });
+
+          group("second ranking", () {
+            var secondRanking = rankings.elementAt(1);
+
+            test("has correct position", () {
+              expect(secondRanking.position, rank2);
+            });
+          });
+        });
+      });
+
+      group("second phase", () {
+        var secondPhase = phases.elementAt(1);
+
+        test("isCurrent", () {
+          expect(secondPhase.isCurrent, isTrue);
         });
       });
     });
