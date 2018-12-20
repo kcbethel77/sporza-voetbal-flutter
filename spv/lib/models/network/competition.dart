@@ -32,6 +32,9 @@ abstract class Competition implements Built<Competition, CompetitionBuilder> {
   @nullable
   BuiltList<Phase> get phases;
 
+  @nullable
+  BuiltList<Ranking> get ranking;
+
   bool get hasRanking;
 
   @nullable

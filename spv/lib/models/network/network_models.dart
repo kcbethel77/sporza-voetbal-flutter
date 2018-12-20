@@ -11,5 +11,6 @@ export 'phase.dart';
 export 'match_day.dart';
 export 'match.dart';
 export 'team.dart';
+export 'ranking.dart';
 
 export 'serializers.dart';
