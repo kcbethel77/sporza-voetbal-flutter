@@ -1,16 +1,16 @@
 import 'package:spv/models/response.dart';
 
 mixin ViewModelMappable {
-  Response<List<R>> mapToViewModels<T, R>(Response<List<T>> response,
-      [List<R> mapListOfDataToViewModels(List<T> list)]) {
+  Response<R> mapToViewModels<T, R>(Response<T> response, [R mapToViewModel(T t)]) {
+    Response<R> r;
     if (response is Data) {
       var data = response as Data;
-      var value = mapListOfDataToViewModels((data).value as List<T>);
+      var value = mapToViewModel((data).value);
 
       if (data.isNetwork) {
-        return Response.nwSuccess(value);
+        r = Response.nwSuccess(value);
       } else {
-        return Response.dbSuccess(value);
+        r = Response.dbSuccess(value);
       }
     }
 
@@ -18,34 +18,12 @@ mixin ViewModelMappable {
       var fail = response as Fail;
 
       if (fail.isNetwork) {
-        return Response.nwError(fail.throwable);
+        r = Response.nwError(fail.throwable);
       } else {
-        return Response.dbError(fail.throwable);
-      }
-    }
-  }
-
-  Response<R> mapToViewModel<T, R>(
-      Response<T> response, R mapDataToViewModel(T t)) {
-    if (response is Data) {
-      var data = response as Data;
-      var value = mapDataToViewModel(data.value);
-
-      if (data.isNetwork) {
-        return Response.nwSuccess(value);
-      } else {
-        return Response.dbSuccess(value);
+        r = Response.dbError(fail.throwable);
       }
     }
 
-    if (response is Fail) {
-      var fail = response as Fail;
-
-      if (fail.isNetwork) {
-        return Response.nwError(fail.throwable);
-      } else {
-        return Response.dbError(fail.throwable);
-      }
-    }
+    return r;
   }
 }

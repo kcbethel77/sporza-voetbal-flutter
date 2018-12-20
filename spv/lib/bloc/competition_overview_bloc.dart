@@ -18,7 +18,7 @@ class CompetitionOverviewBloc with ViewModelMappable {
 
   Observable<Response<Calendar>> get calendar =>
       _calendarUseCase.calendarForCompetition.map((response) =>
-          mapToViewModel(response, Mapper.mapCompetitionToCalendar));
+          mapToViewModels(response, Mapper.mapCompetitionToCalendar));
 
   Observable<Response> get ranking => Observable.empty();
 }
