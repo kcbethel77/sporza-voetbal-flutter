@@ -7,17 +7,17 @@ abstract class Response<T> {
     return Data(value, false);
   }
 
-  factory Response.nwError(Error err) {
+  factory Response.nwError(err) {
     return Fail<T>(err, true);
   }
 
-  factory Response.dbError(Error err) {
+  factory Response.dbError(err) {
     return Fail<T>(err, false);
   }
 }
 
 class Fail<T> implements Response<T> {
-  final Error throwable;
+  final Object throwable;
   final bool _networkError;
 
   bool get isNetwork => _networkError;

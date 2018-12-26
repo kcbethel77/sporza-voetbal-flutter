@@ -38,7 +38,7 @@ class CacheImpl with FileHandling implements Cache {
 
   Future<List<T>> _fetchT<T>(
       final String path, final String file, final Serializer serializer) async {
-    List list = List();
+    List list = List<T>();
     final File jsonFile = await getFolder(path, file);
 
     if (await jsonFile.exists()) {
@@ -56,7 +56,7 @@ class CacheImpl with FileHandling implements Cache {
   @override
   Observable<List<T>> getListOfT<T>(final DatasourceType fetchType) =>
       Observable.fromFuture(
-          _fetchT(fetchType.path, fetchType.file, fetchType.serializer));
+          _fetchT<T>(fetchType.path, fetchType.file, fetchType.serializer));
 
   @override
   Observable<T> getT<T>(DatasourceType datasourceType) {

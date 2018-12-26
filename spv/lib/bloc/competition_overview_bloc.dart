@@ -8,7 +8,6 @@ import 'package:rxdart/rxdart.dart';
 import 'package:spv/bloc/view_model_mappable_mixin.dart';
 import 'package:spv/datasource/user/user_preferences.dart';
 
-//BLoC for the Calendar and Ranking
 class CompetitionOverviewBloc with ViewModelMappable {
   final CalendarUseCase _calendarUseCase;
   final RankingUseCase _rankingUseCase;
@@ -24,10 +23,8 @@ class CompetitionOverviewBloc with ViewModelMappable {
 
   Observable<Response<Calendar>> get calendar => Observable.zip(
       [_calendarUseCase.calendar, _userPreference.favoriteTeams],
-      (pair) => mapToViewModels(
-          pair.first,
-          (competition) =>
-              Mapper.mapCompetitionToCalendar(competition, pair.last)));
+      (pair) => mapToViewModels(pair.first, Mapper.mapCompetitionToCalendar,
+          extraParam1: pair.last));
 
   Observable<Response> get ranking => _rankingUseCase.ranking.map(
       (response) => mapToViewModels(response, Mapper.mapCompetitionToRanking));

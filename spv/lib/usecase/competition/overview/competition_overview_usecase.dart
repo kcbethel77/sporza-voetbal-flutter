@@ -7,12 +7,15 @@ import 'package:spv/models/response.dart';
 import 'package:spv/usecase/list_usecase.dart';
 
 class CompetitionOverviewUseCase extends ListUseCase<Competition> {
-  CompetitionOverviewUseCase(Cache cache, SporzaSoccerDataSource network) : super(cache, network);
+  SporzaSoccerDataSource _network;
+  Cache _cache;
+
+  CompetitionOverviewUseCase(this._cache, this._network);
 
   @override
   DatasourceType<Competition> get dataSourceType => competitionDataSourceType;
 
-  Observable<Response<List<Competition>>> get competitions => mergeNetworkAndDb;
+  Observable<Response<List<Competition>>> get competitions => merged;
 
   Observable<Response<List<Competition>>> get sporzaFavoriteCompetitions =>
       _filterCompetitionFromList((competition) => competition.sporzaFeatured);
@@ -33,4 +36,10 @@ class CompetitionOverviewUseCase extends ListUseCase<Competition> {
           return response;
         });
       });
+
+  @override
+  Cache get cache => _cache;
+
+  @override
+  SporzaSoccerDataSource get network => _network;
 }

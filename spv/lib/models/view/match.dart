@@ -16,6 +16,7 @@ abstract class Match implements Built<Match, MatchBuilder>, Id, Accessible {
 
   Team get awayTeam;
 
+  @nullable
   String get startTime;
 
   MatchStatus get status;

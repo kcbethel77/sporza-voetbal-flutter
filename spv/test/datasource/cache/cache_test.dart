@@ -2,7 +2,7 @@ import 'package:spv/datasource/cache/cache.dart';
 import 'package:spv/datasource/data_source_type.dart';
 import 'package:test/test.dart';
 
-import '../../utils/model_builder.dart';
+import '../../utils/index.dart';
 
 void main() {
   final CacheImpl cache = CacheImpl(path: "json");
@@ -117,6 +117,20 @@ void main() {
           expect(actual, competition);
         }));
       });
+    });
+  });
+
+  group("match detail", () {
+    var matchDetail = buildMatchDetail(homeTeam, awayTeam);
+
+    final type = MatchDetailDataSourceType("42");
+
+    test("should save and fetch the match detail", () async {
+      await cache.saveItem(type, matchDetail);
+
+      cache.getT(type).listen(expectAsync1((actual) {
+        expect(actual, matchDetail);
+      }));
     });
   });
 }

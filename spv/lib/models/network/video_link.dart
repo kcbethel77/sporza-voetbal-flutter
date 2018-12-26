@@ -1,6 +1,6 @@
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
-import 'package:spv/models/network/media_type.dart';
+import 'package:spv/models/common/common.dart';
 
 part 'video_link.g.dart';
 

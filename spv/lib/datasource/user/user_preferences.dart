@@ -61,7 +61,7 @@ class UserPreferenceImpl with FileHandling implements UserPreference {
       var file = await fileToRead;
       var fileContents = await file.readAsString();
       return List.from(json.decode(fileContents));
-    } on Exception catch (e) {}
+    } on Exception {}
     return [];
   }
 }

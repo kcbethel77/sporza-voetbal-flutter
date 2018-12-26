@@ -1,4 +1,4 @@
-GET http://{{host}}/football/match/2277206/stats
+GET http://{{host}}/football/match/2277288/stats
 Accept: {{accept-header-v7}}
 
 ###

@@ -10,13 +10,21 @@ part 'serializers.g.dart';
   News,
   Video,
   Team,
-  MediaType,
   Competition,
   Phase,
   MatchDay,
   Match,
   MatchStatus,
   Ranking,
+  MatchDetail,
+  MatchDetailCompetition,
+  MatchDetailMatchDay,
+  MatchDetailPhase,
+  Person,
+  MatchEvent,
+  EventOwningTeam,
+  Banner,
+  Media
 ])
 final Serializers serializers =
     (_$serializers.toBuilder()..addPlugin(StandardJsonPlugin())).build();

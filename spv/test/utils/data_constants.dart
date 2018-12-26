@@ -372,3 +372,197 @@ const String rankingJson = '''
   "hasRanking": true
 }
 ''';
+
+const String matchDetailEventsJson = '''{
+  "id": "42",
+  "competition": {
+    "id": "48",
+    "label": "Jupiler Pro League"
+  },
+  "phase": {
+    "id": "132540",
+    "label": "Regulier"
+  },
+  "matchDay": {
+    "id": "132540_19",
+    "name": "Speeldag 19"
+  },
+  "homeTeam": {
+    "id": "300",
+    "name": "Standard",
+    "logoUrl": "https://images.vrt.be/orig/contentapi/infostrada/team/300.png"
+  },
+  "awayTeam": {
+    "id": "103844",
+    "name": "Zulte Waregem",
+    "logoUrl": "https://images.vrt.be/orig/contentapi/infostrada/team/103844.png"
+  },
+  "startTime": "2018-12-16T19:00:37.000+0000",
+  "status": "END",
+  "homeScore": 4,
+  "awayScore": 1,
+  "statusName": "einde",
+  "statusLabel": "einde",
+  "accessibilityText": "Standard Zulte Waregem, afgelopen, 4, 1.",
+  "isKnockout": false,
+  "eventList": [
+    {
+      "id": "111127868",
+      "eventType": "GOAL",
+      "eventTime": "34'",
+      "timestamp": 1545422664000,
+      "eventOwningTeam": "HOME",
+      "teamName": "KAA Gent",
+      "person": {
+        "id": "1357028",
+        "lastName": "Sigurd Rosted",
+        "shortName": "Rosted"
+      },
+      "homeScore": 2,
+      "awayScore": 0,
+      "accessibilityText": "Doelpunt tijdens eerste helft, minuut 34, door Rosted van KAA Gent. 2, 0."
+    },
+    {
+      "id": "104035101",
+      "eventType": "OWN_GOAL",
+      "eventTime": "13'",
+      "timestamp": 1530900842000,
+      "eventOwningTeam": "AWAY",
+      "teamName": "België",
+      "person": {
+        "id": "588309",
+        "lastName": "Fernandinho",
+        "shortName": "Fernandinho"
+      },
+      "homeScore": 0,
+      "awayScore": 1,
+      "accessibilityText": "Owngoal tijdens eerste helft, minuut 13, door Fernandinho van België. 0, 1."
+    },
+    {
+      "id": "111121780",
+      "eventType": "SUBSTITUTION",
+      "eventTime": "21:16",
+      "timestamp": 1545423395000,
+      "eventOwningTeam": "AWAY",
+      "teamName": "Cercle Brugge",
+      "person": {
+        "id": "601234",
+        "lastName": "Serge Gakpé",
+        "shortName": "Gakpé"
+      },
+      "subPerson": {
+        "id": "1290290",
+        "lastName": "Kylian Hazard",
+        "shortName": "K. Hazard"
+      },
+      "accessibilityText": "Wissel Cercle Brugge. K. Hazard door Gakpé tijdens rust."
+    },
+    {
+      "id": "104121272",
+      "eventType": "FREE_KICK_GOAL",
+      "eventTime": "5'",
+      "timestamp": 1531332292000,
+      "eventOwningTeam": "AWAY",
+      "teamName": "Engeland",
+      "person": {
+        "id": "812363",
+        "lastName": "Kieran Trippier",
+        "shortName": "Trippier"
+      },
+      "homeScore": 0,
+      "awayScore": 1,
+      "accessibilityText": "Doelpunt na vrije trap tijdens eerste helft, minuut 5, door Trippier van Engeland. 0, 1."
+    },
+    {
+      "id": "111127677",
+      "eventType": "YELLOW_CARD",
+      "eventTime": "33'",
+      "timestamp": 1545422556000,
+      "eventOwningTeam": "AWAY",
+      "teamName": "Cercle Brugge",
+      "person": {
+        "id": "951532",
+        "lastName": "Isaac Koné",
+        "shortName": "Koné"
+      },
+      "accessibilityText": "Gele kaart voor Koné van Cercle Brugge tijdens eerste helft, minuut 33."
+    },
+    {
+      "id": "57722",
+      "eventType": "COMMENT",
+      "eventTime": "19:11",
+      "timestamp": 1544983861009,
+      "eventOwningTeam": "NEUTRAL",
+      "title": "Opstellingen",
+      "text": "Michel Preud'homme heeft de wissels die hij afgelopen donderdag in de Europa League doorvoerde voor het grootste deel teruggedraaid. Emond vervangt Orlando Sa in de spits, met Djenepo, Mpoku, Laifis en Cimirot zijn we heel wat vertrouwde gezichten terugkeren. Bij Zulte Waregem komt Buffel weer in de ploeg, ten koste van De Pauw.",
+      "accessibilityText": "Vooraf. Opstellingen. Michel Preud'homme heeft de wissels die hij afgelopen donderdag in de Europa League doorvoerde voor het grootste deel teruggedraaid. Emond vervangt Orlando Sa in de spits, met Djenepo, Mpoku, Laifis en Cimirot zijn we heel wat vertrouwde gezichten terugkeren. Bij Zulte Waregem komt Buffel weer in de ploeg, ten koste van De Pauw."
+    },
+    {
+      "id": "111128943",
+      "eventType": "PHASE",
+      "eventTime": "45+1'",
+      "timestamp": 1545423340000,
+      "eventOwningTeam": "NEUTRAL",
+      "title": "RUST",
+      "accessibilityText": "Rust."
+    },
+    {
+      "id": "3223142_banner_imu",
+      "eventType": "BANNER",
+      "eventOwningTeam": "NEUTRAL",
+      "banner": {
+        "id": "3223142_imu",
+        "format": "IMU",
+        "pebblePhoneUrl": "https://ads-pebblemedia.adhese.com/ad/sl_sporza-voetbal_jupilerproleague_-XAMR",
+        "pebbleTabletUrl": "https://ads-pebblemedia.adhese.com/ad/sl_sporza-voetbal_jupilerproleague_-MiddleApp"
+      }
+    },
+    {
+      "id": "58384",
+      "eventType": "VIDEO",
+      "eventTime": "3'",
+      "timestamp": 1545420780000,
+      "eventOwningTeam": "NEUTRAL",
+      "title": "Heerlijke assist van Odjidja wordt niet bekroond met een goal",
+      "accessibilityText": "Video: Heerlijke assist van Odjidja wordt niet bekroond met een goal",
+      "media": {
+        "id": "pbs-pub-6f2157ec-4ff9-4973-beac-c45c1943bcd2vid-1e8bfb09-25a1-4e9d-b241-473fe8df16c1",
+        "mediaType": "VRT",
+        "thumbnailUrl": "https://images.vrt.be/width320/2018/12/21/5fa6dda5-0559-11e9-abcc-02b7b76bf47f.jpg",
+        "publicationId": "pbs-pub-6f2157ec-4ff9-4973-beac-c45c1943bcd2"
+      },
+      "labels": [
+        "betalend"
+      ]
+    },
+    {
+      "id": "1243534",
+      "eventType": "LIVESTREAM",
+      "timestamp": 1545420780000,
+      "eventOwningTeam": "NEUTRAL",
+      "title": "Dit is een live stream voorbeeld",
+      "accessibilityText": "Live stream acc",
+      "media": {
+        "id": "yezfueyrgyuegyererger",
+        "url": "http://www.liveurl.com",
+        "mediaType": "VRT",
+        "adContent": "adContent",
+        "adLocation": "adLocation",
+        "adCategory": "adCategory",
+        "adConsent": "adConsent",
+        "publicationId": "pbs-pub-6f2157ec-4ff9-4973-beac-c45c1943bcd2"
+      }
+    },
+    {
+      "id": "INFO_EVENT_3223086",
+      "eventType": "INFO",
+      "eventOwningTeam": "NEUTRAL",
+      "text": "Deze wedstrijd begint op 27/12 om 18u00",
+      "accessibilityText": "Deze wedstrijd begint op donderdag 27 december om 18 uur 00"
+    }
+  ],
+  "stadium": "Sclessin",
+  "referee": "Wim Smet",
+  "spectators": 24338
+}
+''';

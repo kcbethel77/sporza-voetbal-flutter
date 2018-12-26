@@ -7,10 +7,20 @@ import 'package:spv/models/response.dart';
 import 'package:spv/usecase/list_usecase.dart';
 
 class VideoUseCase extends ListUseCase<Video> {
-  VideoUseCase(Cache cache, SporzaSoccerDataSource network) : super(cache, network);
+
+  SporzaSoccerDataSource _network;
+  Cache _cache;
+
+  VideoUseCase(this._cache,this._network);
 
   @override
   DatasourceType<Video> get dataSourceType => videoDatasourceType;
 
-  Observable<Response<List<Video>>> get video => mergeNetworkAndDb;
+  Observable<Response<List<Video>>> get video => merged;
+
+  @override
+  Cache get cache => _cache;
+
+  @override
+  SporzaSoccerDataSource get network => _network;
 }

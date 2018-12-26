@@ -1,4 +1,4 @@
-GET http://{{host}}/football/match/2277206/lineup
+GET http://{{host}}/football/match/2277288/lineup
 Accept: {{accept-header-v7}}
 
 ###

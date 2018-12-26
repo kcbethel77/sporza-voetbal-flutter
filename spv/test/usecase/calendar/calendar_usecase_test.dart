@@ -6,7 +6,7 @@ import 'package:spv/usecase/usecase.dart';
 import 'package:test/test.dart';
 import 'package:mockito/mockito.dart';
 
-import '../../utils/spv_test_utils.dart';
+import '../../utils/index.dart';
 
 const _competitionId = "43";
 

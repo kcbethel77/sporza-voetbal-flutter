@@ -1,12 +1,10 @@
 import 'package:flutter_driver/flutter_driver.dart';
-import 'package:spv/datasource/cache/cache.dart';
 import 'package:test/test.dart';
 
 
 void main() {
   group('Caching', () {
     FlutterDriver driver;
-    final Cache cache = CacheImpl();
 
     setUpAll(() async {
       driver = await FlutterDriver.connect(timeoutMultiplier: 4);
@@ -16,8 +14,8 @@ void main() {
       driver?.close();
     });
 
-    test('Integration test do not run for some reason', () async {
-      expect(true, false);
+    test("this is just a test to see if the it test run", () async {
+      expect(true, true);
     });
   });
 }

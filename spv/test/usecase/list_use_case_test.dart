@@ -7,15 +7,24 @@ import 'package:spv/models/response.dart' as resp;
 import 'package:spv/usecase/list_usecase.dart';
 import 'package:test/test.dart';
 
-import '../utils/mocks/mocks.dart';
+import '../utils/index.dart';
 
 final mockDatasourceType = MockDatasourceType<String>();
 
 class StubbedStringListUseCase extends ListUseCase {
-  StubbedStringListUseCase(Cache cache, SporzaSoccerDataSource network) : super(cache, network);
+  final SporzaSoccerDataSource _network;
+  final Cache _cache;
+
+  StubbedStringListUseCase(this._cache, this._network);
 
   @override
   DatasourceType get dataSourceType => mockDatasourceType;
+
+  @override
+  Cache get cache => _cache;
+
+  @override
+  SporzaSoccerDataSource get network => _network;
 }
 
 const List<String> aStringList = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"];
@@ -33,7 +42,7 @@ void main() {
     when(mockNetwork.getListOfT(mockDatasourceType)).thenAnswer((_) => aStringListObservable);
     when(mockCache.getListOfT(mockDatasourceType)).thenAnswer((_) => aStringListObservable);
 
-    var emissions = useCase.mergeNetworkAndDb.toList();
+    var emissions = useCase.merged.toList();
 
     test("should have 2 emissions", () async {
       expect((await emissions).length, 2);
@@ -56,7 +65,7 @@ void main() {
     when(mockNetwork.getListOfT(mockDatasourceType)).thenAnswer((_) => aStringListObservable);
     when(mockCache.getListOfT(mockDatasourceType)).thenAnswer((_) => Observable.error(someError));
 
-    var emissions = useCase.mergeNetworkAndDb.toList();
+    var emissions = useCase.merged.toList();
 
     test("should have 2 emissions", () async {
       expect((await emissions).length, 2);
@@ -79,7 +88,7 @@ void main() {
     when(mockNetwork.getListOfT(mockDatasourceType)).thenAnswer((_) => Observable.error(someError));
     when(mockCache.getListOfT(mockDatasourceType)).thenAnswer((_) => aStringListObservable);
 
-    var emissions = useCase.mergeNetworkAndDb.toList();
+    var emissions = useCase.merged.toList();
 
     test("should have 2 emissions", () async {
       expect((await emissions).length, 2);

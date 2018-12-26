@@ -6,7 +6,7 @@ import 'package:spv/datasource/soccer_datasource.dart';
 import 'package:spv/models/network/network_models.dart';
 import 'package:spv/models/response.dart';
 
-class RankingUseCase with UseCase {
+class RankingUseCase with UseCase<Competition> {
   final Cache _cache;
   final SporzaSoccerDataSource _network;
   final DatasourceType _dataSourceType;
@@ -14,12 +14,14 @@ class RankingUseCase with UseCase {
   RankingUseCase(final String _competitionId, final this._cache, final this._network)
       : _dataSourceType = RankingForCompetitionDataSourceType(_competitionId);
 
-  Observable<Response<Competition>> get _nw => mapToNetworkResponse(
-      _network.getT<Competition>(_dataSourceType).doOnData((item) => _cache.saveItem(_dataSourceType, item)));
+  Observable<Response<Competition>> get ranking => merged;
 
-  Observable<Response<Competition>> get _db => mapToCacheResponse(_cache.getT(_dataSourceType));
+  @override
+  Cache get cache => _cache;
 
-  Observable<Response<Competition>> get _mergedRanking => merge(_nw, _db);
+  @override
+  DatasourceType get dataSourceType => _dataSourceType;
 
-  Observable<Response<Competition>> get ranking => _mergedRanking;
+  @override
+  SporzaSoccerDataSource get network => _network;
 }

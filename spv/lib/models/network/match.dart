@@ -16,6 +16,7 @@ abstract class Match implements Built<Match, MatchBuilder> {
 
   Team get awayTeam;
 
+  @nullable
   String get startTime;
 
   MatchStatus get status;
@@ -26,6 +27,7 @@ abstract class Match implements Built<Match, MatchBuilder> {
 
   String get statusName;
 
+  @nullable
   String get statusLabel;
 
   String get accessibilityText;

@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:spv/bloc/competition_overview_bloc.dart';
-import 'package:spv/bloc/home_bloc.dart';
+import 'package:rxdart/rxdart.dart';
 import 'package:spv/datasource/cache/cache.dart';
 import 'package:spv/datasource/network/network.dart';
 import 'package:spv/datasource/user/user_preferences.dart';
 import 'package:http/http.dart' as http;
+import 'package:spv/models/response.dart';
+import 'package:spv/models/view/view_models.dart' as view;
 import 'package:spv/usecase/usecase.dart';
+import 'package:spv/bloc//bloc.dart';
 
 void main() => runApp(MyApp());
 
@@ -47,28 +49,63 @@ class _MyHomePageState extends State<MyHomePage> {
     final NewsUseCase newsUseCase = NewsUseCase(cache, network);
     final VideoUseCase videoUseCase = VideoUseCase(cache, network);
 
-    final HomeBloc newsBloc = HomeBloc(newsUseCase, videoUseCase);
+    final HomeBloc homeBloc = HomeBloc(newsUseCase, videoUseCase);
 
     final UserPreference userPreferences = UserPreferenceImpl();
+    userPreferences.setFavoriteTeams(["300"]);
+
+    final GameDetailBloc gameDetailBloc = GameDetailBloc(
+      "2277288",
+      cache,
+      network,
+      userPreferences,
+      notLiveRefreshInMilliSeconds: 1000,
+    );
 
     final CompetitionOverviewBloc competitionOverviewBloc =
-    CompetitionOverviewBloc("48", cache, network, userPreferences);
+        CompetitionOverviewBloc("52", cache, network, userPreferences);
 
     competitionOverviewBloc.calendar.listen((data) {
-      print(data);
+      (data as Data<view.Calendar>)
+          .value
+          .phases
+          .expand((phase) => phase.matchDays)
+          .expand((matchDay) => matchDay.matches)
+          .map((match) => (match as view.Match).id)
+          .map((matchId) => [
+                matchId,
+                GameDetailBloc(matchId, cache, network, userPreferences, notLiveRefreshInMilliSeconds: 1000).events
+              ])
+          .forEach((pair) {
+        (pair.last as Observable<Response<List<view.Event>>>).listen((eventResp) {
+          if (eventResp is Fail<List<view.Event>>) {
+            print("Fail: ${pair.first}: ${eventResp.throwable}");
+          }
+        }, onError: (err) {
+          print("Unhandled Error: ${pair.first} $err");
+        });
+      });
     });
 
-    competitionOverviewBloc.ranking.listen((data) {
-      print(data);
-    });
-
-    newsBloc.news.listen((data) {
-      print(data);
-    });
-
-    newsBloc.videos.listen((data) {
-      print(data);
-    });
+//    competitionOverviewBloc.ranking.listen((data) {
+//      print(data);
+//    });
+//
+//    gameDetailBloc.headingInfo.listen((resp) {
+//      print(resp);
+//    });
+//
+//    gameDetailBloc.events.listen((resp) {
+//      print(resp);
+//    });
+//
+//    homeBloc.news.listen((resp) {
+//      print(resp);
+//    });
+//
+//    homeBloc.videos.listen((resp) {
+//      print(resp);
+//    });
 
     setState(() {
       _counter++;

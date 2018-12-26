@@ -87,18 +87,17 @@ class CalendarForCompetitionDataSourceType extends DatasourceType<Competition> {
   bool operator ==(Object other) =>
       identical(this, other) ||
       other is CalendarForCompetitionDataSourceType &&
-      runtimeType == other.runtimeType &&
-      _competitionId == other._competitionId;
+          runtimeType == other.runtimeType &&
+          _competitionId == other._competitionId;
 
   @override
   int get hashCode => _competitionId.hashCode;
 }
 
 class RankingForCompetitionDataSourceType extends DatasourceType<Competition> {
-
   final String _competitionId;
 
-  RankingForCompetitionDataSourceType(this._competitionId);
+  const RankingForCompetitionDataSourceType(this._competitionId);
 
   @override
   String get file => "competition/$_competitionId/ranking";
@@ -110,9 +109,29 @@ class RankingForCompetitionDataSourceType extends DatasourceType<Competition> {
   bool operator ==(Object other) =>
       identical(this, other) ||
       other is RankingForCompetitionDataSourceType &&
-      runtimeType == other.runtimeType &&
-      _competitionId == other._competitionId;
+          runtimeType == other.runtimeType &&
+          _competitionId == other._competitionId;
 
   @override
   int get hashCode => _competitionId.hashCode;
+}
+
+class MatchDetailDataSourceType extends DatasourceType<MatchDetail> {
+  final String _matchId;
+
+  const MatchDetailDataSourceType(this._matchId);
+
+  @override
+  String get file => "match/$_matchId";
+
+  @override
+  Serializer<MatchDetail> get serializer => MatchDetail.serializer;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is MatchDetailDataSourceType && runtimeType == other.runtimeType && _matchId == other._matchId;
+
+  @override
+  int get hashCode => _matchId.hashCode;
 }

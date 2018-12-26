@@ -10,3 +10,6 @@ export 'competition/overview/competition_overview_usecase.dart';
 //Calendar + Ranking
 export 'calendar/calendar_usecase.dart';
 export 'ranking/ranking_usecase.dart';
+
+//Game Detail
+export 'matchdetail/events/match_event_usecase.dart';
