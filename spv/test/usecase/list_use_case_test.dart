@@ -42,7 +42,7 @@ void main() {
     when(mockNetwork.getListOfT(mockDatasourceType)).thenAnswer((_) => aStringListObservable);
     when(mockCache.getListOfT(mockDatasourceType)).thenAnswer((_) => aStringListObservable);
 
-    var emissions = useCase.merged.toList();
+    var emissions = useCase.stream().toList();
 
     test("should have 2 emissions", () async {
       expect((await emissions).length, 2);
@@ -65,7 +65,7 @@ void main() {
     when(mockNetwork.getListOfT(mockDatasourceType)).thenAnswer((_) => aStringListObservable);
     when(mockCache.getListOfT(mockDatasourceType)).thenAnswer((_) => Observable.error(someError));
 
-    var emissions = useCase.merged.toList();
+    var emissions = useCase.stream().toList();
 
     test("should have 2 emissions", () async {
       expect((await emissions).length, 2);
@@ -88,7 +88,7 @@ void main() {
     when(mockNetwork.getListOfT(mockDatasourceType)).thenAnswer((_) => Observable.error(someError));
     when(mockCache.getListOfT(mockDatasourceType)).thenAnswer((_) => aStringListObservable);
 
-    var emissions = useCase.merged.toList();
+    var emissions = useCase.stream().toList();
 
     test("should have 2 emissions", () async {
       expect((await emissions).length, 2);

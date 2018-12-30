@@ -14,7 +14,7 @@ class RankingUseCase with UseCase<Competition> {
   RankingUseCase(final String _competitionId, final this._cache, final this._network)
       : _dataSourceType = RankingForCompetitionDataSourceType(_competitionId);
 
-  Observable<Response<Competition>> get ranking => merged;
+  Observable<Response<Competition>> get ranking => stream();
 
   @override
   Cache get cache => _cache;

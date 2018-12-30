@@ -27,82 +27,177 @@ class StubbedStringUseCase with UseCase {
   SporzaSoccerDataSource get network => _network;
 }
 
-const String aString= "a string";
+const String aString = "a string";
 Error someError = Error();
-Observable<String> get aStringObservable => Observable.just(aString);
+
+Observable<String> get aStringObservable => Observable.defer(() => Observable.just(aString));
+
+Observable<String> get aStringObservableError => Observable.error(someError);
 
 void main() {
   var mockCache = MockCache();
   var mockNetwork = MockSporzaSoccerDataSource();
 
-  var useCase = StubbedStringUseCase(mockNetwork, mockCache);
+  setUp(() {
+    reset(mockCache);
+    reset(mockNetwork);
+  });
 
-  group("SUCCESS network and SUCCESS db", () {
-    when(mockNetwork.getT(mockDatasourceType)).thenAnswer((_) => aStringObservable);
-    when(mockCache.getT(mockDatasourceType)).thenAnswer((_) => aStringObservable);
+  group("single call", () {
+    group("SUCCESS network and SUCCESS db", () {
+      var useCase = StubbedStringUseCase(mockNetwork, mockCache);
+      when(mockNetwork.getT(mockDatasourceType)).thenAnswer((_) => aStringObservable);
+      when(mockCache.getT(mockDatasourceType)).thenAnswer((_) => aStringObservable);
 
-    var emissions = useCase.merged.toList();
+      var emissions = useCase.stream().toList();
 
-    test("should have 2 emissions", () async {
-      expect((await emissions).length, 2);
+      test("should have 2 emissions", () async {
+        expect((await emissions).length, 2);
+      });
+
+      test("should contain a network success", () async {
+        var networkSuccess = ((await emissions)[0] as resp.Data);
+        expect(networkSuccess.value, aString);
+        expect(networkSuccess.isNetwork, true);
+      });
+
+      test("should contain a database success", () async {
+        var dbSuccess = ((await emissions)[1] as resp.Data);
+        expect(dbSuccess.value, aString);
+        expect(dbSuccess.isDatabase, true);
+      });
     });
-    test("should contain a network success", () async {
-      var networkSuccess = ((await emissions)[0] as resp.Data);
-      expect(networkSuccess.value, aString);
-      expect(networkSuccess.isNetwork, true);
+
+    group("SUCCESS network and FAILURE db", () {
+      var useCase = StubbedStringUseCase(mockNetwork, mockCache);
+      when(mockNetwork.getT(mockDatasourceType)).thenAnswer((_) => aStringObservable);
+      when(mockCache.getT(mockDatasourceType)).thenAnswer((_) => aStringObservableError);
+
+      var emissions = useCase.stream().toList();
+
+      test("should have 2 emissions", () async {
+        expect((await emissions).length, 2);
+      });
+
+      test("should contain a network success", () async {
+        var networkSuccess = ((await emissions)[0] as resp.Data);
+        expect(networkSuccess.value, aString);
+        expect(networkSuccess.isNetwork, true);
+      });
+
+      test("should contain a database failure", () async {
+        var dbError = ((await emissions)[1] as resp.Fail);
+        expect(dbError.throwable, someError);
+        expect(dbError.isDatabase, true);
+      });
     });
 
-    test("should contain a database success", () async {
-      var dbSuccess = ((await emissions)[1] as resp.Data);
-      expect(dbSuccess.value, aString);
-      expect(dbSuccess.isDatabase, true);
+    group("SUCCESS network and FAILURE db", () {
+      var useCase = StubbedStringUseCase(mockNetwork, mockCache);
+      when(mockNetwork.getT(mockDatasourceType)).thenAnswer((_) => aStringObservableError);
+      when(mockCache.getT(mockDatasourceType)).thenAnswer((_) => aStringObservable);
+
+      var emissions = useCase.stream().toList();
+
+      test("should have 2 emissions", () async {
+        expect((await emissions).length, 2);
+      });
+
+      test("should contain a db success", () async {
+        var dbSuccess = ((await emissions)[0] as resp.Data);
+        expect(dbSuccess.value, aString);
+        expect(dbSuccess.isNetwork, false);
+      });
+
+      test("should contain a network failure", () async {
+        var networkError = ((await emissions)[1] as resp.Fail);
+        expect(networkError.throwable, someError);
+        expect(networkError.isDatabase, false);
+      });
     });
   });
 
-  group("SUCCESS network and FAILURE db", () {
-    when(mockNetwork.getT(mockDatasourceType)).thenAnswer((_) => aStringObservable);
-    when(mockCache.getT(mockDatasourceType)).thenAnswer((_) => Observable.error(someError));
+  group("cached call", () {
+    group("SUCCESS network then FAILURE network, SUCCESS db", () {
+      var useCase = StubbedStringUseCase(mockNetwork, mockCache);
+      var networkResponses = [aStringObservable, aStringObservableError];
 
-    var emissions = useCase.merged.toList();
+      group("first subscription", () {
+        test("it should succeed for both calls", () async {
+          when(mockNetwork.getT(mockDatasourceType)).thenAnswer((_) => networkResponses.removeAt(0));
+          when(mockCache.getT(mockDatasourceType)).thenAnswer((_) => aStringObservable);
 
-    test("should have 2 emissions", () async {
-      expect((await emissions).length, 2);
+          var firstEmissions = await useCase.stream().toList();
+          expect(firstEmissions.length, 2);
+
+          var nwData = firstEmissions[0] as resp.Data;
+          expect(nwData.value, aString);
+          expect(nwData.isNetwork, true);
+
+          var dbData = firstEmissions[1] as resp.Data;
+          expect(dbData.value, aString);
+          expect(dbData.isDatabase, true);
+        });
+      });
+
+      group("second subscription", () {
+        test("it should have cached the results of the previous emission", () async {
+          when(mockNetwork.getT(mockDatasourceType)).thenAnswer((_) => networkResponses.removeAt(0));
+          when(mockCache.getT(mockDatasourceType)).thenAnswer((_) => aStringObservable);
+
+          var secondEmissions = await useCase.stream().toList();
+          expect(secondEmissions.length, 2);
+
+          var nwData = secondEmissions[0] as resp.Data;
+          expect(nwData.value, aString);
+          expect(nwData.isNetwork, true);
+
+          var dbData = secondEmissions[1] as resp.Data;
+          expect(dbData.value, aString);
+          expect(dbData.isDatabase, true);
+        });
+      });
     });
 
-    test("should contain a network success", () async {
-      var networkSuccess = ((await emissions)[0] as resp.Data);
-      expect(networkSuccess.value, aString);
-      expect(networkSuccess.isNetwork, true);
-    });
+    group("FAILURE network, then SUCCESS network with SUCCESS db", () {
+      var useCase = StubbedStringUseCase(mockNetwork, mockCache);
+      var networkResponses = [aStringObservableError, aStringObservable];
 
-    test("should contain a database failure", () async {
-      var dbError = ((await emissions)[1] as resp.Fail);
-      expect(dbError.throwable, someError);
-      expect(dbError.isDatabase, true);
-    });
-  });
+      group("first subscription", () {
+        test("it should have 1 network error and 1 db success", () async {
+          when(mockNetwork.getT(mockDatasourceType)).thenAnswer((_) => networkResponses.removeAt(0));
+          when(mockCache.getT(mockDatasourceType)).thenAnswer((_) => aStringObservable);
 
-  group("SUCCESS network and FAILURE db", () {
-    when(mockNetwork.getT(mockDatasourceType)).thenAnswer((_) => Observable.error(someError));
-    when(mockCache.getT(mockDatasourceType)).thenAnswer((_) => aStringObservable);
+          var firstEmissions = await useCase.stream().toList();
+          expect(firstEmissions.length, 2);
 
-    var emissions = useCase.merged.toList();
+          var nwData = firstEmissions[0] as resp.Data;
+          expect(nwData.value, aString);
+          expect(nwData.isDatabase, true);
 
-    test("should have 2 emissions", () async {
-      expect((await emissions).length, 2);
-    });
+          var dbData = firstEmissions[1] as resp.Fail;
+          expect(dbData.throwable, someError);
+          expect(dbData.isNetwork, true);
+        });
+      });
 
-    test("should contain a db success", () async {
-      var networkSuccess = ((await emissions)[0] as resp.Data);
-      expect(networkSuccess.value, aString);
-      expect(networkSuccess.isNetwork, false);
-    });
+      group("second subscription", () {
+        test("it should not have cached the values", () async {
+          when(mockNetwork.getT(mockDatasourceType)).thenAnswer((_) => networkResponses.removeAt(0));
+          when(mockCache.getT(mockDatasourceType)).thenAnswer((_) => aStringObservable);
 
-    test("should contain a network failure", () async {
-      var dbError = ((await emissions)[1] as resp.Fail);
-      expect(dbError.throwable, someError);
-      expect(dbError.isDatabase, false);
+          var secondEmissions = await useCase.stream().toList();
+          expect(secondEmissions.length, 2);
+
+          var nwData = secondEmissions[0] as resp.Data;
+          expect(nwData.value, aString);
+          expect(nwData.isNetwork, true);
+
+          var dbData = secondEmissions[1] as resp.Data;
+          expect(dbData.value, aString);
+          expect(dbData.isDatabase, true);
+        });
+      });
     });
   });
 }
-

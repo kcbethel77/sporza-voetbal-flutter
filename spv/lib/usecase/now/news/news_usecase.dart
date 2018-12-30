@@ -15,7 +15,7 @@ class NewsUseCase extends ListUseCase<News> {
   @override
   DatasourceType<News> get dataSourceType => newsDatasourceType;
 
-  Observable<Response<List<News>>> get news => merged;
+  Observable<Response<List<News>>> get news => stream();
 
   @override
   Cache get cache => _cache;

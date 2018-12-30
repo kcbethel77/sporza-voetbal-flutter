@@ -15,7 +15,7 @@ class CompetitionOverviewUseCase extends ListUseCase<Competition> {
   @override
   DatasourceType<Competition> get dataSourceType => competitionDataSourceType;
 
-  Observable<Response<List<Competition>>> get competitions => merged;
+  Observable<Response<List<Competition>>> get competitions => stream();
 
   Observable<Response<List<Competition>>> get sporzaFavoriteCompetitions =>
       _filterCompetitionFromList((competition) => competition.sporzaFeatured);

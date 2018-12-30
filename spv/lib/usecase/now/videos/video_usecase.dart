@@ -16,7 +16,7 @@ class VideoUseCase extends ListUseCase<Video> {
   @override
   DatasourceType<Video> get dataSourceType => videoDatasourceType;
 
-  Observable<Response<List<Video>>> get video => merged;
+  Observable<Response<List<Video>>> get video => stream();
 
   @override
   Cache get cache => _cache;

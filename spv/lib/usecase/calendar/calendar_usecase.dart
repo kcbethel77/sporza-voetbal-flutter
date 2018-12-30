@@ -14,7 +14,7 @@ class CalendarUseCase with UseCase<Competition> {
   CalendarUseCase(final String _competitionId, final this._cache, final this._network)
       : _dataSourceType = CalendarForCompetitionDataSourceType(_competitionId);
 
-  Observable<Response<Competition>> get calendar => merged;
+  Observable<Response<Competition>> get calendar => stream();
 
   @override
   Cache get cache => _cache;

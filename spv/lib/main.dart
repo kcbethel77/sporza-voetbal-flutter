@@ -36,76 +36,83 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
 
+  HomeBloc _homeBloc;
+  NewsUseCase _newsUseCase;
+  VideoUseCase _videoUseCase;
+  GameDetailBloc _gameDetailBloc;
+  UserPreference _userPreferences;
+  CompetitionOverviewBloc _competitionOverviewBloc;
+  Cache _cache;
+  NetworkImpl _network;
+
   @override
   void initState() {
     super.initState();
-  }
-
-  void _incrementCounter() {
     var httpClient = http.Client();
-    var cache = CacheImpl();
-    var network = NetworkImpl(httpClient);
+    _cache = CacheImpl();
+    _network = NetworkImpl(httpClient);
 
-    final NewsUseCase newsUseCase = NewsUseCase(cache, network);
-    final VideoUseCase videoUseCase = VideoUseCase(cache, network);
+    _newsUseCase = NewsUseCase(_cache, _network);
+    _videoUseCase = VideoUseCase(_cache, _network);
 
-    final HomeBloc homeBloc = HomeBloc(newsUseCase, videoUseCase);
+    _homeBloc = HomeBloc(_newsUseCase, _videoUseCase);
 
-    final UserPreference userPreferences = UserPreferenceImpl();
-    userPreferences.setFavoriteTeams(["300"]);
+    _userPreferences = UserPreferenceImpl();
+    _userPreferences.setFavoriteTeams(["300"]);
 
-    final GameDetailBloc gameDetailBloc = GameDetailBloc(
+    _gameDetailBloc = GameDetailBloc(
       "2277288",
-      cache,
-      network,
-      userPreferences,
+      _cache,
+      _network,
+      _userPreferences,
       notLiveRefreshInMilliSeconds: 1000,
     );
 
-    final CompetitionOverviewBloc competitionOverviewBloc =
-        CompetitionOverviewBloc("52", cache, network, userPreferences);
+    _competitionOverviewBloc = CompetitionOverviewBloc("52", _cache, _network, _userPreferences);
+  }
 
-    competitionOverviewBloc.calendar.listen((data) {
-      (data as Data<view.Calendar>)
-          .value
-          .phases
-          .expand((phase) => phase.matchDays)
-          .expand((matchDay) => matchDay.matches)
-          .map((match) => (match as view.Match).id)
-          .map((matchId) => [
-                matchId,
-                GameDetailBloc(matchId, cache, network, userPreferences, notLiveRefreshInMilliSeconds: 1000).events
-              ])
-          .forEach((pair) {
-        (pair.last as Observable<Response<List<view.Event>>>).listen((eventResp) {
-          if (eventResp is Fail<List<view.Event>>) {
-            print("Fail: ${pair.first}: ${eventResp.throwable}");
-          }
-        }, onError: (err) {
-          print("Unhandled Error: ${pair.first} $err");
-        });
-      });
+  void _incrementCounter() {
+    //_competitionOverviewBloc.calendar.listen((data) {
+    //  (data as Data<view.Calendar>)
+    //      .value
+    //      .phases
+    //      .expand((phase) => phase.matchDays)
+    //      .expand((matchDay) => matchDay.matches)
+    //      .map((match) => (match as view.Match).id)
+    //      .map((matchId) => [
+    //            matchId,
+    //            GameDetailBloc(matchId, _cache, _network, _userPreferences, notLiveRefreshInMilliSeconds: 1000).events
+    //          ])
+    //      .forEach((pair) {
+    //    (pair.last as Observable<Response<List<view.Event>>>).listen((eventResp) {
+    //      if (eventResp is Fail<List<view.Event>>) {
+    //        print("Fail: ${pair.first}: ${eventResp.throwable}");
+    //      }
+    //    }, onError: (err) {
+    //      print("Unhandled Error: ${pair.first} $err");
+    //    });
+    //  });
+    //});
+
+    _competitionOverviewBloc.ranking.listen((data) {
+      print(data);
     });
 
-//    competitionOverviewBloc.ranking.listen((data) {
-//      print(data);
-//    });
-//
-//    gameDetailBloc.headingInfo.listen((resp) {
-//      print(resp);
-//    });
-//
-//    gameDetailBloc.events.listen((resp) {
-//      print(resp);
-//    });
-//
-//    homeBloc.news.listen((resp) {
-//      print(resp);
-//    });
-//
-//    homeBloc.videos.listen((resp) {
-//      print(resp);
-//    });
+    //_gameDetailBloc.headingInfo.listen((resp) {
+    //  print(resp);
+    //});
+
+    //_gameDetailBloc.events.listen((resp) {
+    //  print(resp);
+    //});
+
+   _homeBloc.news.listen((resp) {
+      print(resp);
+    });
+
+    _homeBloc.videos.listen((resp) {
+      print(resp);
+    });
 
     setState(() {
       _counter++;

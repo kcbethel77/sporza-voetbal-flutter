@@ -24,5 +24,5 @@ class MatchEventUseCase with UseCase<MatchDetail> {
   @override
   SporzaSoccerDataSource get network => _network;
 
-  Observable<Response<MatchDetail>> get matchDetailInfoWithEvents => merged;
+  Observable<Response<MatchDetail>> get matchDetailInfoWithEvents => stream();
 }
