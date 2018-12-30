@@ -28,6 +28,7 @@ class StubbedStringUseCase with UseCase {
 }
 
 const String aString = "a string";
+const String aSecondString = "a second string";
 Error someError = Error();
 
 Observable<String> get aStringObservable => Observable.defer(() => Observable.just(aString));
@@ -196,6 +197,49 @@ void main() {
           var dbData = secondEmissions[1] as resp.Data;
           expect(dbData.value, aString);
           expect(dbData.isDatabase, true);
+        });
+      });
+    });
+
+    group("if cache should refresh", () {
+      group("SUCCESS network, SUCCESS db", () {
+        var useCase = StubbedStringUseCase(mockNetwork, mockCache);
+        var networkResponses = [aStringObservable, Observable.just(aSecondString)];
+
+        group("first subscription", () {
+          test("it should return the first success results", () async {
+            when(mockNetwork.getT(mockDatasourceType)).thenAnswer((_) => networkResponses.removeAt(0));
+            when(mockCache.getT(mockDatasourceType)).thenAnswer((_) => aStringObservable);
+
+            var firstEmissions = await useCase.stream(shouldRefresh: true).toList();
+            expect(firstEmissions.length, 2);
+
+            var nwData = firstEmissions[0] as resp.Data;
+            expect(nwData.value, aString);
+            expect(nwData.isNetwork, true);
+
+            var dbData = firstEmissions[1] as resp.Data;
+            expect(dbData.value, aString);
+            expect(dbData.isDatabase, true);
+          });
+        });
+
+        group("second subscription should return the second result", () {
+          test("it should return the second success results", () async {
+            when(mockNetwork.getT(mockDatasourceType)).thenAnswer((_) => networkResponses.removeAt(0));
+            when(mockCache.getT(mockDatasourceType)).thenAnswer((_) => aStringObservable);
+
+            var firstEmissions = await useCase.stream(shouldRefresh: true).toList();
+            expect(firstEmissions.length, 2);
+
+            var nwData = firstEmissions[0] as resp.Data;
+            expect(nwData.value, aSecondString);
+            expect(nwData.isNetwork, true);
+
+            var dbData = firstEmissions[1] as resp.Data;
+            expect(dbData.value, aString);
+            expect(dbData.isDatabase, true);
+          });
         });
       });
     });

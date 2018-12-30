@@ -24,7 +24,7 @@ mixin UseCase<T> {
   Observable<Response<T>> get _cachedResponseStream => Observable.fromIterable(_cachedResponse.values);
 
   Observable<Response<T>> stream({final bool shouldRefresh = false}) {
-    if (_cachedResponse.values.length == MINIMUM_AMOUNT_OF_VALID_VALUES) {
+    if (!shouldRefresh && _cachedResponse.values.length == MINIMUM_AMOUNT_OF_VALID_VALUES) {
       print("${runtimeType} hit cache");
       return _cachedResponseStream;
     } else {
