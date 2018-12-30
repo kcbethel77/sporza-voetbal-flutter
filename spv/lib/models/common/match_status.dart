@@ -21,4 +21,6 @@ class MatchStatus extends EnumClass {
   static BuiltSet<MatchStatus> get values => _$values;
 
   static MatchStatus valueOf(String name) => _$valueOf(name);
+
+  static bool isLive(MatchStatus status) => status == MatchStatus.LIVE;
 }

@@ -25,17 +25,17 @@ mixin UseCase<T> {
 
   Observable<Response<T>> stream({final bool shouldRefresh = false}) {
     if (!shouldRefresh && _cachedResponse.values.length == MINIMUM_AMOUNT_OF_VALID_VALUES) {
-      print("${runtimeType} hit cache");
+      //print("${runtimeType} hit cache");
       return _cachedResponseStream;
     } else {
-      print("${runtimeType} missed cached");
+      //print("${runtimeType} missed cached");
       _cachedResponse = ReplaySubject(maxSize: MINIMUM_AMOUNT_OF_VALID_VALUES);
     }
 
     return Observable.merge([nw, db]).doOnData((data) {
       if (data is Data) {
         final dataKind = (data as Data).isDatabase ? "db" : "network";
-        print("${runtimeType} cached: ${dataKind}");
+        //print("${runtimeType} cached: ${dataKind}");
         _cachedResponse.add(data);
       }
     });
