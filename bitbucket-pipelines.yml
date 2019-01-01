@@ -18,6 +18,10 @@ pipelines:
             - flutter packages get
             - flutter packages pub run build_runner build
             - flutter test
+            - cd service_layer
+            - flutter packages get
+            - flutter packages pub run build_runner build
+            - flutter test
 
 definitions:
   caches:
