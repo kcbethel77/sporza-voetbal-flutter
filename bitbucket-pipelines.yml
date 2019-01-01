@@ -14,11 +14,7 @@ pipelines:
             - gradlewrapper
           name: Build and test
           script:
-            - cd spv
-            - flutter packages get
-            - flutter packages pub run build_runner build
-            - flutter test
-            - cd service_layer
+            - cd spv/service_layer
             - flutter packages get
             - flutter packages pub run build_runner build
             - flutter test
