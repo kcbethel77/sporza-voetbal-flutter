@@ -1,13 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:rxdart/rxdart.dart';
-import 'package:spv/datasource/cache/cache.dart';
-import 'package:spv/datasource/network/network.dart';
-import 'package:spv/datasource/user/user_preferences.dart';
 import 'package:http/http.dart' as http;
-import 'package:spv/models/response.dart';
-import 'package:spv/models/view/view_models.dart' as view;
-import 'package:spv/usecase/usecase.dart';
-import 'package:spv/bloc//bloc.dart';
+import 'package:rxdart/rxdart.dart';
+import 'package:service_layer_spv/spv_service.dart';
 
 void main() => runApp(MyApp());
 
@@ -49,7 +43,7 @@ class _MyHomePageState extends State<MyHomePage> {
   void initState() {
     super.initState();
     var httpClient = http.Client();
-    _cache = CacheImpl();
+   _cache = CacheImpl();
     _network = NetworkImpl(httpClient);
 
     _newsUseCase = NewsUseCase(_cache, _network);
@@ -72,39 +66,39 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void _incrementCounter() {
-    //_competitionOverviewBloc.calendar.listen((data) {
-    //  (data as Data<view.Calendar>)
-    //      .value
-    //      .phases
-    //      .expand((phase) => phase.matchDays)
-    //      .expand((matchDay) => matchDay.matches)
-    //      .map((match) => (match as view.Match).id)
-    //      .map((matchId) => [
-    //            matchId,
-    //            GameDetailBloc(matchId, _cache, _network, _userPreferences, notLiveRefreshInMilliSeconds: 1000).events
-    //          ])
-    //      .forEach((pair) {
-    //    (pair.last as Observable<Response<List<view.Event>>>).listen((eventResp) {
-    //      if (eventResp is Fail<List<view.Event>>) {
-    //        print("Fail: ${pair.first}: ${eventResp.throwable}");
-    //      }
-    //    }, onError: (err) {
-    //      print("Unhandled Error: ${pair.first} $err");
-    //    });
-    //  });
-    //});
+    _competitionOverviewBloc.calendar.listen((data) {
+      (data as Data<Calendar>)
+          .value
+          .phases
+          .expand((phase) => phase.matchDays)
+          .expand((matchDay) => matchDay.matches)
+          .map((match) => (match as Match).id)
+          .map((matchId) => [
+                matchId,
+                GameDetailBloc(matchId, _cache, _network, _userPreferences, notLiveRefreshInMilliSeconds: 1000).events
+              ])
+          .forEach((pair) {
+        (pair.last as Observable<Response<List<Event>>>).listen((eventResp) {
+          if (eventResp is Fail<List<Event>>) {
+            print("Fail: ${pair.first}: ${eventResp.throwable}");
+          }
+        }, onError: (err) {
+          print("Unhandled Error: ${pair.first} $err");
+        });
+      });
+    });
 
     _competitionOverviewBloc.ranking.listen((data) {
       print(data);
     });
 
-    //_gameDetailBloc.headingInfo.listen((resp) {
-    //  print(resp);
-    //});
+    _gameDetailBloc.headingInfo.listen((resp) {
+      print(resp);
+    });
 
-    //_gameDetailBloc.events.listen((resp) {
-    //  print(resp);
-    //});
+    _gameDetailBloc.events.listen((resp) {
+      print(resp);
+    });
 
    _homeBloc.news.listen((resp) {
       print(resp);
