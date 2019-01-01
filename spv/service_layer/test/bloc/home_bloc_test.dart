@@ -1,26 +1,28 @@
-import 'package:service_layer_spv/src/models/response.dart';
+import 'package:service_layer_spv/src/models/network/network_models.dart';
 import 'package:test/test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:rxdart/rxdart.dart';
 import '../utils/index.dart';
 import 'package:service_layer_spv/src/bloc/bloc.dart';
-import 'package:service_layer_spv/src/usecase/usecase.dart';
 
 void main() {
-  final NewsUseCase newsUseCase = MockNewsUseCase();
-  final VideoUseCase videoUseCase = MockVideoUseCase();
+  final MockCache cache = MockCache();
 
-  final HomeBloc bloc = HomeBloc(newsUseCase, videoUseCase);
+  final MockSporzaSoccerDataSource network = MockSporzaSoccerDataSource();
+
+  final HomeBloc bloc = HomeBloc(cache, network);
 
   group("home bloc", () {
     test("news", () async {
-      when(newsUseCase.news).thenAnswer((_) => Observable.just(Response.nwSuccess([buildNewsItem()])));
+      when(cache.getListOfT<News>(any)).thenAnswer((_) => Observable.empty());
+      when(network.getListOfT<News>(any)).thenAnswer((_) => Observable.just([buildNewsItem()]));
       var emissions = await bloc.news.toList();
       expect(emissions.length, 1);
     });
 
-    test("video", ()  async {
-      when(videoUseCase.video).thenAnswer((_) => Observable.just(Response.nwSuccess([buildVideoItem()])));
+    test("video", () async {
+      when(cache.getListOfT<Video>(any)).thenAnswer((_) => Observable.empty());
+      when(network.getListOfT<Video>(any)).thenAnswer((_) => Observable.just([buildVideoItem()]));
       var emissions = await bloc.videos.toList();
       expect(emissions.length, 1);
     });

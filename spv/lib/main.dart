@@ -31,8 +31,6 @@ class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
 
   HomeBloc _homeBloc;
-  NewsUseCase _newsUseCase;
-  VideoUseCase _videoUseCase;
   GameDetailBloc _gameDetailBloc;
   UserPreference _userPreferences;
   CompetitionOverviewBloc _competitionOverviewBloc;
@@ -46,10 +44,7 @@ class _MyHomePageState extends State<MyHomePage> {
    _cache = CacheImpl();
     _network = NetworkImpl(httpClient);
 
-    _newsUseCase = NewsUseCase(_cache, _network);
-    _videoUseCase = VideoUseCase(_cache, _network);
-
-    _homeBloc = HomeBloc(_newsUseCase, _videoUseCase);
+    _homeBloc = HomeBloc(_cache, _network);
 
     _userPreferences = UserPreferenceImpl();
     _userPreferences.setFavoriteTeams(["300"]);
