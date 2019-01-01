@@ -6,18 +6,29 @@ clone:
 pipelines:
   branches:
     master:
-      - step:
-          caches:
-            - flutterappcache
-            - flutterservicecache
-            - androidgradle
-            - gradlewrapper
-          name: Build and test
-          script:
-            - cd spv/service_layer
-            - flutter packages get
-            - flutter packages pub run build_runner build
-            - flutter test
+      - parallel:
+          - step:
+              caches:
+                - flutterappcache
+                - androidgradle
+                - gradlewrapper
+              name: Build and Test App
+              script:
+                - cd spv
+                - flutter packages get
+                - flutter packages pub run build_runner build
+                - flutter test
+          - step:
+              caches:
+                - flutterservicecache
+                - androidgradle
+                - gradlewrapper
+              name: Build and Test Service Layer
+              script:
+                - cd spv/service_layer
+                - flutter packages get
+                - flutter packages pub run build_runner build
+                - flutter test
 
 definitions:
   caches:
