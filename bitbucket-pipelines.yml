@@ -8,7 +8,8 @@ pipelines:
     master:
       - step:
           caches:
-            - fluttercache
+            - flutterappcache
+            - flutterservicecache
             - androidgradle
             - gradlewrapper
           name: Build and test
@@ -17,9 +18,14 @@ pipelines:
             - flutter packages get
             - flutter packages pub run build_runner build
             - flutter test
+            - cd service_layer
+            - flutter packages get
+            - flutter packages pub run build_runner build
+            - flutter test
 
 definitions:
   caches:
-    fluttercache: spv/build
+    flutterappcache: spv/build
+    flutterservicecache: spv/service_layer/build
     androidgradle: spv/android/.gradle
     gradlewrapper: ~/.gradle/wrapper
