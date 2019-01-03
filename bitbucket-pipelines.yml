@@ -14,8 +14,8 @@ pipelines:
                 - gradlewrapper
               name: Build and Test App
               script:
-                - cd spv
-                - sh ./buildTestAll
+                - cd spv/
+                - sh ./buildTestAll.sh
 
 definitions:
   caches:
