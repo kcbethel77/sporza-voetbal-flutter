@@ -335,5 +335,21 @@ class Mapper {
 
   //</editor-fold>
 
+  //<editor-fold desc="Menu">
+  static view.Competition _mapCompetitionToCompetition(final network.Competition competition) =>
+      (view.CompetitionBuilder()
+            ..id = competition.id
+            ..abbreviation = competition.countryShort
+            ..name = competition.label
+            ..accessibility = competition.accessibilityText)
+          .build();
+
+  static view.DrawerMenu mapMenuToDrawerMenu(final network.Menu menu) => (view.DrawerMenuBuilder()
+        ..favouriteCompetitions = ListBuilder(_mapListOfTtoR(menu.favouriteCompetitions, _mapCompetitionToCompetition))
+        ..nonFavouriteCompetitions =
+            ListBuilder(_mapListOfTtoR(menu.nonFavouriteCompetitions, _mapCompetitionToCompetition)))
+      .build();
+  //</editor-fold>
+
   static List<R> _mapListOfTtoR<T, R>(Iterable<T> list, [R mapFunc(T t)]) => list.map(mapFunc).toList();
 }

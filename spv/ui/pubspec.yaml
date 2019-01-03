@@ -1,0 +1,25 @@
+name: ui_spv
+description: This module contains the UI components
+version: 0.0.1
+author: Tim Rijckaert
+homepage: http://www.vrt.be
+
+environment:
+  sdk: ">=2.0.0-dev.68.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  rxdart: 0.20.0
+
+  common_spv:
+    path: ../common
+
+  cupertino_icons: 0.1.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true

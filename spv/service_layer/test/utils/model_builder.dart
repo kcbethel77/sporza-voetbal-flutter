@@ -396,3 +396,8 @@ Media buildMedia(
           ..userHasPaid = userHasPaid
           ..url = url)
         .build();
+
+Menu buildMenu({List<Competition> favs = const [], List<Competition> nonFavs = const []}) => (MenuBuilder()
+      ..favouriteCompetitions = ListBuilder(favs)
+      ..nonFavouriteCompetitions = ListBuilder(nonFavs))
+    .build();

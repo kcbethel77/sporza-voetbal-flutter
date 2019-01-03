@@ -12,3 +12,5 @@ export 'src/datasource/user/user_preferences.dart';
 export 'src/models/view/calendar.dart';
 export 'src/models/view/match.dart';
 export 'src/models/view/event.dart';
+export 'src/models/view/news.dart';
+export 'src/models/view/video.dart';

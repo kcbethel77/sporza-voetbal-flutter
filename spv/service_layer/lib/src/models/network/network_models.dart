@@ -20,5 +20,6 @@ export 'match_event.dart';
 export 'event_owning_team.dart';
 export 'banner.dart';
 export 'media.dart';
+export 'menu.dart';
 
 export 'serializers.dart';

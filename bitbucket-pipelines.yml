@@ -15,20 +15,7 @@ pipelines:
               name: Build and Test App
               script:
                 - cd spv
-                - flutter packages get
-                - flutter packages pub run build_runner build
-                - flutter test
-          - step:
-              caches:
-                - flutterservicecache
-                - androidgradle
-                - gradlewrapper
-              name: Build and Test Service Layer
-              script:
-                - cd spv/service_layer
-                - flutter packages get
-                - flutter packages pub run build_runner build
-                - flutter test
+                - sh ./buildTestAll
 
 definitions:
   caches:

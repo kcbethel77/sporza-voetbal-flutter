@@ -887,4 +887,54 @@ void main() {
       });
     });
   });
+
+  group("Menu Drawer", () {
+    var drawerMenu = Mapper.mapMenuToDrawerMenu(buildMenu(
+      favs: [
+        buildCompetition(id: "1"),
+        buildCompetition(id: "2"),
+        buildCompetition(id: "3"),
+      ],
+      nonFavs: [
+        buildCompetition(id: "4"),
+        buildCompetition(id: "5"),
+      ],
+    ));
+
+    group("favourites", () {
+      var competitions = drawerMenu.favouriteCompetitions;
+      
+      test("has the correct size", () {
+        expect(competitions.length, 3);
+      });
+
+      group("first favourite", () {
+        var firstFavComp = competitions.first;
+
+        test("has the correct id", () {
+          expect(firstFavComp.id, "1");
+        });
+
+        test("has the correct abbreviation", () {
+          expect(firstFavComp.abbreviation, countryShort);
+        });
+
+        test("has the correct name", () {
+          expect(firstFavComp.name, label);
+        });
+
+        test("has the correct accessibility text", () {
+          expect(firstFavComp.accessibility, accessibilityText);
+        });
+      });
+    });
+    
+    group("non favourites", () {
+      var competitions = drawerMenu.nonFavouriteCompetitions;
+      
+      test("has the correct size", () {
+        expect(competitions.length, 2);
+      });
+    });
+  });
 }
