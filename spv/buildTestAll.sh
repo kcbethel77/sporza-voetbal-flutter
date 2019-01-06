@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 ##### Main #####
 
 flutter packages get

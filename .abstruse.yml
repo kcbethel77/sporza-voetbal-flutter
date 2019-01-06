@@ -1,0 +1,12 @@
+image: nathansamson/flutter-builder-docker
+
+before_script:
+  - flutter packages get
+  - flutter packages pub run build_runner build
+script:
+  - cd service_layer
+  - flutter packages get
+  - flutter packages pub run build_runner build
+  - flutter test
+after_script:
+  - echo done
