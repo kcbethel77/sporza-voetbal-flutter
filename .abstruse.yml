@@ -2,6 +2,7 @@ image: flutter
 
 before_install:
   - apt-get update
+  - echo before installing
 
 install:
   - echo install
