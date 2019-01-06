@@ -1,5 +1,14 @@
 image: flutter
 
+branches:
+  - master
+
+cache:
+  - spv/build
+  - spv/service_layer/build
+  - spv/android/.gradle
+  - ~/.gradle/wrapper
+
 install:
   - echo install
 
@@ -7,9 +16,16 @@ before_script:
   - flutter packages get
   - flutter packages pub run build_runner build
 script:
+  - echo hellllooo woooorld
   - cd service_layer
   - flutter packages get
   - flutter packages pub run build_runner build
   - flutter test
+  - cd ../ui
+  - flutter packages get
+  - flutter test
+  - cd ../common
+  - flutter packages get
+
 after_script:
   - echo done
