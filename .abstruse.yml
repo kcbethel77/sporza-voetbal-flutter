@@ -1,4 +1,7 @@
-image: nathansamson/flutter-builder-docker
+image: flutter
+
+install:
+  - echo install
 
 before_script:
   - flutter packages get
