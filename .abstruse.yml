@@ -3,13 +3,5 @@ image: flutter
 install:
   - echo install
 
-before_script:
-  - flutter packages get
-  - flutter packages pub run build_runner build
 script:
-  - cd service_layer
-  - flutter packages get
-  - flutter packages pub run build_runner build
-  - flutter test
-after_script:
-  - echo done
+  - echo hello world from abstruse
