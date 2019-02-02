@@ -1,4 +1,0 @@
-image: abstruse_builder
-
-script:
-  - echo "hello world"

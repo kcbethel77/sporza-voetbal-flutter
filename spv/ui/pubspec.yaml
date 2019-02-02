@@ -11,6 +11,7 @@ dependencies:
   flutter:
     sdk: flutter
   rxdart: 0.20.0
+  cached_network_image: 0.5.1
 
   common_spv:
     path: ../common
