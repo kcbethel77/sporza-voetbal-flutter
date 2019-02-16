@@ -28,7 +28,7 @@ class _$MatchSerializer implements StructuredSerializer<Match> {
           specifiedType: const FullType(Team)),
       'status',
       serializers.serialize(object.status,
-          specifiedType: const FullType(MatchStatus)),
+          specifiedType: const FullType(common.MatchStatus)),
       'homeScore',
       serializers.serialize(object.homeScore,
           specifiedType: const FullType(int)),
@@ -90,7 +90,8 @@ class _$MatchSerializer implements StructuredSerializer<Match> {
           break;
         case 'status':
           result.status = serializers.deserialize(value,
-              specifiedType: const FullType(MatchStatus)) as MatchStatus;
+                  specifiedType: const FullType(common.MatchStatus))
+              as common.MatchStatus;
           break;
         case 'homeScore':
           result.homeScore = serializers.deserialize(value,
@@ -133,7 +134,7 @@ class _$Match extends Match {
   @override
   final String startTime;
   @override
-  final MatchStatus status;
+  final common.MatchStatus status;
   @override
   final int homeScore;
   @override
@@ -277,9 +278,9 @@ class MatchBuilder implements Builder<Match, MatchBuilder> {
   String get startTime => _$this._startTime;
   set startTime(String startTime) => _$this._startTime = startTime;
 
-  MatchStatus _status;
-  MatchStatus get status => _$this._status;
-  set status(MatchStatus status) => _$this._status = status;
+  common.MatchStatus _status;
+  common.MatchStatus get status => _$this._status;
+  set status(common.MatchStatus status) => _$this._status = status;
 
   int _homeScore;
   int get homeScore => _$this._homeScore;

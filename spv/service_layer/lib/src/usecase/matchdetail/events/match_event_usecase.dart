@@ -1,5 +1,5 @@
 import 'package:rxdart/rxdart.dart';
-import 'package:service_layer_spv/src/models/common/common.dart';
+import 'package:common_spv/common.dart';
 import 'package:service_layer_spv/src/models/response.dart';
 import 'package:service_layer_spv/src/usecase/usecase_mixin.dart';
 import 'package:service_layer_spv/src/datasource/cache/cache.dart';
@@ -17,14 +17,9 @@ class MatchEventUseCase with UseCase<MatchDetail> {
   final int liveRefreshInMilliSeconds;
 
   Observable<int> get _refreshRateStream =>
-      _isLive.stream.distinct().map((isLive) =>
-          isLive ? liveRefreshInMilliSeconds : notLiveRefreshInMilliSeconds);
+      _isLive.stream.distinct().map((isLive) => isLive ? liveRefreshInMilliSeconds : notLiveRefreshInMilliSeconds);
 
-  MatchEventUseCase(
-      final String _matchId,
-      final this._cache,
-      final this._network,
-      this.liveRefreshInMilliSeconds,
+  MatchEventUseCase(final String _matchId, final this._cache, final this._network, this.liveRefreshInMilliSeconds,
       this.notLiveRefreshInMilliSeconds)
       : _dataSourceType = MatchDetailDataSourceType(_matchId),
         _isLive = BehaviorSubject(seedValue: false);
@@ -38,13 +33,11 @@ class MatchEventUseCase with UseCase<MatchDetail> {
   @override
   SporzaSoccerDataSource get network => _network;
 
-  Observable<Response<MatchDetail>> get matchDetailInfoWithEvents =>
-      _refreshRateStream
-          .switchMap((refreshRate) =>
-              Observable.periodic(Duration(milliseconds: refreshRate)))
-          .switchMap((_) => stream(shouldRefresh: _isLive.value).doOnData((it) {
-                if (it is Data<MatchDetail>) {
-                  _isLive.value = MatchStatus.isLive(it.value.status);
-                }
-              }));
+  Observable<Response<MatchDetail>> get matchDetailInfoWithEvents => _refreshRateStream
+      .switchMap((refreshRate) => Observable.periodic(Duration(milliseconds: refreshRate)))
+      .switchMap((_) => stream(shouldRefresh: _isLive.value).doOnData((it) {
+            if (it is Data<MatchDetail>) {
+              _isLive.value = MatchStatus.isLive(it.value.status);
+            }
+          }));
 }

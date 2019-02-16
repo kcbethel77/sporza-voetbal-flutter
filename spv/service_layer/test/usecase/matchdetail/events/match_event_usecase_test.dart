@@ -1,4 +1,4 @@
-import 'package:service_layer_spv/src/models/common/common.dart';
+import 'package:common_spv/common.dart';
 import 'package:service_layer_spv/src/models/response.dart';
 import 'package:test/test.dart';
 import 'package:mockito/mockito.dart';

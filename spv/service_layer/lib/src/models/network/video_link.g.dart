@@ -27,7 +27,7 @@ class _$VideoLinkSerializer implements StructuredSerializer<VideoLink> {
       serializers.serialize(object.url, specifiedType: const FullType(String)),
       'mediaType',
       serializers.serialize(object.mediaType,
-          specifiedType: const FullType(MediaType)),
+          specifiedType: const FullType(common.MediaType)),
       'adDomain',
       serializers.serialize(object.adDomain,
           specifiedType: const FullType(String)),
@@ -76,7 +76,8 @@ class _$VideoLinkSerializer implements StructuredSerializer<VideoLink> {
           break;
         case 'mediaType':
           result.mediaType = serializers.deserialize(value,
-              specifiedType: const FullType(MediaType)) as MediaType;
+                  specifiedType: const FullType(common.MediaType))
+              as common.MediaType;
           break;
         case 'adDomain':
           result.adDomain = serializers.deserialize(value,
@@ -117,7 +118,7 @@ class _$VideoLink extends VideoLink {
   @override
   final String url;
   @override
-  final MediaType mediaType;
+  final common.MediaType mediaType;
   @override
   final String adDomain;
   @override
@@ -256,9 +257,9 @@ class VideoLinkBuilder implements Builder<VideoLink, VideoLinkBuilder> {
   String get url => _$this._url;
   set url(String url) => _$this._url = url;
 
-  MediaType _mediaType;
-  MediaType get mediaType => _$this._mediaType;
-  set mediaType(MediaType mediaType) => _$this._mediaType = mediaType;
+  common.MediaType _mediaType;
+  common.MediaType get mediaType => _$this._mediaType;
+  set mediaType(common.MediaType mediaType) => _$this._mediaType = mediaType;
 
   String _adDomain;
   String get adDomain => _$this._adDomain;

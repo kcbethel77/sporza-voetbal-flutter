@@ -2,7 +2,7 @@ import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 import 'package:built_collection/built_collection.dart';
 import 'package:service_layer_spv/src/models/network/network_models.dart';
-import 'package:service_layer_spv/src/models/common/common.dart';
+import 'package:common_spv/common.dart' as common;
 
 part 'match_detail.g.dart';
 
@@ -25,7 +25,7 @@ abstract class MatchDetail implements Built<MatchDetail, MatchDetailBuilder> {
 
   String get startTime;
 
-  MatchStatus get status;
+  common.MatchStatus get status;
 
   int get homeScore;
 

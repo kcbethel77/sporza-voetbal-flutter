@@ -1,6 +1,6 @@
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
-import 'package:service_layer_spv/src/models/common/common.dart';
+import 'package:common_spv/common.dart' as common;
 
 part 'media.g.dart';
 
@@ -11,7 +11,7 @@ abstract class Media implements Built<Media, MediaBuilder> {
 
   String get id;
 
-  MediaType get mediaType;
+  common.MediaType get mediaType;
 
   String get publicationId;
 

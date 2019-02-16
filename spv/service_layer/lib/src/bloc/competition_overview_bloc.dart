@@ -2,7 +2,7 @@ import 'package:service_layer_spv/src/datasource/cache/cache.dart';
 import 'package:service_layer_spv/src/datasource/soccer_datasource.dart';
 import 'package:service_layer_spv/src/models/model_mapper.dart';
 import 'package:service_layer_spv/src/models/response.dart';
-import 'package:service_layer_spv/src/models/view/view_models.dart';
+import 'package:common_spv/common.dart';
 import 'package:service_layer_spv/src/usecase/usecase.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:service_layer_spv/src/bloc/view_model_mappable_mixin.dart';
@@ -23,9 +23,8 @@ class CompetitionOverviewBloc with ViewModelMappable {
 
   Observable<Response<Calendar>> get calendar => Observable.zip(
       [_calendarUseCase.calendar, _userPreference.favoriteTeams],
-      (pair) => mapToViewModels(pair.first, Mapper.mapCompetitionToCalendar,
-          extraParam1: pair.last));
+      (pair) => mapToViewModels(pair.first, Mapper.mapCompetitionToCalendar, extraParam1: pair.last));
 
-  Observable<Response> get ranking => _rankingUseCase.ranking.map(
-      (response) => mapToViewModels(response, Mapper.mapCompetitionToRanking));
+  Observable<Response> get ranking =>
+      _rankingUseCase.ranking.map((response) => mapToViewModels(response, Mapper.mapCompetitionToRanking));
 }

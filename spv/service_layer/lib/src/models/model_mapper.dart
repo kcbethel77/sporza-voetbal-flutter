@@ -1,8 +1,7 @@
 import 'package:built_collection/built_collection.dart';
-import 'package:service_layer_spv/src/models/common/common.dart';
 import 'package:service_layer_spv/src/models/network/network_models.dart' as network;
 import 'package:service_layer_spv/src/models/network/person.dart';
-import 'package:service_layer_spv/src/models/view/view_models.dart' as view;
+import 'package:common_spv/common.dart' as view;
 
 class Mapper {
   //<editor-fold desc="News">
@@ -160,7 +159,7 @@ class Mapper {
 
   static view.HeadingInfo _mapToHeadingInfo(
       final String startTime,
-      final MatchStatus status,
+      final view.MatchStatus status,
       final int homeScore,
       final int awayScore,
       final String statusName,
@@ -171,48 +170,48 @@ class Mapper {
       final String statusDate) {
     var headingInfo;
     switch (status) {
-      case MatchStatus.END:
+      case view.MatchStatus.END:
         headingInfo = (view.EndMatchHeadingInfoBuilder()
               ..score = "$homeScore - $awayScore"
               ..statusLabel = statusLabel
               ..knockoutEnd = isKnockout ? knockOutEnd : null)
             .build();
         break;
-      case MatchStatus.SUSPENDED:
+      case view.MatchStatus.SUSPENDED:
         headingInfo = (view.SuspendedHeadingInfoBuilder()
               ..statusLabel = statusLabel
               ..score = "($homeScore - $awayScore)")
             .build();
         break;
-      case MatchStatus.SUSPENDED_INDEFINITELY:
+      case view.MatchStatus.SUSPENDED_INDEFINITELY:
         headingInfo = (view.SuspendedIndefinitelyHeadingInfoBuilder()
               ..statusLabel = statusLabel
               ..score = "($homeScore - $awayScore)")
             .build();
         break;
-      case MatchStatus.NOT_STARTED:
+      case view.MatchStatus.NOT_STARTED:
         headingInfo = (view.NotStartedHeadingInfoBuilder()
               ..statusDay = statusDay
               ..statusLabel = statusLabel)
             .build();
         break;
-      case MatchStatus.AFTER_TODAY:
+      case view.MatchStatus.AFTER_TODAY:
         headingInfo = (view.AfterTodayHeadingInfoBuilder()
               ..statusDay = statusDay
               ..statusDate = statusDate
               ..statusLabel = statusName)
             .build();
         break;
-      case MatchStatus.CANCELLED:
+      case view.MatchStatus.CANCELLED:
         headingInfo = (view.CancelledHeadingInfoBuilder()..statusLabel = statusLabel).build();
         break;
-      case MatchStatus.LIVE:
+      case view.MatchStatus.LIVE:
         headingInfo = (view.LiveMatchHeadingInfoBuilder()
               ..score = "$homeScore - $awayScore"
               ..statusLabel = statusLabel)
             .build();
         break;
-      case MatchStatus.POSTPONED:
+      case view.MatchStatus.POSTPONED:
         headingInfo = (view.PostponedHeadingInfoBuilder()..statusLabel = statusLabel).build();
         break;
       default:
@@ -349,6 +348,7 @@ class Mapper {
         ..nonFavouriteCompetitions =
             ListBuilder(_mapListOfTtoR(menu.nonFavouriteCompetitions, _mapCompetitionToCompetition)))
       .build();
+
   //</editor-fold>
 
   static List<R> _mapListOfTtoR<T, R>(Iterable<T> list, [R mapFunc(T t)]) => list.map(mapFunc).toList();

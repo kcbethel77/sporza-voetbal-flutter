@@ -5,7 +5,7 @@ import 'package:service_layer_spv/src/datasource/soccer_datasource.dart';
 import 'package:service_layer_spv/src/datasource/user/user_preferences.dart';
 import 'package:service_layer_spv/src/models/model_mapper.dart';
 import 'package:service_layer_spv/src/models/response.dart';
-import 'package:service_layer_spv/src/models/view/view_models.dart';
+import 'package:common_spv/common.dart';
 
 import 'package:service_layer_spv/src/usecase/usecase.dart';
 

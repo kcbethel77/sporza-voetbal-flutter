@@ -22,7 +22,7 @@ class _$MediaSerializer implements StructuredSerializer<Media> {
       serializers.serialize(object.id, specifiedType: const FullType(String)),
       'mediaType',
       serializers.serialize(object.mediaType,
-          specifiedType: const FullType(MediaType)),
+          specifiedType: const FullType(common.MediaType)),
       'publicationId',
       serializers.serialize(object.publicationId,
           specifiedType: const FullType(String)),
@@ -96,7 +96,8 @@ class _$MediaSerializer implements StructuredSerializer<Media> {
           break;
         case 'mediaType':
           result.mediaType = serializers.deserialize(value,
-              specifiedType: const FullType(MediaType)) as MediaType;
+                  specifiedType: const FullType(common.MediaType))
+              as common.MediaType;
           break;
         case 'publicationId':
           result.publicationId = serializers.deserialize(value,
@@ -145,7 +146,7 @@ class _$Media extends Media {
   @override
   final String id;
   @override
-  final MediaType mediaType;
+  final common.MediaType mediaType;
   @override
   final String publicationId;
   @override
@@ -265,9 +266,9 @@ class MediaBuilder implements Builder<Media, MediaBuilder> {
   String get id => _$this._id;
   set id(String id) => _$this._id = id;
 
-  MediaType _mediaType;
-  MediaType get mediaType => _$this._mediaType;
-  set mediaType(MediaType mediaType) => _$this._mediaType = mediaType;
+  common.MediaType _mediaType;
+  common.MediaType get mediaType => _$this._mediaType;
+  set mediaType(common.MediaType mediaType) => _$this._mediaType = mediaType;
 
   String _publicationId;
   String get publicationId => _$this._publicationId;

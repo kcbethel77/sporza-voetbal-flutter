@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:rxdart/rxdart.dart';
 import 'package:service_layer_spv/spv_service.dart';
-import 'package:cached_network_image/cached_network_image.dart';
+import 'package:common_spv/common.dart';
 
 void main() => runApp(MyApp());
 

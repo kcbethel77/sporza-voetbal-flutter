@@ -24,6 +24,7 @@ flutter test
 ##### Common #####
 cd ../common
 flutter packages get
+flutter packages pub run build_runner build
 
 # Enable once we have tests
 # flutter test

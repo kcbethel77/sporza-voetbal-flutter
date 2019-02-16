@@ -1,6 +1,6 @@
 import 'package:built_collection/built_collection.dart';
 import 'package:service_layer_spv/src/models/network/network_models.dart';
-import 'package:service_layer_spv/src/models/common/common.dart';
+import 'package:common_spv/common.dart' as common;
 
 const int rank = 10;
 const int nrOfMatches = 20;
@@ -64,10 +64,10 @@ const bool isFavourite = true;
 const bool paymentNecessary = true;
 const bool userHasPaid = true;
 
-const MediaType mediaType = MediaType.VRT;
-const MatchStatus matchStatus = MatchStatus.END;
+const common.MediaType mediaType = common.MediaType.VRT;
+const common.MatchStatus matchStatus = common.MatchStatus.END;
 const EventOwningTeam defaultEventOwningTeam = EventOwningTeam.HOME;
-const BannerFormat bannerFormat = BannerFormat.IMU;
+const common.BannerFormat bannerFormat = common.BannerFormat.IMU;
 
 final Team homeTeam = buildTeam(id: "${homeTeamName}_$id", name: homeTeamName, logoUrl: "${url}_$homeTeamName");
 final Team awayTeam = buildTeam(id: "${awayTeamName}_$id", name: awayTeamName, logoUrl: "${url}_$awayTeamName");
@@ -84,7 +84,7 @@ VideoLink buildVideoLink(
     {String id = id,
     String publicationId = publicationId,
     String url = url,
-    MediaType mediaType = mediaType,
+    common.MediaType mediaType = mediaType,
     String adDomain = adDomain,
     String adPartner = adPartner,
     String adContent = adContent,
@@ -244,7 +244,7 @@ Match buildMatch(
   Team awayTeam, {
   String id = id,
   String startTime = startTime,
-  MatchStatus status = matchStatus,
+  common.MatchStatus status = matchStatus,
   int homeScore = homeScore,
   int awayScore = awayScore,
   String statusName = statusName,
@@ -276,7 +276,7 @@ MatchDetail buildMatchDetail(
   String id = id,
   String startTime = startTime,
   String statusDate = statusDate,
-  MatchStatus status = matchStatus,
+  common.MatchStatus status = matchStatus,
   String statusDay = statusDay,
   int homeScore = homeScore,
   int awayScore = awayScore,
@@ -360,7 +360,7 @@ Person buildPerson(
 
 Banner buildBanner(
         {String id = id,
-        BannerFormat format = bannerFormat,
+        common.BannerFormat format = bannerFormat,
         String pebblePhoneUrl = pebblePhoneUrl,
         String pebbleTabletUrl = pebbleTabletUrl}) =>
     (BannerBuilder()
@@ -372,7 +372,7 @@ Banner buildBanner(
 
 Media buildMedia(
         {String id = id,
-        MediaType mediaType = mediaType,
+        common.MediaType mediaType = mediaType,
         String thumbnailUrl = thumbnailUrl,
         String publicationId = publicationId,
         String adContent = adContent,

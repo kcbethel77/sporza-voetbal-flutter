@@ -22,7 +22,7 @@ class _$BannerSerializer implements StructuredSerializer<Banner> {
       serializers.serialize(object.id, specifiedType: const FullType(String)),
       'format',
       serializers.serialize(object.format,
-          specifiedType: const FullType(BannerFormat)),
+          specifiedType: const FullType(common.BannerFormat)),
       'pebblePhoneUrl',
       serializers.serialize(object.pebblePhoneUrl,
           specifiedType: const FullType(String)),
@@ -51,7 +51,8 @@ class _$BannerSerializer implements StructuredSerializer<Banner> {
           break;
         case 'format':
           result.format = serializers.deserialize(value,
-              specifiedType: const FullType(BannerFormat)) as BannerFormat;
+                  specifiedType: const FullType(common.BannerFormat))
+              as common.BannerFormat;
           break;
         case 'pebblePhoneUrl':
           result.pebblePhoneUrl = serializers.deserialize(value,
@@ -72,7 +73,7 @@ class _$Banner extends Banner {
   @override
   final String id;
   @override
-  final BannerFormat format;
+  final common.BannerFormat format;
   @override
   final String pebblePhoneUrl;
   @override
@@ -139,9 +140,9 @@ class BannerBuilder implements Builder<Banner, BannerBuilder> {
   String get id => _$this._id;
   set id(String id) => _$this._id = id;
 
-  BannerFormat _format;
-  BannerFormat get format => _$this._format;
-  set format(BannerFormat format) => _$this._format = format;
+  common.BannerFormat _format;
+  common.BannerFormat get format => _$this._format;
+  set format(common.BannerFormat format) => _$this._format = format;
 
   String _pebblePhoneUrl;
   String get pebblePhoneUrl => _$this._pebblePhoneUrl;

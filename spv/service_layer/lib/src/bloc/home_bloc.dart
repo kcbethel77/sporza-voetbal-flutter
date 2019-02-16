@@ -4,7 +4,7 @@ import 'package:service_layer_spv/src/datasource/soccer_datasource.dart';
 import 'package:service_layer_spv/src/models/model_mapper.dart';
 import 'package:service_layer_spv/src/bloc/view_model_mappable_mixin.dart';
 import 'package:service_layer_spv/src/models/response.dart';
-import 'package:service_layer_spv/src/models/view/view_models.dart' as view;
+import 'package:common_spv/common.dart' as view;
 import 'package:service_layer_spv/src/models/network/network_models.dart' as network;
 import 'package:service_layer_spv/src/usecase/usecase.dart';
 
