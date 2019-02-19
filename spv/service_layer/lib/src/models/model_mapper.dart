@@ -67,7 +67,7 @@ class Mapper {
           .map((matchDay) => (view.MatchDayBuilder()
                 ..name = matchDay.name
                 ..accessibility = matchDay.accessibilityText
-                ..isCurrent = currentMatchDay != null
+                ..isCurrent = currentMatchDay != null && currentMatchDay == matchDay.id
                 ..matches = ListBuilder(_mapToMatches(matchDay.matches, favoriteTeams)))
               .build())
           .toList();

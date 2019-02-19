@@ -341,12 +341,8 @@ void main() {
             expect(matchDays.length, 1);
           });
 
-          group("first match day", () {
-            var firstMatchDay = matchDays.first;
-
-            test("isCurrent", () {
-              expect(firstMatchDay.isCurrent, true);
-            });
+          test("isCurrent", () {
+            expect(secondPhase.isCurrent, true);
           });
         });
       });
@@ -902,7 +898,7 @@ void main() {
 
     group("favourites", () {
       var competitions = drawerMenu.favouriteCompetitions;
-      
+
       test("has the correct size", () {
         expect(competitions.length, 3);
       });
@@ -927,10 +923,10 @@ void main() {
         });
       });
     });
-    
+
     group("non favourites", () {
       var competitions = drawerMenu.nonFavouriteCompetitions;
-      
+
       test("has the correct size", () {
         expect(competitions.length, 2);
       });

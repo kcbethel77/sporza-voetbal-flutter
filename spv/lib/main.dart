@@ -1,8 +1,10 @@
+import 'package:built_collection/built_collection.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:rxdart/rxdart.dart';
 import 'package:service_layer_spv/spv_service.dart';
 import 'package:common_spv/common.dart';
+import 'package:ui_spv/spv_ui.dart';
 
 void main() => runApp(MyApp());
 
@@ -10,12 +12,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: MyHomePage(title: 'Sporza Voetbal'),
-    );
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        home: Scaffold(body: MyHomePage(title: 'Sporza Voetbal')));
   }
 }
 
@@ -56,8 +57,7 @@ class _MyHomePageState extends State<MyHomePage> {
       notLiveRefreshInMilliSeconds: 1000,
     );
 
-    _competitionOverviewBloc =
-        CompetitionOverviewBloc("52", _cache, _network, _userPreferences);
+    _competitionOverviewBloc = CompetitionOverviewBloc("48", _cache, _network, _userPreferences);
   }
 
   void _fire() {
@@ -70,9 +70,7 @@ class _MyHomePageState extends State<MyHomePage> {
           .map((match) => (match as Match).id)
           .map((matchId) => [
                 matchId,
-                GameDetailBloc(matchId, _cache, _network, _userPreferences,
-                        notLiveRefreshInMilliSeconds: 1000)
-                    .events
+                GameDetailBloc(matchId, _cache, _network, _userPreferences, notLiveRefreshInMilliSeconds: 1000).events
               ])
           .forEach((pair) {
         (pair.last as Observable<Response<List<Event>>>).listen((eventResp) {
@@ -108,6 +106,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(color: Colors.green,);
+    return Container();
   }
 }
