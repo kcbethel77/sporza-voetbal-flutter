@@ -1,10 +1,14 @@
-import 'package:built_collection/built_collection.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:rxdart/rxdart.dart';
-import 'package:service_layer_spv/spv_service.dart';
-import 'package:common_spv/common.dart';
-import 'package:ui_spv/spv_ui.dart';
+import 'package:spv/model/view/calendar.dart';
+import 'package:spv/model/view/event.dart';
+import 'package:spv/service/bloc/bloc.dart';
+import 'package:spv/service/datasource/cache/cache.dart';
+import 'package:spv/service/datasource/network/network.dart';
+import 'package:spv/service/datasource/user/user_preferences.dart';
+import 'package:spv/service/models/response.dart';
+import 'package:spv/model/view/match.dart';
 
 void main() => runApp(MyApp());
 
