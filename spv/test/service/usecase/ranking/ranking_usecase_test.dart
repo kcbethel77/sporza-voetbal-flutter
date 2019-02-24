@@ -6,7 +6,7 @@ import 'package:mockito/mockito.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:spv/service/usecase/usecase.dart';
 
-import '../../utils/index.dart';
+import '../../../utils/index.dart';
 
 const _competitionId = "43";
 

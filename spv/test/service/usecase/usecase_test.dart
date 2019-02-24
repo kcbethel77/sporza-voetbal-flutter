@@ -7,7 +7,7 @@ import 'package:spv/service/models/response.dart' as resp;
 import 'package:mockito/mockito.dart';
 import 'package:spv/service/usecase/usecase_mixin.dart';
 
-import '../utils/index.dart';
+import '../../utils/index.dart';
 
 final mockDatasourceType = MockDatasourceType<String>();
 

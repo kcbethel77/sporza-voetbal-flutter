@@ -2,7 +2,7 @@ import 'package:spv/service/datasource/cache/cache.dart';
 import 'package:spv/service/datasource/data_source_type.dart';
 import 'package:test/test.dart';
 
-import '../../utils/index.dart';
+import '../../../utils/index.dart';
 
 void main() {
   final CacheImpl cache = CacheImpl(path: "json");

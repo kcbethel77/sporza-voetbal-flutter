@@ -7,7 +7,7 @@ import 'package:spv/service/datasource/data_source_type.dart';
 import 'package:spv/model/network/network_models.dart';
 import 'package:spv/service/usecase/usecase.dart';
 
-import '../../../utils/index.dart';
+import '../../../../utils/index.dart';
 
 const _matchId = "42";
 const _waitingTimeLive = 50;

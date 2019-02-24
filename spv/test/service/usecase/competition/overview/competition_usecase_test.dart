@@ -6,7 +6,7 @@ import 'package:spv/service/datasource/data_source_type.dart';
 import 'package:spv/service/usecase/usecase.dart';
 import 'package:spv/model/network/network_models.dart';
 
-import '../../../utils/index.dart';
+import '../../../../utils/index.dart';
 
 Observable<List<Competition>> get competitionStream => Observable.just([
       buildCompetition(id: "1", label: "competition 1", sporzaFeatured: true),

@@ -29,5 +29,7 @@ abstract class Match implements Built<Match, MatchBuilder>, Id, Accessible {
 
   bool get isKnockout;
 
+  HeadingInfo get info;
+
   factory Match([updates(MatchBuilder b)]) = _$Match;
 }

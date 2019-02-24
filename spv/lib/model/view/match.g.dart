@@ -36,6 +36,9 @@ class _$MatchSerializer implements StructuredSerializer<Match> {
       'isKnockout',
       serializers.serialize(object.isKnockout,
           specifiedType: const FullType(bool)),
+      'info',
+      serializers.serialize(object.info,
+          specifiedType: const FullType(HeadingInfo)),
       'id',
       serializers.serialize(object.id, specifiedType: const FullType(String)),
       'accessibility',
@@ -91,6 +94,10 @@ class _$MatchSerializer implements StructuredSerializer<Match> {
           result.isKnockout = serializers.deserialize(value,
               specifiedType: const FullType(bool)) as bool;
           break;
+        case 'info':
+          result.info = serializers.deserialize(value,
+              specifiedType: const FullType(HeadingInfo)) as HeadingInfo;
+          break;
         case 'id':
           result.id = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String;
@@ -122,6 +129,8 @@ class _$Match extends Match {
   @override
   final bool isKnockout;
   @override
+  final HeadingInfo info;
+  @override
   final String id;
   @override
   final String accessibility;
@@ -137,6 +146,7 @@ class _$Match extends Match {
       this.homeScore,
       this.awayScore,
       this.isKnockout,
+      this.info,
       this.id,
       this.accessibility})
       : super._() {
@@ -157,6 +167,9 @@ class _$Match extends Match {
     }
     if (isKnockout == null) {
       throw new BuiltValueNullFieldError('Match', 'isKnockout');
+    }
+    if (info == null) {
+      throw new BuiltValueNullFieldError('Match', 'info');
     }
     if (id == null) {
       throw new BuiltValueNullFieldError('Match', 'id');
@@ -184,6 +197,7 @@ class _$Match extends Match {
         homeScore == other.homeScore &&
         awayScore == other.awayScore &&
         isKnockout == other.isKnockout &&
+        info == other.info &&
         id == other.id &&
         accessibility == other.accessibility;
   }
@@ -197,13 +211,15 @@ class _$Match extends Match {
                     $jc(
                         $jc(
                             $jc(
-                                $jc($jc(0, homeTeam.hashCode),
-                                    awayTeam.hashCode),
-                                startTime.hashCode),
-                            status.hashCode),
-                        homeScore.hashCode),
-                    awayScore.hashCode),
-                isKnockout.hashCode),
+                                $jc(
+                                    $jc($jc(0, homeTeam.hashCode),
+                                        awayTeam.hashCode),
+                                    startTime.hashCode),
+                                status.hashCode),
+                            homeScore.hashCode),
+                        awayScore.hashCode),
+                    isKnockout.hashCode),
+                info.hashCode),
             id.hashCode),
         accessibility.hashCode));
   }
@@ -218,6 +234,7 @@ class _$Match extends Match {
           ..add('homeScore', homeScore)
           ..add('awayScore', awayScore)
           ..add('isKnockout', isKnockout)
+          ..add('info', info)
           ..add('id', id)
           ..add('accessibility', accessibility))
         .toString();
@@ -255,6 +272,10 @@ class MatchBuilder implements Builder<Match, MatchBuilder> {
   bool get isKnockout => _$this._isKnockout;
   set isKnockout(bool isKnockout) => _$this._isKnockout = isKnockout;
 
+  HeadingInfo _info;
+  HeadingInfo get info => _$this._info;
+  set info(HeadingInfo info) => _$this._info = info;
+
   String _id;
   String get id => _$this._id;
   set id(String id) => _$this._id = id;
@@ -275,6 +296,7 @@ class MatchBuilder implements Builder<Match, MatchBuilder> {
       _homeScore = _$v.homeScore;
       _awayScore = _$v.awayScore;
       _isKnockout = _$v.isKnockout;
+      _info = _$v.info;
       _id = _$v.id;
       _accessibility = _$v.accessibility;
       _$v = null;
@@ -308,6 +330,7 @@ class MatchBuilder implements Builder<Match, MatchBuilder> {
               homeScore: homeScore,
               awayScore: awayScore,
               isKnockout: isKnockout,
+              info: info,
               id: id,
               accessibility: accessibility);
     } catch (_) {

@@ -6,7 +6,7 @@ import 'package:spv/model/network/network_models.dart';
 import 'package:test/test.dart';
 import 'package:mockito/mockito.dart';
 
-import '../../utils/index.dart';
+import '../../../utils/index.dart';
 
 const bool _hitRealNetwork = false;
 

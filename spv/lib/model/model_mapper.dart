@@ -82,6 +82,18 @@ class Mapper {
             ..awayScore = match.awayScore
             ..startTime = match.startTime
             ..status = match.status
+            ..info = _mapToHeadingInfo(
+              match.startTime,
+              match.status,
+              match.homeScore,
+              match.awayScore,
+              match.statusName,
+              match.statusLabel,
+              match.isKnockout,
+              match.knockOutEnd,
+              match.statusDay,
+              match.statusDate,
+            )
             ..isKnockout = match.isKnockout)
           .build())
       .toList();

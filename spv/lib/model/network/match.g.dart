@@ -57,6 +57,24 @@ class _$MatchSerializer implements StructuredSerializer<Match> {
         ..add(serializers.serialize(object.statusLabel,
             specifiedType: const FullType(String)));
     }
+    if (object.knockOutEnd != null) {
+      result
+        ..add('knockoutEnd')
+        ..add(serializers.serialize(object.knockOutEnd,
+            specifiedType: const FullType(String)));
+    }
+    if (object.statusDay != null) {
+      result
+        ..add('statusDay')
+        ..add(serializers.serialize(object.statusDay,
+            specifiedType: const FullType(String)));
+    }
+    if (object.statusDate != null) {
+      result
+        ..add('statusDate')
+        ..add(serializers.serialize(object.statusDate,
+            specifiedType: const FullType(String)));
+    }
 
     return result;
   }
@@ -116,6 +134,18 @@ class _$MatchSerializer implements StructuredSerializer<Match> {
           result.isKnockout = serializers.deserialize(value,
               specifiedType: const FullType(bool)) as bool;
           break;
+        case 'knockoutEnd':
+          result.knockOutEnd = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
+        case 'statusDay':
+          result.statusDay = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
+        case 'statusDate':
+          result.statusDate = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
       }
     }
 
@@ -146,6 +176,12 @@ class _$Match extends Match {
   final String accessibilityText;
   @override
   final bool isKnockout;
+  @override
+  final String knockOutEnd;
+  @override
+  final String statusDay;
+  @override
+  final String statusDate;
 
   factory _$Match([void updates(MatchBuilder b)]) =>
       (new MatchBuilder()..update(updates)).build();
@@ -161,7 +197,10 @@ class _$Match extends Match {
       this.statusName,
       this.statusLabel,
       this.accessibilityText,
-      this.isKnockout})
+      this.isKnockout,
+      this.knockOutEnd,
+      this.statusDay,
+      this.statusDate})
       : super._() {
     if (id == null) {
       throw new BuiltValueNullFieldError('Match', 'id');
@@ -213,7 +252,10 @@ class _$Match extends Match {
         statusName == other.statusName &&
         statusLabel == other.statusLabel &&
         accessibilityText == other.accessibilityText &&
-        isKnockout == other.isKnockout;
+        isKnockout == other.isKnockout &&
+        knockOutEnd == other.knockOutEnd &&
+        statusDay == other.statusDay &&
+        statusDate == other.statusDate;
   }
 
   @override
@@ -227,17 +269,23 @@ class _$Match extends Match {
                             $jc(
                                 $jc(
                                     $jc(
-                                        $jc($jc(0, id.hashCode),
-                                            homeTeam.hashCode),
-                                        awayTeam.hashCode),
-                                    startTime.hashCode),
-                                status.hashCode),
-                            homeScore.hashCode),
-                        awayScore.hashCode),
-                    statusName.hashCode),
-                statusLabel.hashCode),
-            accessibilityText.hashCode),
-        isKnockout.hashCode));
+                                        $jc(
+                                            $jc(
+                                                $jc(
+                                                    $jc($jc(0, id.hashCode),
+                                                        homeTeam.hashCode),
+                                                    awayTeam.hashCode),
+                                                startTime.hashCode),
+                                            status.hashCode),
+                                        homeScore.hashCode),
+                                    awayScore.hashCode),
+                                statusName.hashCode),
+                            statusLabel.hashCode),
+                        accessibilityText.hashCode),
+                    isKnockout.hashCode),
+                knockOutEnd.hashCode),
+            statusDay.hashCode),
+        statusDate.hashCode));
   }
 
   @override
@@ -253,7 +301,10 @@ class _$Match extends Match {
           ..add('statusName', statusName)
           ..add('statusLabel', statusLabel)
           ..add('accessibilityText', accessibilityText)
-          ..add('isKnockout', isKnockout))
+          ..add('isKnockout', isKnockout)
+          ..add('knockOutEnd', knockOutEnd)
+          ..add('statusDay', statusDay)
+          ..add('statusDate', statusDate))
         .toString();
   }
 }
@@ -306,6 +357,18 @@ class MatchBuilder implements Builder<Match, MatchBuilder> {
   bool get isKnockout => _$this._isKnockout;
   set isKnockout(bool isKnockout) => _$this._isKnockout = isKnockout;
 
+  String _knockOutEnd;
+  String get knockOutEnd => _$this._knockOutEnd;
+  set knockOutEnd(String knockOutEnd) => _$this._knockOutEnd = knockOutEnd;
+
+  String _statusDay;
+  String get statusDay => _$this._statusDay;
+  set statusDay(String statusDay) => _$this._statusDay = statusDay;
+
+  String _statusDate;
+  String get statusDate => _$this._statusDate;
+  set statusDate(String statusDate) => _$this._statusDate = statusDate;
+
   MatchBuilder();
 
   MatchBuilder get _$this {
@@ -321,6 +384,9 @@ class MatchBuilder implements Builder<Match, MatchBuilder> {
       _statusLabel = _$v.statusLabel;
       _accessibilityText = _$v.accessibilityText;
       _isKnockout = _$v.isKnockout;
+      _knockOutEnd = _$v.knockOutEnd;
+      _statusDay = _$v.statusDay;
+      _statusDate = _$v.statusDate;
       _$v = null;
     }
     return this;
@@ -355,7 +421,10 @@ class MatchBuilder implements Builder<Match, MatchBuilder> {
               statusName: statusName,
               statusLabel: statusLabel,
               accessibilityText: accessibilityText,
-              isKnockout: isKnockout);
+              isKnockout: isKnockout,
+              knockOutEnd: knockOutEnd,
+              statusDay: statusDay,
+              statusDate: statusDate);
     } catch (_) {
       String _$failedField;
       try {

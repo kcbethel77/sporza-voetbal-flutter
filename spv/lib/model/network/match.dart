@@ -34,5 +34,15 @@ abstract class Match implements Built<Match, MatchBuilder> {
 
   bool get isKnockout;
 
+  @BuiltValueField(wireName: "knockoutEnd")
+  @nullable
+  String get knockOutEnd;
+
+  @nullable
+  String get statusDay;
+
+  @nullable
+  String get statusDate;
+
   factory Match([updates(MatchBuilder b)]) = _$Match;
 }

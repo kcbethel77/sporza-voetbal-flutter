@@ -3,7 +3,8 @@ import 'package:spv/model/network/network_models.dart';
 import 'package:test/test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:rxdart/rxdart.dart';
-import '../utils/index.dart';
+
+import '../../utils/index.dart';
 
 void main() {
   final MockCache cache = MockCache();

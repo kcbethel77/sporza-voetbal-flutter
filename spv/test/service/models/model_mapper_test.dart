@@ -5,7 +5,7 @@ import 'package:spv/model/model_mapper.dart';
 import 'package:spv/model/network/network_models.dart' as network;
 import 'package:test/test.dart';
 
-import '../utils/index.dart';
+import '../../utils/index.dart';
 
 void main() {
   group("News", () {
@@ -181,7 +181,6 @@ void main() {
                   ),
                   awayTeam,
                   startTime: null,
-                  statusLabel: null,
                 ),
               ],
             ),
@@ -293,6 +292,22 @@ void main() {
 
                 test("isKnockout", () {
                   expect(firstMatch.isKnockout, isKnockout);
+                });
+
+                group("info", () {
+                  EndMatchHeadingInfo matchInfo = firstMatch.info as EndMatchHeadingInfo;
+
+                  test("has correct score", () {
+                    expect(matchInfo.score, "$homeScore - $awayScore");
+                  });
+
+                  test("has correct statusLabel", () {
+                    expect(matchInfo.statusLabel, statusLabel);
+                  });
+
+                  test("has correct knockoutEnd", () {
+                    expect(matchInfo.knockoutEnd, knockOutEnd);
+                  });
                 });
               });
             });

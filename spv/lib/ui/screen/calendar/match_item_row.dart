@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:spv/model/view/match.dart';
+import 'package:spv/model/view/match.dart' as view;
 import 'package:spv/ui/screen/calendar/team_logo.dart';
 
 class MatchItemRow extends StatelessWidget {
-  final Match match;
+  final view.Match match;
   final bool isEven;
 
   const MatchItemRow({Key key, @required this.match, @required this.isEven}) : super(key: key);

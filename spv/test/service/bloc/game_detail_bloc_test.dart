@@ -7,7 +7,7 @@ import 'package:spv/service/bloc/bloc.dart';
 import 'package:spv/model/network/network_models.dart';
 import 'package:spv/model/common/common_models.dart';
 
-import '../utils/index.dart';
+import '../../utils/index.dart';
 
 const String _matchId = "matchId";
 const String _defaultCompLabel = "network";

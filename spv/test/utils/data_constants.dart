@@ -294,6 +294,52 @@ const String calendarJson = '''
               "statusLabel": "einde",
               "accessibilityText": "KAS Eupen Charleroi, afgelopen, 1, 4.",
               "isKnockout": false
+            },
+            {
+              "id": "2045453",
+              "homeTeam": {
+                "id": "413",
+                "name": "Spanje",
+                "logoUrl": "https://images.vrt.be/orig/contentapi/infostrada/team/413.png"
+              },
+              "awayTeam": {
+                "id": "1063",
+                "name": "Rusland",
+                "logoUrl": "https://images.vrt.be/orig/contentapi/infostrada/team/1063.png"
+              },
+              "startTime": "2018-07-01T14:00:10.000+0000",
+              "status": "END",
+              "homeScore": 1,
+              "awayScore": 1,
+              "statusName": "einde",
+              "statusLabel": "einde",
+              "accessibilityText": "Spanje Rusland, afgelopen, 1, 1, penalties, 3, 4. Testing KnockoutEnd",
+              "isKnockout": true,
+              "winningTeamId": "1063",
+              "knockoutEnd": "(pen: 3-4)"
+            },
+            {
+              "id": "2277216",
+              "homeTeam": {
+                "id": "102513",
+                "name": "STVV",
+                "logoUrl": "https://images.vrt.be/orig/contentapi/infostrada/team/102513.png"
+              },
+              "awayTeam": {
+                "id": "4301",
+                "name": "KAA Gent",
+                "logoUrl": "https://images.vrt.be/orig/contentapi/infostrada/team/4301.png"
+              },
+              "startTime": "2019-03-17T17:00:00.000+0000",
+              "status": "AFTER_TODAY",
+              "homeScore": 0,
+              "awayScore": 0,
+              "statusName": "na vandaag",
+              "statusDate": "17/3",
+              "statusDay": "zondag",
+              "statusLabel": "18u00",
+              "accessibilityText": "STVV KAA Gent, op zondag 17 maart, om 18 uur. Status Date. Status Day",
+              "isKnockout": false
             }
           ],
           "accessibilityText": "Speeldag 2, 8 wedstrijden"
