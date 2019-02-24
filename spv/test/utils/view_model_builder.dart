@@ -84,7 +84,6 @@ HeadingInfo buildHeadingInfoViewModel(common.MatchStatus status,
     {int homeScore = homeScore,
     int awayScore = awayScore,
     String statusLabel = statusLabel,
-    bool isKnockout = isKnockout,
     String knockOutEnd = knockOutEnd,
     String statusDay = statusDay,
     String statusDate = statusDate,
@@ -95,7 +94,7 @@ HeadingInfo buildHeadingInfoViewModel(common.MatchStatus status,
       headingInfo = (EndMatchHeadingInfoBuilder()
             ..score = "$homeScore - $awayScore"
             ..statusLabel = statusLabel
-            ..knockoutEnd = isKnockout ? knockOutEnd : null)
+            ..knockoutEnd = knockOutEnd)
           .build();
       break;
     case common.MatchStatus.SUSPENDED:

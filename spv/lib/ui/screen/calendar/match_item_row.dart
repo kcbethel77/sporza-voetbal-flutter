@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:spv/model/view/match.dart' as view;
+import 'package:spv/ui/screen/calendar/match_info.dart';
 import 'package:spv/ui/screen/calendar/team_logo.dart';
 
 class MatchItemRow extends StatelessWidget {
@@ -18,7 +19,7 @@ class MatchItemRow extends StatelessWidget {
         child: Row(
           children: <Widget>[
             Expanded(flex: 1, child: TeamLogo(team: match.homeTeam)),
-            Expanded(flex: 1, child: Center(child: Text(match.status.name))),
+            Expanded(flex: 1, child: MatchInfo(info: match.info)),
             Expanded(flex: 1, child: TeamLogo(team: match.awayTeam))
           ],
         ),
