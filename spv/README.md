@@ -28,6 +28,15 @@ flutter analyze
 flutter test
 ```
 
+#### Widget Test
+
+The idea is the same as snapshot test in React Native.  
+To regenerate a golden set run
+
+```
+flutter test --update-goldens
+```
+
 #### Integration tests
 
 [https://flutter.io/docs/cookbook/testing/integration](https://flutter.io/docs/cookbook/testing/integration)
