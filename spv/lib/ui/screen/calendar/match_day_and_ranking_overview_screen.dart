@@ -12,19 +12,28 @@ class MatchDayAndRankingOverviewScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: PageView(
-        children: <Widget>[
-          MatchDayOverview(competitionOverviewBloc.calendar),
-          RankingOverview(competitionOverviewBloc.ranking),
-        ],
-      ),
-      appBar: AppBar(
-        title: StreamBuilder(
-            stream: competitionOverviewBloc.calendar,
-            builder: (context, snapshot) => snapshot.hasData && snapshot.data is Data<Calendar>
-                ? Text((snapshot.data as Data<Calendar>).value.competitionTitle)
-                : Text("Sporza Voetbal")),
+    return DefaultTabController(
+      length: 2,
+      child: Scaffold(
+        body: TabBarView(
+          children: <Widget>[
+            MatchDayOverview(competitionOverviewBloc.calendar),
+            RankingOverview(competitionOverviewBloc.ranking),
+          ],
+        ),
+        appBar: AppBar(
+          bottom: TabBar(
+            tabs: [
+              Tab(text: "WEDSTRIJDEN",),
+              Tab(text: "KLASSEMENT",),
+            ],
+          ),
+          title: StreamBuilder(
+              stream: competitionOverviewBloc.calendar,
+              builder: (context, snapshot) => snapshot.hasData && snapshot.data is Data<Calendar>
+                  ? Text((snapshot.data as Data<Calendar>).value.competitionTitle)
+                  : Text("Sporza Voetbal")),
+        ),
       ),
     );
   }
