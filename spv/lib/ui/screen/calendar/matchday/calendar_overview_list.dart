@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:spv/model/view/view_models.dart';
 import 'package:spv/service/models/response.dart';
-import 'package:spv/ui/screen/calendar/match_day_row.dart';
-import 'package:spv/ui/screen/calendar/match_end_spacer.dart';
-import 'package:spv/ui/screen/calendar/match_item_row.dart';
+import 'package:spv/ui/screen/calendar/matchday/match_day_row.dart';
+import 'package:spv/ui/screen/calendar/matchday/match_end_spacer.dart';
+import 'package:spv/ui/screen/calendar/matchday/match_item_row.dart';
 
 class CalendarOverviewList extends StatelessWidget {
   final Data<Calendar> calendar;

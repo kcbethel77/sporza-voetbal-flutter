@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter/material.dart';
 import 'package:image_test_utils/image_test_utils.dart';
-import 'package:spv/ui/screen/calendar/match_day_row.dart';
+import 'package:spv/ui/screen/calendar/matchday/match_day_row.dart';
 
 void main() {
   testWidgets("snapshot of Match Day Row (not current match day)", (WidgetTester tester) async {

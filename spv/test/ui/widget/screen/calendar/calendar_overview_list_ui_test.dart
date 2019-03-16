@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:spv/service/models/response.dart';
-import 'package:spv/ui/screen/calendar/calendar_overview_list.dart';
+import 'package:spv/ui/screen/calendar/matchday/calendar_overview_list.dart';
 import 'package:spv/model/common/common_models.dart' as common;
 import 'package:flutter/material.dart';
 import 'package:image_test_utils/image_test_utils.dart';

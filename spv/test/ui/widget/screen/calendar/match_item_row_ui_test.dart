@@ -2,7 +2,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter/material.dart';
 import 'package:image_test_utils/image_test_utils.dart';
 import 'package:spv/model/common/common_models.dart';
-import 'package:spv/ui/screen/calendar/match_item_row.dart';
+import 'package:spv/ui/screen/calendar/matchday/match_item_row.dart';
 
 import '../../../../utils/index.dart';
 

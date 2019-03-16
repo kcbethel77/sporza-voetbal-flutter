@@ -9,32 +9,11 @@ import 'package:spv/service/datasource/network/network.dart';
 import 'package:spv/service/datasource/user/user_preferences.dart';
 import 'package:spv/service/models/response.dart';
 import 'package:spv/model/view/match.dart';
-import 'package:spv/ui/screen/calendar/calendar_screen.dart';
+import 'package:spv/ui/screen/calendar/match_day_and_ranking_overview_screen.dart';
 
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-        title: 'Flutter Demo',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
-        home: Scaffold(body: MyHomePage(title: 'Sporza Voetbal')));
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
-
-  final String title;
-
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
   HomeBloc _homeBloc;
   GameDetailBloc _gameDetailBloc;
   UserPreference _userPreferences;
@@ -43,8 +22,7 @@ class _MyHomePageState extends State<MyHomePage> {
   NetworkImpl _network;
 
   @override
-  void initState() {
-    super.initState();
+  Widget build(BuildContext context) {
     var httpClient = http.Client();
     _cache = CacheImpl();
     _network = NetworkImpl(httpClient);
@@ -63,6 +41,14 @@ class _MyHomePageState extends State<MyHomePage> {
     );
 
     _competitionOverviewBloc = CompetitionOverviewBloc("48", _cache, _network, _userPreferences);
+
+    return MaterialApp(
+      title: 'Sporza Voetbal',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: MatchDayAndRankingOverviewScreen(_competitionOverviewBloc),
+    );
   }
 
   void _fire() {
@@ -73,10 +59,8 @@ class _MyHomePageState extends State<MyHomePage> {
           .expand((phase) => phase.matchDays)
           .expand((matchDay) => matchDay.matches)
           .map((match) => (match as Match).id)
-          .map((matchId) => [
-                matchId,
-                GameDetailBloc(matchId, _cache, _network, _userPreferences, notLiveRefreshInMilliSeconds: 1000).events
-              ])
+          .map((matchId) =>
+              [matchId, GameDetailBloc(matchId, _cache, _network, _userPreferences, notLiveRefreshInMilliSeconds: 1000).events])
           .forEach((pair) {
         (pair.last as Observable<Response<List<Event>>>).listen((eventResp) {
           if (eventResp is Fail<List<Event>>) {
@@ -107,10 +91,5 @@ class _MyHomePageState extends State<MyHomePage> {
     _homeBloc.videos.listen((resp) {
       print(resp);
     });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return CalendarScreen(_competitionOverviewBloc);
   }
 }

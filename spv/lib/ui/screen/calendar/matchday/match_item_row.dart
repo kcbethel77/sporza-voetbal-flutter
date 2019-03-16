@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:spv/model/view/match.dart' as view;
-import 'package:spv/ui/screen/calendar/match_info.dart';
-import 'package:spv/ui/screen/calendar/team_logo.dart';
+import 'package:spv/ui/screen/calendar/matchday/match_info.dart';
+import 'package:spv/ui/screen/calendar/matchday/team_logo.dart';
 
 class MatchItemRow extends StatelessWidget {
   final view.Match match;

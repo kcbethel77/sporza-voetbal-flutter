@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:spv/model/view/view_models.dart';
-import 'package:spv/ui/screen/calendar/live_designation.dart';
+import 'package:spv/ui/screen/calendar/matchday/live_designation.dart';
 
 class MatchInfo extends StatelessWidget {
   final HeadingInfo info;
