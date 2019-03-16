@@ -9,6 +9,7 @@ import 'package:spv/service/datasource/network/network.dart';
 import 'package:spv/service/datasource/user/user_preferences.dart';
 import 'package:spv/service/models/response.dart';
 import 'package:spv/model/view/match.dart';
+import 'package:spv/ui/screen/calendar/calendar_screen.dart';
 
 void main() => runApp(MyApp());
 
@@ -110,6 +111,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return CalendarScreen(_competitionOverviewBloc);
   }
 }

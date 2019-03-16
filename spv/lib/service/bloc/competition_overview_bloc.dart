@@ -1,5 +1,5 @@
 import 'package:rxdart/rxdart.dart';
-import 'package:spv/model/view/calendar.dart';
+import 'package:spv/model/view/view_models.dart';
 import 'package:spv/service/datasource/cache/cache.dart';
 import 'package:spv/service/datasource/soccer_datasource.dart';
 import 'package:spv/service/datasource/user/user_preferences.dart';
@@ -26,6 +26,6 @@ class CompetitionOverviewBloc with ViewModelMappable {
       [_calendarUseCase.calendar, _userPreference.favoriteTeams],
       (pair) => mapToViewModels(pair.first, Mapper.mapCompetitionToCalendar, extraParam1: pair.last));
 
-  Observable<Response> get ranking =>
+  Observable<Response<Ranking>> get ranking =>
       _rankingUseCase.ranking.map((response) => mapToViewModels(response, Mapper.mapCompetitionToRanking));
 }
