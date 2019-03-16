@@ -3,7 +3,7 @@ import 'package:spv/model/view/view_models.dart';
 import 'package:spv/service/bloc/bloc.dart';
 import 'package:spv/service/models/response.dart';
 import 'package:spv/ui/screen/calendar/matchday/match_day_overview.dart';
-import 'package:spv/ui/screen/calendar/ranking/RankingOverview.dart';
+import 'package:spv/ui/screen/calendar/ranking/ranking_overview.dart';
 
 class MatchDayAndRankingOverviewScreen extends StatelessWidget {
   final CompetitionOverviewBloc competitionOverviewBloc;
