@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 class RankingPhase extends StatelessWidget {
-
   final String rankingName;
 
   const RankingPhase(this.rankingName, {Key key}) : super(key: key);
@@ -13,18 +12,19 @@ class RankingPhase extends StatelessWidget {
         Row(
           children: <Widget>[
             Expanded(
+              flex: 6,
               child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
                 child: Text(rankingName),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: Text("W"),
+            Expanded(
+              flex: 1,
+              child: Center(child: Text("W")),
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: Text("P"),
+            Expanded(
+              flex: 1,
+              child: Center(child: Text("P")),
             )
           ],
         ),

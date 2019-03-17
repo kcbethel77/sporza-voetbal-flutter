@@ -1,5 +1,6 @@
 import 'package:rxdart/rxdart.dart';
-import 'package:spv/model/view/view_models.dart';
+import 'package:spv/model/network/network_models.dart' as network;
+import 'package:spv/model/view/view_models.dart' as view;
 import 'package:spv/service/datasource/cache/cache.dart';
 import 'package:spv/service/datasource/soccer_datasource.dart';
 import 'package:spv/service/datasource/user/user_preferences.dart';
@@ -22,10 +23,15 @@ class CompetitionOverviewBloc with ViewModelMappable {
   )   : _calendarUseCase = CalendarUseCase(competitionId, cache, network),
         _rankingUseCase = RankingUseCase(competitionId, cache, network);
 
-  Observable<Response<Calendar>> get calendar => Observable.zip(
-      [_calendarUseCase.calendar, _userPreference.favoriteTeams],
-      (pair) => mapToViewModels(pair.first, Mapper.mapCompetitionToCalendar, extraParam1: pair.last));
+  Observable<Response<view.Calendar>> get calendar => Observable.zip([
+        _calendarUseCase.calendar,
+        _userPreference.favoriteTeams
+      ], (pair) => mapToViewModels<network.Competition, view.Calendar>(pair.first, Mapper.mapCompetitionToCalendar, extraParam1: pair.last))
+          .publishReplay()
+          .autoConnect();
 
-  Observable<Response<Ranking>> get ranking =>
-      _rankingUseCase.ranking.map((response) => mapToViewModels(response, Mapper.mapCompetitionToRanking));
+  Observable<Response<view.Ranking>> get ranking => _rankingUseCase.ranking
+      .map((response) => mapToViewModels<network.Competition, view.Ranking>(response, Mapper.mapCompetitionToRanking))
+      .publishReplay()
+      .autoConnect();
 }

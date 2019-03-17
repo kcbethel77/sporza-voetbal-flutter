@@ -14,25 +14,37 @@ class RankingRow extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
       children: <Widget>[
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: Text(position),
+        Expanded(
+          flex: 1,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: Text(position),
+          ),
         ),
-        Padding(
-          padding: const EdgeInsets.fromLTRB(16, 8, 32, 8),
+        Expanded(
+          flex: 1,
           child: Image.network(
             imageUrl,
             height: 30,
           ),
         ),
-        Expanded(child: Text(name)),
-        Padding(
-          padding: const EdgeInsets.all(16),
-          child: Text(points),
+        Expanded(
+          flex: 4,
+          child: Text(name),
         ),
-        Padding(
-          padding: const EdgeInsets.all(16),
-          child: Text(matchedPlayed),
+        Expanded(
+          flex: 1,
+          child: Padding(
+            padding: const EdgeInsets.all(16),
+            child: Text(points),
+          ),
+        ),
+        Expanded(
+          flex: 1,
+          child: Padding(
+            padding: const EdgeInsets.all(16),
+            child: Text(matchedPlayed),
+          ),
         ),
       ],
     );
