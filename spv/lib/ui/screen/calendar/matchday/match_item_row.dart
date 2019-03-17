@@ -11,17 +11,19 @@ class MatchItemRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () => print("clicked"),
+    return Material(
+      color: isEven ? Colors.white : Colors.grey[100],
       child: Container(
-        color: isEven ? Colors.white : Colors.grey[100],
         height: 100,
-        child: Row(
-          children: <Widget>[
-            Expanded(flex: 1, child: TeamLogo(team: match.homeTeam)),
-            Expanded(flex: 1, child: MatchInfo(info: match.info)),
-            Expanded(flex: 1, child: TeamLogo(team: match.awayTeam))
-          ],
+        child: InkWell(
+          onTap: () => print("Clikcked a match item"),
+          child: Row(
+            children: <Widget>[
+              Expanded(flex: 1, child: TeamLogo(team: match.homeTeam)),
+              Expanded(flex: 1, child: MatchInfo(info: match.info)),
+              Expanded(flex: 1, child: TeamLogo(team: match.awayTeam))
+            ],
+          ),
         ),
       ),
     );

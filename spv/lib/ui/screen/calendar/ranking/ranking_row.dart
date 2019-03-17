@@ -11,42 +11,45 @@ class RankingRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: <Widget>[
-        Expanded(
-          flex: 1,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: Text(position),
+    return InkWell(
+      onTap: () => print("Clicked ranking"),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: <Widget>[
+          Expanded(
+            flex: 1,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Text(position),
+            ),
           ),
-        ),
-        Expanded(
-          flex: 1,
-          child: Image.network(
-            imageUrl,
-            height: 30,
+          Expanded(
+            flex: 1,
+            child: Image.network(
+              imageUrl,
+              height: 30,
+            ),
           ),
-        ),
-        Expanded(
-          flex: 4,
-          child: Text(name),
-        ),
-        Expanded(
-          flex: 1,
-          child: Padding(
-            padding: const EdgeInsets.all(16),
-            child: Text(points),
+          Expanded(
+            flex: 4,
+            child: Text(name),
           ),
-        ),
-        Expanded(
-          flex: 1,
-          child: Padding(
-            padding: const EdgeInsets.all(16),
-            child: Text(matchedPlayed),
+          Expanded(
+            flex: 1,
+            child: Padding(
+              padding: const EdgeInsets.all(16),
+              child: Text(points),
+            ),
           ),
-        ),
-      ],
+          Expanded(
+            flex: 1,
+            child: Padding(
+              padding: const EdgeInsets.all(16),
+              child: Text(matchedPlayed),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
