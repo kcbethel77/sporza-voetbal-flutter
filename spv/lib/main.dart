@@ -13,7 +13,9 @@ class SporzaSoccerApp extends StatelessWidget {
         child: MaterialApp(
           title: 'Sporza Voetbal',
           theme: ThemeData(
-            primarySwatch: Colors.blue,
+            primaryColor: Colors.black,
+            accentColor: Color(0xFF84FF00),
+            fontFamily: 'Ginger'
           ),
           home: MatchDayAndRankingOverviewScreen("48"),
         ),

@@ -19,7 +19,7 @@ class SporzaDrawer extends StatelessWidget {
             child: DrawerHeader(
               child: Center(child: Text("Hier komt dan een image van Sporza")),
               decoration: BoxDecoration(
-                color: Colors.blue,
+                color: Theme.of(context).primaryColor,
               ),
             ),
           ),
@@ -68,7 +68,7 @@ class SporzaDrawer extends StatelessWidget {
                       .map((favCompetition) => ListTile(
                             leading: CircleAvatar(
                               radius: 20,
-                              backgroundColor: Colors.black,
+                              backgroundColor: Theme.of(context).primaryColor,
                               child: Text(favCompetition.abbreviation),
                             ),
                             title: Text(favCompetition.name),
@@ -81,7 +81,7 @@ class SporzaDrawer extends StatelessWidget {
                   final Widget nonFavCompetitions =
                     ExpansionTile(
                       leading: CircleAvatar(
-                        backgroundColor: Colors.black,
+                        backgroundColor: Theme.of(context).primaryColor,
                         child: Icon(Icons.menu),
                       ),
                       title: Text("overige competities"),
@@ -90,7 +90,7 @@ class SporzaDrawer extends StatelessWidget {
                           padding: const EdgeInsets.fromLTRB(16, 0, 0, 0),
                           child: ListTile(
                             leading: CircleAvatar(
-                              backgroundColor: Colors.black,
+                              backgroundColor: Theme.of(context).primaryColor,
                               child: Text(nonFavCompetition.abbreviation),
                             ),
                             title: Text(nonFavCompetition.name),
