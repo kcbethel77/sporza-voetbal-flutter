@@ -4,17 +4,20 @@ import 'package:spv/service/bloc/bloc.dart';
 import 'package:spv/service/models/response.dart';
 import 'package:spv/ui/screen/calendar/matchday/match_day_overview.dart';
 import 'package:spv/ui/screen/calendar/ranking/ranking_overview.dart';
+import 'package:spv/ui/screen/drawer/sporza_drawer.dart';
 
 class MatchDayAndRankingOverviewScreen extends StatelessWidget {
   final CompetitionOverviewBloc competitionOverviewBloc;
+  final DrawerBloc drawerBloc;
 
-  const MatchDayAndRankingOverviewScreen(this.competitionOverviewBloc, {Key key}) : super(key: key);
+  const MatchDayAndRankingOverviewScreen(this.competitionOverviewBloc, this.drawerBloc, {Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: 2,
       child: Scaffold(
+        drawer: SporzaDrawer(drawerBloc),
         body: TabBarView(
           children: <Widget>[
             MatchDayOverview(competitionOverviewBloc.calendar),
@@ -24,8 +27,12 @@ class MatchDayAndRankingOverviewScreen extends StatelessWidget {
         appBar: AppBar(
           bottom: TabBar(
             tabs: [
-              Tab(text: "WEDSTRIJDEN",),
-              Tab(text: "KLASSEMENT",),
+              Tab(
+                text: "WEDSTRIJDEN",
+              ),
+              Tab(
+                text: "KLASSEMENT",
+              ),
             ],
           ),
           title: StreamBuilder(

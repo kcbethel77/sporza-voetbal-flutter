@@ -42,12 +42,14 @@ class MyApp extends StatelessWidget {
 
     _competitionOverviewBloc = CompetitionOverviewBloc("48", _cache, _network, _userPreferences);
 
+    var _drawerBloc = DrawerBloc(_cache, _network, _userPreferences);
+
     return MaterialApp(
       title: 'Sporza Voetbal',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MatchDayAndRankingOverviewScreen(_competitionOverviewBloc),
+      home: MatchDayAndRankingOverviewScreen(_competitionOverviewBloc, _drawerBloc),
     );
   }
 
