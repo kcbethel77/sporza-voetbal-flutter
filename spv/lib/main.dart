@@ -9,6 +9,8 @@ import 'package:spv/service/datasource/network/network.dart';
 import 'package:spv/service/datasource/user/user_preferences.dart';
 import 'package:spv/service/models/response.dart';
 import 'package:spv/model/view/match.dart';
+import 'package:spv/ui/di/context/app_context.dart';
+import 'package:spv/ui/di/context/competition_overview_context.dart';
 import 'package:spv/ui/screen/calendar/match_day_and_ranking_overview_screen.dart';
 
 void main() => runApp(MyApp());
@@ -40,16 +42,16 @@ class MyApp extends StatelessWidget {
       notLiveRefreshInMilliSeconds: 1000,
     );
 
-    _competitionOverviewBloc = CompetitionOverviewBloc("48", _cache, _network, _userPreferences);
-
-    var _drawerBloc = DrawerBloc(_cache, _network, _userPreferences);
-
-    return MaterialApp(
-      title: 'Sporza Voetbal',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+    return AppContext(
+      child: CompetitionOverviewContext(
+        child: MaterialApp(
+          title: 'Sporza Voetbal',
+          theme: ThemeData(
+            primarySwatch: Colors.blue,
+          ),
+          home: MatchDayAndRankingOverviewScreen("48"),
+        ),
       ),
-      home: MatchDayAndRankingOverviewScreen(_competitionOverviewBloc, _drawerBloc),
     );
   }
 
